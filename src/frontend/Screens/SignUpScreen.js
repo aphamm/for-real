@@ -24,10 +24,6 @@ const SignUpScreen = ({navigation}) => {
         <View style={page.imgLogoContainer}>
           <Image source={require('../../../assets/favicon.png')} style={page.img} />
         </View>
-       {/* <View style={page.imgTextContainer}>
-          <Image source={require('../../assets/textLogo.png')} style={page.img} />
-        </View>
-  */}
       </View>
 
       <View style={[page.input, page.inline, page.bottomMargin]}>

@@ -25,10 +25,7 @@ const LoginScreen = ({navigation}) => {
         <View style={page.imgLogoContainer}>
           <Image source={require('../../../assets/favicon.png')} style={page.img} />
         </View>
-       {/* <View style={page.imgTextContainer}>
-          <Image source={require('../../assets/textLogo.png')} style={page.img} />
-        </View>
-  */}
+
       </View>
 
 
