@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import Feed from './src/frontend/Screens/Feed';
+import Navigator from './src/frontend/routes/NavStack';
 
 export default function App() {
-  return <Feed />;
+  return (
+    <Navigator />
+  );
 }
 
 const styles = StyleSheet.create({});
