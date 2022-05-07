@@ -1,17 +1,14 @@
 # ForReal
-=============
 
-ForReal is a mobile application that allows users to share their thoughts on a new daily prompt to the rest of the world. It’s Twitter meets Reddit meets YikYak with the daily habit stimulation of Wordle and BeReal.  ForReal is different because users can only see other responses until they post theirs, enabling honest, original perspectives to be shared. There are no echo chambers because ForReal’s feed does not filter content based on user interests. There are lots of interesting possible features which we will outline below.
+ForReal is a mobile application that allows users to share their thoughts on a daily prompt to the rest of the world. It’s Twitter meets Reddit meets YikYak with the daily habit stimulation of Wordle and BeReal. ForReal is different since users can only see other responses after posting their own.
 
 ## Motivation
----------------
 
-Current social media has been criticized for the emergence of echo chambers and filtered realities where people post what everyone else is saying rather than their own thoughts. Inspired by this desire to motivate original, un-influenced perspectives to be circulated, we wanted to create an application that pushes users to think and develop their own opinions first before looking at what everyone else believes. 
+Current social media has been criticized for the emergence of echo chambers and filtered realities. We hope our application can help push users to develop their own original opinions before interacting with other posts.
 
 ## Install
----------------
 
-This project uses [node](http://nodejs.org) and [npm](https://npmjs.com).Check to see if you already have them installed by running the following command otherwise you can install them [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Check to see if you already have them installed by running the following command otherwise you can install them [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
 ```
 node -v
@@ -27,7 +24,7 @@ Our full-stack application is using the MERN stack comprised of the four key tec
 3. [React Native](https://reactnative.dev/docs/getting-started) - a client-side JavaScript framework
 4. [Node](https://nodejs.org/en/docs/) - the premier JavaScript web server
 
-React Native combines the best parts of native development with React.js to allow us to deploy a dynamic client-side application for both Android and iOS. The Express.js server-side framework runs inside our Node.js server to provide a minimalist web framework that allows for powerful models for URL routing and handling HTTP requests and reponses. We can connect our Express.js functions to power the functionality of our client-side UI. These functions use MongoDB's Node.js drivers via callbacks for using Promises to access and update data in our MongoDB database hosted in the cloud using Atlas.
+React Native allows us to deploy a dynamic client-side application for both Android and iOS. The Express.js server-side framework runs inside our Node.js server to provide a minimalist web framework that allows for powerful models for URL routing and handling HTTP requests and reponses. These Express.js functions use MongoDB's Node.js drivers to access and update data in our MongoDB database hosted in Atlas.
 
 ## Usage
 
@@ -48,7 +45,7 @@ MONGO_URI = mongodb+srv://
 JWT_SECRET = ********
 ```
 
-Start your project via the `npm start` command. Download the Expo Go app on iOS to run natively on your own personal device by scanning the QR code.
+Start your project via the `npm start` command. Download the [Expo Go](https://expo.dev/client) app on iOS to run natively on your own personal device by scanning the QR code.
 
 ## Contributors
 
