@@ -2,9 +2,7 @@
 
 ForReal is a mobile application that allows users to share their thoughts on a daily prompt to the rest of the world. It’s Twitter meets Reddit meets YikYak with the daily habit stimulation of Wordle and BeReal. ForReal is different since users can only see other responses after posting their own.
 
-## Motivation
-
-Current social media has been criticized for the emergence of echo chambers and filtered realities. We hope our application can help push users to develop their own original opinions before interacting with other posts.
+    Current social media has been criticized for the emergence of echo chambers and filtered realities. We hope our application can help push users to develop their own original opinions before interacting with other posts.
 
 ## Install
 
