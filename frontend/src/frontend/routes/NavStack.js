@@ -1,9 +1,9 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import { Feather } from '@expo/vector-icons'; 
-import LoginScreen from "../screens/LoginScreen";
-import SignUpScreen from "../screens/SignUpScreen";
-import Feed from "../screens/Feed";
+import LoginScreen from "../Screens/LoginScreen";
+import SignUpScreen from "../Screens/SignUpScreen";
+import Feed from "../Screens/Feed";
 
 const screens = { 
     Signup:{
