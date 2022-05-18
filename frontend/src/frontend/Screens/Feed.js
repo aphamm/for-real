@@ -1,5 +1,9 @@
 import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
-import Post from '../components/Post';
+import RightPost from '../components/RightPost';
+import LeftPost from '../components/LeftPost';
+
+import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import AppLoading from 'expo-app-loading';
 
 export default function Feed() {
   const dummyData = [
@@ -25,7 +29,7 @@ export default function Feed() {
     },
     {
       user: 'Eggert294',
-      answer: 'Guy is a menace',
+      answer: 'Guy is a menace adhfldlhf;lkds  l;kjskadf jkalsd j;lkjs hldjf sd fkjasdhfafkjlashfj;dashfjkhdasjkfhads;jkfhjkd  jalhfj kdsa',
       number: 1,
     },
     {
@@ -41,6 +45,18 @@ export default function Feed() {
   ];
 
   const image = {uri: "https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg"}
+  
+
+  let [fontsLoaded] = useFonts({
+    Roboto_300Light_Italic,
+    Roboto_300Light,
+    Roboto_700Bold
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
     <View style={styles.container}>
       <ImageBackground 
@@ -64,14 +80,27 @@ export default function Feed() {
         data={dummyData}
         renderItem={(item) => {
           console.log(item);
-          return (
-            <Post
-              user={item.item.user}
-              answer={item.item.answer}
-              number={item.item.number}
-              keyExtractor={(item) => item.user}
-            />
-          );
+          if(item.index % 2 == 0) {
+            return (
+              <RightPost
+                user={item.item.user}
+                answer={item.item.answer}
+                number={item.item.number}
+                keyExtractor={(item) => item.user}
+              />
+            );
+          } else {
+            return(
+              <LeftPost
+                user={item.item.user}
+                answer={item.item.answer}
+                number={item.item.number}
+                keyExtractor={(item) => item.user}
+              />
+            )
+              
+          }
+          
         }}
       />
     </View>
@@ -80,11 +109,12 @@ export default function Feed() {
 const styles = StyleSheet.create({
   question: {
     marginTop: 30,
-    fontSize: 15,
+    fontSize: 18,
     textAlign: 'center',
     paddingLeft: 35,
     paddingRight: 35,
-    
+    fontFamily: "Roboto_700Bold"
+
   },
   header: {
     backgroundColor: 'white',
@@ -93,10 +123,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 10,
+    shadowRadius: 4,
+    shadowColor: 'grey',
+    shadowOpacity: 0.3,
+    shadowOffset: {width:0, height: 4},
   },
   container: {
      backgroundColor: 'white',
+     flex: 1
   },
   menu: {
     marginTop: 40,
@@ -106,7 +140,8 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    fontFamily: "Roboto_300Light",
 
   },
   
