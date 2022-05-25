@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
 import { useState } from 'react';
+import { sendPost } from '../../../firebase';
 
 export default function Question() {
 
@@ -9,18 +10,23 @@ export default function Question() {
   const [answer, setAnswer] = useState();
 
 
-  const submitPostHandler = () =>{
+  const submitPostHandler = async () =>{
     const post = {
       question: questionOfDay,
       answer,
-      month: new Date().getDate().toString(),
-      day: (new Date().getMonth() + 1).toString(),
-      year: new Date().getFullYear().toString(),
-      time: new Date().getHours().toString() + ':' + new Date().getMinutes().toString() 
+      time:
+        new Date().getDate().toString() +
+        '-' +
+        (new Date().getMonth() + 1).toString() +
+        '-' +
+        new Date().getFullYear().toString() + " " + 
+        new Date().getHours().toString() +
+        ':' +
+        String(new Date().getMinutes()).padStart(2, '0'),
+        username: 'testUser'
     };
 
-    console.log(post);
-
+    const response = await sendPost(post);
   };
 
 

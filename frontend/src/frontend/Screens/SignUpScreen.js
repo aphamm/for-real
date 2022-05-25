@@ -17,10 +17,10 @@ import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 const SignUpScreen = ({ navigation }) => {
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [password2, setPassword2] = useState();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [error, setError] = useState();
 
   const manageSignUp = async () => {

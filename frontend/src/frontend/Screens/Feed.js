@@ -4,8 +4,26 @@ import LeftPost from '../components/LeftPost';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
+import { getPosts } from '../../../firebase';
+import { useState, useEffect} from 'react';
 
 export default function Feed({ navigation }) {
+
+  const [data, setData] = useState();
+
+  const gettingData = async () =>{
+  const dummyDataBaseData = await getPosts(); 
+  console.log(dummyDataBaseData);
+  setData(dummyDataBaseData);
+  }
+  useEffect(
+    () => {
+       gettingData(); 
+    },
+  // optional dependency array
+    [ ]
+  );
+
   const dummyData = [
     {
       user: 'Thomas5236',
@@ -94,7 +112,6 @@ export default function Feed({ navigation }) {
       <FlatList
         data={dummyData}
         renderItem={(item) => {
-          console.log(item);
           if (item.index % 2 == 0) {
             return (
               <RightPost
