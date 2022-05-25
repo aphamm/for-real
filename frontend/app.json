@@ -26,7 +26,15 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "config": {
+        "firebase": {
+         "appId": "1:244281053420:web:6e3dbd78e83f42183215c9",
+          "apiKey": "AIzaSyB-UZ6mJwXOolXiqTm_Y7DALdX3Zi7ItXs",
+          "projectId": "forreal-b795c",
+          "measurementId": "G-ZF6V4HWW9R"
+        }
+      }
     }
   }
 }
