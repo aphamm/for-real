@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getUser } from '../../../firebase';
 import {
   LogBox,
   StatusBar,
@@ -16,29 +17,34 @@ import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
 
-  const manageLogin = () => {
-    const loginObject = {
-      email,
+
+  const manageLogin = async () => {
+    const logInObject = {
+      username,
       password,
     };
 
-    //replace below boolean later w check for if valid credentials
-    if (false) {
-      setError('Credentials do not match!');
+    const response = await getUser(logInObject);
+    //inside response is data for user
+    console.log(response.status); 
+
+    if(response.status===true){
+      console.log('response');
+      navigation.navigate('Feed');
+      console.log('Success');
+      return;
+    }
+    else{
+      setError(response.data);
       setTimeout(() => {
         setError();
       }, '2500');
       return false;
-    }
-
-    console.log(loginObject);
-    navigation.navigate('Feed');
-    return;
-  };
+    }}
 
   return (
     <View style={page.container}>
@@ -64,9 +70,9 @@ const LoginScreen = ({ navigation }) => {
           <TextInput
             keyboardAppearance="dark"
             style={text.body}
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
             placeholderTextColor="rgba(30, 30, 30, 0.8)"
           />
         </View>

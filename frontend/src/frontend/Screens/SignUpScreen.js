@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createUser } from '../../../firebase';
 import {
   LogBox,
   StatusBar,
@@ -16,13 +17,13 @@ import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 const SignUpScreen = ({ navigation }) => {
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [password2, setPassword2] = useState();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [error, setError] = useState();
 
-  const manageSignUp = () => {
+  const manageSignUp = async () => {
     const signUpObject = {
       username,
       email,
@@ -30,18 +31,24 @@ const SignUpScreen = ({ navigation }) => {
       password2,
     };
 
-    //checks and error handling
-    if (password !== password2) {
-      setError('Passwords do not match!');
+    const response = await createUser(signUpObject);
+    console.log('test');
+    console.log(response);
+
+    if(response===1){
+      navigation.navigate('Feed');
+      console.log('Success');
+      return;
+    }
+    else{
+      setError(response);
       setTimeout(() => {
         setError();
       }, '2500');
       return false;
     }
-
-    console.log(signUpObject);
-    navigation.navigate('Feed');
-    return;
+    
+    
   };
   return (
     <View style={page.container}>
