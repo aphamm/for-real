@@ -1,19 +1,25 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 
+
+
 export default function Question() {
   return (
     <View style={styles.container}>
       <View style={styles.questionofday}>
         <Text style={styles.question}>
-          Is Austin Pham down bad? Or is he down really bad?
+          Would you rather have $5 million or dinner with Jay Z?
         </Text>
       </View>
       <TextInput
-        placeholder="Write Stuff here"
+        placeholder="Your thoughts here..."
         placeholderTextColor="white"
+        multiline = {true}
+        marginTop = '10'
+        maxLength={250}
+        numberOfLines={8}
         style={styles.textInput}
       />
-      <Text>250/250 characters left</Text>
+      <Text style={styles.characters}>250/250 characters left</Text>
       <View style={styles.button}>
         <Text style={styles.buttonText}>Publish</Text>
       </View>
@@ -36,11 +42,17 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginTop: 20,
-    height: 300,
-    width: '100%',
-    backgroundColor: '#D3D3D3',
+    height: 250,
+    width: '90%',
+    backgroundColor: '#D3D3d3',
     borderRadius: 20,
-    padding: 10,
+    padding: 30,
+    paddingTop: 25,
+    fontSize: 17,
+    color: 'black',
+    opacity: 0.8,
+    textAlignVertical: 'top',
+    textAlign : 'left',
   },
 
   question: {
@@ -49,14 +61,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   questionofday: {
-    backgroundColor: '#D3D3D3',
-    width: '100%',
-    padding: 40,
+    backgroundColor: 'white',
+    width: '90%',
+    padding: 25,
+    paddingHorizontal: 40,
     borderRadius: 14,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50,
   },
 
   container: {
@@ -65,5 +77,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#144CDB'
   },
+  characters: {
+    marginTop: 8,
+    fontSize: 12
+  }
 });
+
