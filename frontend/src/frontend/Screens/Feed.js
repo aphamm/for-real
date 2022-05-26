@@ -115,7 +115,9 @@ export default function Feed({ navigation }) {
         renderItem={(thing) => {
           const goodThing = JSON.parse(JSON.stringify(thing));
           console.log('hi');
-          console.log(goodThing.item);
+          console.log(goodThing.item.answer);
+          // console.log(thing.item);
+          // console.log(thing.item.answer);
          
            const number= Object.keys(goodThing.item.upvotes).length -
               Object.keys(goodThing.item.downvotes).length

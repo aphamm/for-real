@@ -18,6 +18,7 @@ export default function Post(props) {
     
     <View style={styles.bubble}>
       <View style={styles.container}>
+      <View style={styles.TriangleShapeCSS} />
       
         <View style={styles.numberContainer}>
           <Text style={styles.arrow}>∧</Text>
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: {width:0, height: 4},
   },
+
   // rightArrow: {
   //   position: "absolute",
   //   backgroundColor: "white",
