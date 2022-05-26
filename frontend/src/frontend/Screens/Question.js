@@ -15,15 +15,16 @@ export default function Question() {
       question: questionOfDay,
       answer,
       time:
-        new Date().getDate().toString() +
+        new Date().getFullYear().toString() +
         '-' +
         (new Date().getMonth() + 1).toString() +
         '-' +
-        new Date().getFullYear().toString() + " " + 
-        new Date().getHours().toString() +
+        new Date().getDate().toString() +
+        ' ' +
+        +new Date().getHours().toString() +
         ':' +
         String(new Date().getMinutes()).padStart(2, '0'),
-        username: 'testUser'
+      username: 'testUser',
     };
 
     const response = await sendPost(post);

@@ -115,14 +115,23 @@ const sendPost = async (post) =>{
        answer: post.answer, 
        question:post.question, 
        user: post.username, 
-       likes: 0
+       time: post.time,
+       upvotes: [1,2,3,4], 
+       downvotes:[1,2]
       });
 
 };
 
 const getPosts = async (post) => {
   const response = await db_.ref().get(); 
-  return response;
+  console.log('START');
+  const arr = [];
+
+  response.forEach((element)=>{
+    arr.push(element);
+  });
+
+  return arr;
 };
 
 

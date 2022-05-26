@@ -12,9 +12,10 @@ export default function Feed({ navigation }) {
   const [data, setData] = useState();
 
   const gettingData = async () =>{
-  const dummyDataBaseData = await getPosts(); 
+  const dummyDataBaseData = await getPosts();
   console.log(dummyDataBaseData);
   setData(dummyDataBaseData);
+
   }
   useEffect(
     () => {
@@ -110,24 +111,34 @@ export default function Feed({ navigation }) {
       </View>
 
       <FlatList
-        data={dummyData}
-        renderItem={(item) => {
-          if (item.index % 2 == 0) {
+        data={data}
+        renderItem={(thing) => {
+          const goodThing = JSON.parse(JSON.stringify(thing));
+          console.log('hi');
+          console.log(goodThing.item);
+         
+           const number= Object.keys(goodThing.item.upvotes).length -
+              Object.keys(goodThing.item.downvotes).length
+       
+
+          if (thing.index % 2 == 0) {
             return (
               <RightPost
-                user={item.item.user}
-                answer={item.item.answer}
-                number={item.item.number}
-                keyExtractor={(item) => item.user}
+                user={goodThing.item.user}
+                answer={goodThing.item.answer}
+                number={number}
+                keyExtractor={(thing) => thing.index}
               />
             );
           } else {
             return (
               <LeftPost
-                user={item.item.user}
-                answer={item.item.answer}
-                number={item.item.number}
-                keyExtractor={(item) => item.user}
+                user={goodThing.item.user}
+                answer={goodThing.item.answer}
+                number={
+                 number
+                }
+                keyExtractor={(thing) => thing.index}
               />
             );
           }
