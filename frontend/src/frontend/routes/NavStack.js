@@ -45,7 +45,24 @@ const screens = {
   Question: {
     screen: Question,
     navigationOptions: ({ navigation }) => ({
-      headerShown: false,
+      title: '',
+      headerBackTitleVisible: false,
+      headerShown: true,
+      headerTransparent: true,
+      headerTintColor: 'white',
+      headerLeft: (
+        <Feather
+          style={{
+            marginLeft: 9,
+          }}
+          name="chevron-left"
+          size={34}
+          color="black"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+      ),
     }),
   },
 

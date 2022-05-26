@@ -160,7 +160,8 @@ const styles = StyleSheet.create({
   },
   container: {
      backgroundColor: 'white',
-     flex: 1
+     flex: 1,
+
   },
   menu: {
     marginTop: 40,

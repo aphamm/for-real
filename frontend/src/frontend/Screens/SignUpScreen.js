@@ -186,7 +186,7 @@ const text = StyleSheet.create({
     fontWeight: 'bold',
   },
   body: {
-    color: 'white',
+    color: 'black',
     fontSize: 17,
   },
   bold: {
