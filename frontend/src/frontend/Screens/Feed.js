@@ -110,7 +110,9 @@ export default function Feed({ navigation }) {
       </View>
 
       <FlatList
+      showsVerticalScrollIndicator={false}
         data={dummyData}
+        style={styles.list}
         renderItem={(item) => {
           if (item.index % 2 == 0) {
             return (
