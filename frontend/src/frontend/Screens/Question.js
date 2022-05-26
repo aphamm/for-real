@@ -9,6 +9,29 @@ export default function Question() {
 
   const [answer, setAnswer] = useState();
 
+  
+  const getRealTime = () =>{
+    const day =
+      (new Date().getMonth() + 1).toString() +
+      '/' +
+      new Date().getDate().toString() +
+      '/' +
+      new Date().getFullYear().toString();
+
+      const hour = new Date().getHours().toString();
+      const pm = true; 
+      let ampm = 'am';
+
+      if(hour>12){
+        hour = hour - 12; 
+        ampm='pm';
+      }
+      const time =
+        hour + ':' + String(new Date().getMinutes()).padStart(2, '0') + ampm;
+
+        return time + ' ' + day;
+
+  };
 
   const submitPostHandler = async () =>{
     const post = {
@@ -25,6 +48,7 @@ export default function Question() {
         ':' +
         String(new Date().getMinutes()).padStart(2, '0'),
       username: 'testUser',
+      realtime: getRealTime()
     };
 
     const response = await sendPost(post);
@@ -45,7 +69,7 @@ export default function Question() {
         value={answer}
         onChangeText={setAnswer}
       />
-      <Text>250/250 characters left</Text>
+      <Text>{250-answer.length}/250 characters left</Text>
       <View style={styles.button}>
         <Text style={styles.buttonText} onPress={submitPostHandler}>Publish</Text>
       </View>
