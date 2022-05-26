@@ -5,10 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
+import { UserContext } from '../../context/userContext';
 
 export default function Feed({ navigation }) {
-
+  const [username,setUsername] = useContext(UserContext);
   const [data, setData] = useState();
 
   const gettingData = async () =>{
