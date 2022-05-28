@@ -110,19 +110,28 @@ console.log('success in firebase js');
 
 const sendPost = async (post) =>{
     const key = post.time + ' ' + post.username;
-    const response = await db_.ref(key)
-      .set({
-       answer: post.answer, 
-       question:post.question, 
-       user: post.username, 
-       likes: 0
-      });
+    const response = await db_.ref(key).set({
+      answer: post.answer,
+      question: post.question,
+      user: post.username,
+      realtime: post.realtime,
+      upvotes: [1, 2, 3, 4],
+      downvotes: [1, 2],
+      key: post.time + ' ' + post.username,
+    });
 
 };
 
 const getPosts = async (post) => {
   const response = await db_.ref().get(); 
-  return response;
+  console.log('START');
+  const arr = [];
+
+  response.forEach((element)=>{
+    arr.push(element);
+  });
+
+  return arr;
 };
 
 
