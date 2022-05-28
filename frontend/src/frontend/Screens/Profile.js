@@ -44,6 +44,10 @@ export default function Profile() {
     return <AppLoading />;
   }
 
+  const profileHandler = () => {
+    navigation.navigate('Profile');
+  };
+
   return (
     <View style={styles.container}>
       {/* <ImageBackground 
