@@ -35,7 +35,7 @@ export default function Community({ navigation }) {
   );
 
   const image = {
-    uri: 'https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg',
+    uri: 'https://i.imgur.com/WgIfoZ4.jpg',
   };
 
   let [fontsLoaded] = useFonts({
