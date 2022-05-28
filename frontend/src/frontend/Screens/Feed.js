@@ -73,7 +73,7 @@ export default function Feed({ navigation }) {
       </Image> */}
       <View style={styles.header}>
         <View style={styles.menu}>
-          <Text style={styles.menuItem} onPress={feedHandler}>
+          <Text style={[styles.menuItem, styles.clicked]} onPress={feedHandler}>
             Global
           </Text>
           <Text style={styles.menuItem} onPress={communityHandler}>
@@ -128,8 +128,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 35,
     paddingRight: 35,
-    fontFamily: "Roboto_700Bold"
-
+    fontFamily: 'Roboto_700Bold',
   },
   header: {
     backgroundColor: 'white',
@@ -141,12 +140,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowColor: 'grey',
     shadowOpacity: 0.3,
-    shadowOffset: {width:0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
   },
   container: {
-     backgroundColor: 'white',
-     flex: 1,
-
+    backgroundColor: 'white',
+    flex: 1,
   },
   menu: {
     marginTop: 40,
@@ -156,9 +154,10 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    textDecorationLine: 'underline',
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: 'Roboto_300Light',
   },
-  
+  clicked: {
+    color: '#AA83FF',
+    fontFamily: 'Roboto_700Bold',
+  },
 });

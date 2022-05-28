@@ -84,14 +84,13 @@ export default function Community({ navigation }) {
           <Text style={styles.menuItem} onPress={FeedHandler}>
             Global
           </Text>
-          <Text style={styles.menuItem} onPress={communityHandler}>
+          <Text style={[styles.menuItem, styles.clicked]} onPress={communityHandler}>
             Your Community
           </Text>
           <Text style={styles.menuItem} onPress={profileHandler}>
             Profile
           </Text>
         </View>
-        <Text>COMMUNITY</Text>
         <Text style={styles.question} onPress={questionHandler}>
           Would you rather have $5 million or dinner with Jay Z and why?
         </Text>
@@ -163,7 +162,10 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    textDecorationLine: 'underline',
     fontFamily: 'Roboto_300Light',
+  },
+  clicked: {
+    color: '#AA83FF',
+    fontFamily: 'Roboto_700Bold',
   },
 });

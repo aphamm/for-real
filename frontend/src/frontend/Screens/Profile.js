@@ -80,7 +80,7 @@ export default function Profile({ navigation }) {
           <Text style={styles.menuItem} onPress={communityHandler}>
             Your Community
           </Text>
-          <Text style={styles.menuItem} onPress={profileHandler}>
+          <Text style={[styles.menuItem, styles.clicked]} onPress={profileHandler}>
             Profile
           </Text>
         </View>
@@ -205,9 +205,12 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    textDecorationLine: 'underline',
     fontFamily: "Roboto_300Light",
 
   },
+  clicked: {
+    color: '#AA83FF',
+    fontFamily: 'Roboto_700Bold'
+  }
   
 });
