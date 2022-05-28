@@ -13,13 +13,6 @@ export default function Question() {
 
   
   const getRealTime = () =>{
-    const day =
-      (new Date().getMonth() + 1).toString() +
-      '/' +
-      new Date().getDate().toString() +
-      '/' +
-      new Date().getFullYear().toString();
-
       const hour = new Date().getHours().toString();
       const pm = true; 
       let ampm = 'am';
@@ -31,7 +24,7 @@ export default function Question() {
       const time =
         hour + ':' + String(new Date().getMinutes()).padStart(2, '0') + ampm;
 
-        return time + ' ' + day;
+        return time;
 
   };
 

@@ -14,7 +14,7 @@ export default function Feed({ navigation }) {
   const gettingData = async () =>{
   const dummyDataBaseData = await getPosts();
   console.log(dummyDataBaseData);
-  setData(dummyDataBaseData);
+  setData(dummyDataBaseData.reverse());
 
   }
   useEffect(
@@ -54,6 +54,7 @@ export default function Feed({ navigation }) {
   const feedHandler = () => {
     navigation.navigate('Feed');
   };
+
 
 
   return (
@@ -103,6 +104,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
             );
@@ -112,6 +114,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
             );
