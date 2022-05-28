@@ -2,6 +2,8 @@ import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-na
 import { useState } from 'react';
 import { sendPost } from '../../../firebase';
 
+
+
 export default function Question() {
 
   const questionOfDay =
@@ -59,17 +61,24 @@ export default function Question() {
     <View style={styles.container}>
       <View style={styles.questionofday}>
         <Text style={styles.question}>
+
         {questionOfDay}
+
         </Text>
       </View>
       <TextInput
-        placeholder="Write Stuff here"
+        placeholder="Your thoughts here..."
         placeholderTextColor="white"
+        multiline = {true}
+        marginTop = '10'
+        maxLength={250}
+        numberOfLines={8}
         style={styles.textInput}
         value={answer}
         onChangeText={setAnswer}
       />
-      <Text>{250-answer.length}/250 characters left</Text>
+
+      <Text style={styles.characters}>{250-answer.length}/250 characters left</Text>
       <View style={styles.button}>
         <Text style={styles.buttonText} onPress={submitPostHandler}>Publish</Text>
       </View>
@@ -92,11 +101,17 @@ const styles = StyleSheet.create({
   },
   textInput: {
     marginTop: 20,
-    height: 300,
-    width: '100%',
-    backgroundColor: '#D3D3D3',
+    height: 250,
+    width: '90%',
+    backgroundColor: '#D3D3d3',
     borderRadius: 20,
-    padding: 10,
+    padding: 30,
+    paddingTop: 25,
+    fontSize: 17,
+    color: 'black',
+    opacity: 0.8,
+    textAlignVertical: 'top',
+    textAlign : 'left',
   },
 
   question: {
@@ -105,14 +120,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   questionofday: {
-    backgroundColor: '#D3D3D3',
-    width: '100%',
-    padding: 40,
+    backgroundColor: 'white',
+    width: '90%',
+    padding: 25,
+    paddingHorizontal: 40,
     borderRadius: 14,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50,
   },
 
   container: {
@@ -121,5 +136,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#144CDB'
   },
+  characters: {
+    marginTop: 8,
+    fontSize: 12
+  }
 });
+
