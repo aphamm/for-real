@@ -64,7 +64,7 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="user"
@@ -82,7 +82,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <Foundation
             style={page.rightMargin}
             name="mail"
@@ -99,7 +99,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="lock"
@@ -116,7 +116,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="lock"
@@ -139,7 +139,7 @@ const SignUpScreen = ({ navigation }) => {
         ) : null}
         <View style={page.buttonWrapper}>
           <TouchableOpacity
-            style={[page.inlineButton, page.toggleOn, page.bottomMargin]}
+            style={[page.inlineButton, page.toggleOn, page.bottomMargin, page.dropShadow]}
           >
             <Text style={text.button} onPress={manageSignUp}>
               Sign Up
@@ -151,7 +151,7 @@ const SignUpScreen = ({ navigation }) => {
               navigation.navigate('Login');
             }}
           >
-            <Text style={text.button}>Already have an Account?</Text>
+            <Text style={text.button}>Already Have an Account?</Text>
             <Text style={text.button}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -250,7 +250,7 @@ const page = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#144CDB',
+    backgroundColor: '#AA83FF',
   },
   inline: {
     flexDirection: 'row',
@@ -264,7 +264,7 @@ const page = StyleSheet.create({
     justifyContent: 'space-between',
   },
   dropShadow: {
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
