@@ -1,22 +1,21 @@
 import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
-
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 
-export default function Profile() {
-
+export default function Profile({ navigation }) {
   const userData = {
     totalPosts: 10,
     postStreak: 5,
     totalUpvotes: 100,
-  }
-
+  };
 
   const dummyData = [
     {
       question: 'Question #1',
-      answer: 'Def 5 milli who cares bout Jay Z get a bag and run wit it am i rite',
+      answer:
+        'Def 5 milli who cares bout Jay Z get a bag and run wit it am i rite',
       number: 15,
     },
     {
@@ -26,26 +25,40 @@ export default function Profile() {
     },
     {
       question: 'Question #3',
-      answer: 'I would rather have dinner with Jay Z because what are you actually gonna do with 5 mil',
+      answer:
+        'I would rather have dinner with Jay Z because what are you actually gonna do with 5 mil',
       number: 3,
     },
   ];
 
-  const image = {uri: "https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg"}
-  
+  const image = {
+    uri: 'https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg',
+  };
 
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
     Roboto_300Light,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
     return <AppLoading />;
   }
 
+  const questionHandler = () => {
+    navigation.navigate('Question');
+  };
+
   const profileHandler = () => {
     navigation.navigate('Profile');
+  };
+
+  const FeedHandler = () => {
+    navigation.navigate('Feed');
+  };
+
+  const communityHandler = () => {
+    navigation.navigate('Community');
   };
 
   return (
@@ -58,12 +71,18 @@ export default function Profile() {
         source={require("../../assets/tempgrad.png/")}
         style={styles.bgimage}>
       </Image> */}
-      
+
       <View style={styles.header}>
         <View style={styles.menu}>
-          <Text style={styles.menuItem}>Global</Text>
-          <Text style={styles.menuItem}>Your Community</Text>
-          <Text style={styles.menuItem}>Profile</Text>
+          <Text style={styles.menuItem} onPress={FeedHandler}>
+            Global
+          </Text>
+          <Text style={styles.menuItem} onPress={communityHandler}>
+            Your Community
+          </Text>
+          <Text style={styles.menuItem} onPress={profileHandler}>
+            Profile
+          </Text>
         </View>
       </View>
 
@@ -72,28 +91,27 @@ export default function Profile() {
       <View style={styles.statsBox}>
         <Text style={styles.statsHeader}>Stats</Text>
         <View style={styles.stats}>
-            <Text style={styles.statItem}>Total Posts: </Text>
-            <Text style={styles.statItem}>Post Streak: </Text>
-            <Text style={styles.statItem}>Total Upvotes: </Text>
+          <Text style={styles.statItem}>Total Posts: </Text>
+          <Text style={styles.statItem}>Post Streak: </Text>
+          <Text style={styles.statItem}>Total Upvotes: </Text>
         </View>
       </View>
 
       <Text style={styles.upvoteHeader}>Most Upvoted Posts</Text>
       <FlatList
-      //slice the first two posts
+        //slice the first two posts
         data={dummyData.slice(1)}
         renderItem={(item) => {
           console.log(item);
-            return (
-              <ProfilePost
-                question={item.item.question}
-                answer={item.item.answer}
-                number={item.item.number}
-                keyExtractor={(item) => item.user}
-              />
-            );
-          }
-        }
+          return (
+            <ProfilePost
+              question={item.item.question}
+              answer={item.item.answer}
+              number={item.item.number}
+              keyExtractor={(item) => item.user}
+            />
+          );
+        }}
       />
     </View>
   );

@@ -1,28 +1,37 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
 import RightPost from '../components/RightPost';
 import LeftPost from '../components/LeftPost';
 import { useNavigation } from '@react-navigation/native';
-import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import {
+  useFonts,
+  Roboto_300Light,
+  Roboto_300Light_Italic,
+  Roboto_700Bold,
+} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Feed({ navigation }) {
-
+export default function Community({ navigation }) {
   const [data, setData] = useState();
 
-  const gettingData = async () =>{
-  const dummyDataBaseData = await getPosts();
-  console.log(dummyDataBaseData);
-  setData(dummyDataBaseData);
-
-  }
+  const gettingData = async () => {
+    const dummyDataBaseData = await getPosts();
+    console.log(dummyDataBaseData);
+    setData(dummyDataBaseData);
+  };
   useEffect(
     () => {
-       gettingData(); 
+      gettingData();
     },
-  // optional dependency array
-    [ ]
+    // optional dependency array
+    []
   );
 
   const image = {
@@ -47,14 +56,13 @@ export default function Feed({ navigation }) {
     navigation.navigate('Profile');
   };
 
-  const communityHandler = () => {
-    navigation.navigate('Community');
-  };
+   const FeedHandler = () => {
+     navigation.navigate('Feed');
+   };
 
-  const feedHandler = () => {
-    navigation.navigate('Feed');
-  };
-
+   const communityHandler = () => {
+     navigation.navigate('Community');
+   };
 
   return (
     <View style={styles.container}>
@@ -73,7 +81,7 @@ export default function Feed({ navigation }) {
       </Image> */}
       <View style={styles.header}>
         <View style={styles.menu}>
-          <Text style={styles.menuItem} onPress={feedHandler}>
+          <Text style={styles.menuItem} onPress={FeedHandler}>
             Global
           </Text>
           <Text style={styles.menuItem} onPress={communityHandler}>
@@ -83,6 +91,7 @@ export default function Feed({ navigation }) {
             Profile
           </Text>
         </View>
+        <Text>COMMUNITY</Text>
         <Text style={styles.question} onPress={questionHandler}>
           Would you rather have $5 million or dinner with Jay Z and why?
         </Text>
@@ -128,8 +137,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 35,
     paddingRight: 35,
-    fontFamily: "Roboto_700Bold"
-
+    fontFamily: 'Roboto_700Bold',
   },
   header: {
     backgroundColor: 'white',
@@ -141,12 +149,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowColor: 'grey',
     shadowOpacity: 0.3,
-    shadowOffset: {width:0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
   },
   container: {
-     backgroundColor: 'white',
-     flex: 1,
-
+    backgroundColor: 'white',
+    flex: 1,
   },
   menu: {
     marginTop: 40,
@@ -157,8 +164,6 @@ const styles = StyleSheet.create({
   menuItem: {
     marginHorizontal: 15,
     textDecorationLine: 'underline',
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: 'Roboto_300Light',
   },
-  
 });
