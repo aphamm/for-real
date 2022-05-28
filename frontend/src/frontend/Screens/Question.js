@@ -93,6 +93,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: 30,
     padding: 20,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
   },
   buttonText: {
     color: 'white',
@@ -112,6 +116,10 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     textAlignVertical: 'top',
     textAlign : 'left',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
   },
 
   question: {
@@ -128,6 +136,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
   },
 
   container: {
@@ -136,7 +148,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#144CDB'
+    backgroundColor: '#AA83FF'
   },
   characters: {
     marginTop: 8,
