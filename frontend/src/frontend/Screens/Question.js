@@ -13,7 +13,7 @@ export default function Question() {
 
   
   const getRealTime = () =>{
-      const hour = new Date().getHours().toString();
+      let hour = new Date().getHours().toString();
       const pm = true; 
       let ampm = 'am';
 
