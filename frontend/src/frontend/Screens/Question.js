@@ -7,7 +7,7 @@ export default function Question() {
   const questionOfDay =
     ' Would you rather have $5 million or dinner with Jay Z and why?';
 
-  const [answer, setAnswer] = useState();
+  const [answer, setAnswer] = useState('');
 
   
   const getRealTime = () =>{
