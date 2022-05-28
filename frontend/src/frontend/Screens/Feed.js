@@ -43,6 +43,10 @@ export default function Feed({ navigation }) {
     navigation.navigate('Question');
   };
 
+  const profileHandler = () => {
+    navigation.navigate('Profile');
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -62,7 +66,7 @@ export default function Feed({ navigation }) {
         <View style={styles.menu}>
           <Text style={styles.menuItem}>Global</Text>
           <Text style={styles.menuItem}>Your Community</Text>
-          <Text style={styles.menuItem}>Profile</Text>
+          <Text style={styles.menuItem} onPress={profileHandler}>Profile</Text>
         </View>
         <Text style={styles.question} onPress={questionHandler}>
           Would you rather have $5 million or dinner with Jay Z and why?
