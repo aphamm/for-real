@@ -38,6 +38,7 @@ const LoginScreen = ({ navigation }) => {
     if(response.status===true){
       //response.data
       setUser(JSON.parse(JSON.stringify(response.data)));
+      console.log('setUser in context');
       navigation.navigate('Feed');
       return;
     }

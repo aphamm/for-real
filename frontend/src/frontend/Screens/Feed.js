@@ -14,7 +14,7 @@ export default function Feed({ navigation }) {
   const gettingData = async () =>{
   const dummyDataBaseData = await getPosts();
   setData(dummyDataBaseData.reverse());
-
+    console.log('HIT');
   }
   useEffect(
     () => {
