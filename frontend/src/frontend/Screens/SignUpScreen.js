@@ -106,6 +106,7 @@ const SignUpScreen = ({ navigation }) => {
           <TextInput
             keyboardAppearance="dark"
             style={text.body}
+            secureTextEntry={true}
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
@@ -123,6 +124,7 @@ const SignUpScreen = ({ navigation }) => {
           <TextInput
             keyboardAppearance="dark"
             style={text.body}
+            secureTextEntry={true}
             value={password2}
             onChangeText={setPassword2}
             placeholder="Confirm Password"
