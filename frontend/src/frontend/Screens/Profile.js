@@ -97,12 +97,15 @@ export default function Profile({ navigation }) {
       <View style={styles.statsBox}>
         <View style={styles.stats}>
           <Text style={styles.statsHeader}>22</Text>
-          <Text style={styles.statsHeader}>15</Text>
-          <Text style={styles.statsHeader}>87</Text>
+          <Text style={styles.statItem}>Posts</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statItem}>Posts</Text>
+          <Text style={styles.statsHeader}>15</Text>
           <Text style={styles.statItem}>Streak</Text>
+
+        </View>
+        <View style={styles.stats}>
+          <Text style={styles.statsHeader}>87</Text>
           <Text style={styles.statItem}>Upvotes</Text>
         </View>
       </View>
@@ -160,14 +163,18 @@ const styles = StyleSheet.create({
       padding: 10,
       borderRadius: 20,
       display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignSelf: 'center',
+      textAlign: 'center'
   },
 
   statsHeader: {
     fontSize: 30,
     fontFamily: "Roboto_700Bold",
     marginHorizontal: 15,
+    
   },
 
   upvoteHeader: {
@@ -180,11 +187,9 @@ const styles = StyleSheet.create({
 
   stats: {
     marginTop: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    flexWrap: 'wrap',
-    alignSelf: 'center',
-    textAlign: 'center'
+    flexDirection: 'column',
+    alignItems: 'center'
+    
   },
 
   statItem: {
