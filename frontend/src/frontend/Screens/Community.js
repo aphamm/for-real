@@ -1,32 +1,40 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
 import RightPost from '../components/RightPost';
 import LeftPost from '../components/LeftPost';
 import { useNavigation } from '@react-navigation/native';
-import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import {
+  useFonts,
+  Roboto_300Light,
+  Roboto_300Light_Italic,
+  Roboto_700Bold,
+} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Feed({ navigation }) {
-
+export default function Community({ navigation }) {
   const [data, setData] = useState();
 
-  const gettingData = async () =>{
-  const dummyDataBaseData = await getPosts();
-  setData(dummyDataBaseData.reverse());
-
-  }
+  const gettingData = async () => {
+    const dummyDataBaseData = await getPosts();
+    setData(dummyDataBaseData.reverse());
+  };
   useEffect(
     () => {
-       gettingData(); 
+      gettingData();
     },
-  // optional dependency array
-    [ ]
+    // optional dependency array
+    []
   );
 
   const image = {
-    // uri: 'https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg',
-    uri: 'https://i.imgur.com/WgIfoZ4.jpg'
+    uri: 'https://i.imgur.com/WgIfoZ4.jpg',
   };
 
   let [fontsLoaded] = useFonts({
@@ -47,15 +55,13 @@ export default function Feed({ navigation }) {
     navigation.navigate('Profile');
   };
 
-  const communityHandler = () => {
-    navigation.navigate('Community');
-  };
+   const FeedHandler = () => {
+     navigation.navigate('Feed');
+   };
 
-  const feedHandler = () => {
-    navigation.navigate('Feed');
-  };
-
-
+   const communityHandler = () => {
+     navigation.navigate('Community');
+   };
 
   return (
     <View style={styles.container}>
@@ -74,10 +80,10 @@ export default function Feed({ navigation }) {
       </Image> */}
       <View style={styles.header}>
         <View style={styles.menu}>
-          <Text style={[styles.menuItem, styles.clicked]} onPress={feedHandler}>
+          <Text style={styles.menuItem} onPress={FeedHandler}>
             Global
           </Text>
-          <Text style={styles.menuItem} onPress={communityHandler}>
+          <Text style={[styles.menuItem, styles.clicked]} onPress={communityHandler}>
             Your Community
           </Text>
           <Text style={styles.menuItem} onPress={profileHandler}>

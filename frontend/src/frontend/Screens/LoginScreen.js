@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { getUser } from '../../../firebase';
 import {
   LogBox,
   StatusBar,
@@ -14,31 +15,39 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
+import { UserContext } from '../../context/userContext';
+
+
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState();
+  const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  const [user, setUser] = useContext(UserContext);
 
-  const manageLogin = () => {
-    const loginObject = {
-      email,
+
+  const manageLogin = async () => {
+    const logInObject = {
+      username,
       password,
     };
 
-    //replace below boolean later w check for if valid credentials
-    if (false) {
-      setError('Credentials do not match!');
+    const response = await getUser(logInObject);
+    //inside response is data for user
+
+    if(response.status===true){
+      //response.data
+      setUser(JSON.parse(JSON.stringify(response.data)));
+      navigation.navigate('Feed');
+      return;
+    }
+    else{
+      setError(response.data);
       setTimeout(() => {
         setError();
       }, '2500');
       return false;
-    }
-
-    console.log(loginObject);
-    navigation.navigate('Feed');
-    return;
-  };
+    }}
 
   return (
     <View style={page.container}>
@@ -54,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <Foundation
             style={page.rightMargin}
             name="mail"
@@ -64,14 +73,14 @@ const LoginScreen = ({ navigation }) => {
           <TextInput
             keyboardAppearance="dark"
             style={text.body}
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
+            placeholder="Username"
+            value={username}
+            onChangeText={setUsername}
             placeholderTextColor="rgba(30, 30, 30, 0.8)"
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="lock"
@@ -96,7 +105,7 @@ const LoginScreen = ({ navigation }) => {
 
         <View style={page.buttonWrapper}>
           <TouchableOpacity
-            style={[page.inlineButton, page.toggleOn, page.bottomMargin]}
+            style={[page.inlineButton, page.toggleOn, page.bottomMargin, page.dropShadow]}
             onPress={manageLogin}
           >
             <Text style={text.button}>Login</Text>
@@ -134,7 +143,7 @@ const text = StyleSheet.create({
     fontWeight: 'bold',
   },
   body: {
-    color: 'white',
+    color: 'black',
     fontSize: 17,
   },
   bold: {
@@ -197,7 +206,7 @@ const page = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#144CDB',
+    backgroundColor: '#AA83FF',
   },
   inline: {
     flexDirection: 'row',
@@ -211,7 +220,7 @@ const page = StyleSheet.create({
     justifyContent: 'space-between',
   },
   dropShadow: {
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 8,

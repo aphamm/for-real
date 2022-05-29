@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createUser } from '../../../firebase';
 import {
   LogBox,
   StatusBar,
@@ -16,13 +17,13 @@ import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
 
 const SignUpScreen = ({ navigation }) => {
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [password2, setPassword2] = useState();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [error, setError] = useState();
 
-  const manageSignUp = () => {
+  const manageSignUp = async () => {
     const signUpObject = {
       username,
       email,
@@ -30,18 +31,21 @@ const SignUpScreen = ({ navigation }) => {
       password2,
     };
 
-    //checks and error handling
-    if (password !== password2) {
-      setError('Passwords do not match!');
+    const response = await createUser(signUpObject);
+
+    if(response===1){
+      navigation.navigate('Feed');
+      return;
+    }
+    else{
+      setError(response);
       setTimeout(() => {
         setError();
       }, '2500');
       return false;
     }
-
-    console.log(signUpObject);
-    navigation.navigate('Feed');
-    return;
+    
+    
   };
   return (
     <View style={page.container}>
@@ -57,7 +61,7 @@ const SignUpScreen = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="user"
@@ -75,7 +79,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <Foundation
             style={page.rightMargin}
             name="mail"
@@ -92,7 +96,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="lock"
@@ -109,7 +113,7 @@ const SignUpScreen = ({ navigation }) => {
           />
         </View>
 
-        <View style={[page.input, page.inline, page.bottomMargin]}>
+        <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
           <FontAwesome
             style={page.rightMargin}
             name="lock"
@@ -132,7 +136,7 @@ const SignUpScreen = ({ navigation }) => {
         ) : null}
         <View style={page.buttonWrapper}>
           <TouchableOpacity
-            style={[page.inlineButton, page.toggleOn, page.bottomMargin]}
+            style={[page.inlineButton, page.toggleOn, page.bottomMargin, page.dropShadow]}
           >
             <Text style={text.button} onPress={manageSignUp}>
               Sign Up
@@ -144,7 +148,7 @@ const SignUpScreen = ({ navigation }) => {
               navigation.navigate('Login');
             }}
           >
-            <Text style={text.button}>Already have an Account?</Text>
+            <Text style={text.button}>Already Have an Account?</Text>
             <Text style={text.button}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -179,7 +183,7 @@ const text = StyleSheet.create({
     fontWeight: 'bold',
   },
   body: {
-    color: 'white',
+    color: 'black',
     fontSize: 17,
   },
   bold: {
@@ -243,7 +247,7 @@ const page = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#144CDB',
+    backgroundColor: '#AA83FF',
   },
   inline: {
     flexDirection: 'row',
@@ -257,7 +261,7 @@ const page = StyleSheet.create({
     justifyContent: 'space-between',
   },
   dropShadow: {
-    shadowColor: 'white',
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 8,

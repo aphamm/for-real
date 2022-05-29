@@ -1,24 +1,28 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
+import { useNavigation } from '@react-navigation/native';
 
-
+//needs to be given {navigation} somehow
 export default function Post(props) {
-  
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
     Roboto_300Light,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
+
+  const profileOthersHandler = () => {
+    navigation.navigate('ProfileOthers');
+  };
 
   if (!fontsLoaded) {
     return <AppLoading />;
   }
   return (
-    
     <View style={styles.bubble}>
       <View style={styles.container}>
-      
+        <View style={styles.TriangleShapeCSS} />
+
         <View style={styles.numberContainer}>
           <Text style={styles.arrow}>∧</Text>
           <Text style={styles.number}>{props.number}</Text>
@@ -28,19 +32,17 @@ export default function Post(props) {
         <View style={styles.textContainer}>
           <Text style={styles.answer}>{props.answer}</Text>
           <View style={styles.userandtime}>
-            <Text style={styles.username}>{props.user} - </Text>
-            <Text style={styles.time}>5 mins ago</Text>
+            <Text style={styles.username} onPress={profileOthersHandler}>
+              {props.user} -{' '}
+            </Text>
+            <Text style={styles.time}>{props.realtime}</Text>
           </View>
         </View>
-        
-        
-
       </View>
 
       <View style={styles.rightArrow}></View>
       <View style={styles.rightArrowOverlap}></View>
     </View>
-    
   );
 }
 
@@ -112,6 +114,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: {width:0, height: 4},
   },
+
   // rightArrow: {
   //   position: "absolute",
   //   backgroundColor: "white",
