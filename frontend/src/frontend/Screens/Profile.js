@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
@@ -37,6 +37,12 @@ export default function Profile({ navigation }) {
         'I would rather have dinner with Jay Z because what are you actually gonna do with 5 mil',
       number: 3,
     },
+    {
+      question: 'Question #4',
+      answer:
+        'answer q4',
+      number: 3,
+    },
   ];
 
   const image = {
@@ -71,15 +77,6 @@ export default function Profile({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <ImageBackground 
-        source={image}
-        style={{width: '100%', height: '100%', position: 'absolute', opacity: 0.8}}>
-      </ImageBackground> */}
-      {/* <Image 
-        source={require("../../assets/tempgrad.png/")}
-        style={styles.bgimage}>
-      </Image> */}
-
       <View style={styles.header}>
         <View style={styles.menu}>
           <Text style={styles.menuItem} onPress={FeedHandler}>
@@ -96,18 +93,24 @@ export default function Profile({ navigation }) {
 
       <Text style={styles.name}>Angelina Lue</Text>
       <Text style={styles.username}>@Angelina02184</Text>
+      
       <View style={styles.statsBox}>
-        <Text style={styles.statsHeader}>Stats</Text>
         <View style={styles.stats}>
-          <Text style={styles.statItem}>Total Posts: </Text>
-          <Text style={styles.statItem}>Post Streak: </Text>
-          <Text style={styles.statItem}>Total Upvotes: </Text>
+          <Text style={styles.statsHeader}>22</Text>
+          <Text style={styles.statsHeader}>15</Text>
+          <Text style={styles.statsHeader}>87</Text>
+        </View>
+        <View style={styles.stats}>
+          <Text style={styles.statItem}>Posts</Text>
+          <Text style={styles.statItem}>Streak</Text>
+          <Text style={styles.statItem}>Upvotes</Text>
         </View>
       </View>
 
-      <Text style={styles.upvoteHeader}>Most Upvoted Posts</Text>
+      <Text style={styles.upvoteHeader}>Recent Posts</Text>
       <FlatList
         //slice the first two posts
+        // style={styles.upvotedposts}
         data={dummyData.slice(1)}
         renderItem={(item) => {
           return (
@@ -136,9 +139,9 @@ const styles = StyleSheet.create({
 
   name: {
       fontSize: 20,
-      marginTop: 20,
+      marginTop: 40,
       textAlign: 'center',
-      fontFamily: "Roboto_300Light",
+      fontFamily: "Roboto_700Bold",
   },
 
   username: {
@@ -149,11 +152,11 @@ const styles = StyleSheet.create({
   },
 
   statsBox: {
-      backgroundColor: 'lightgrey',
-      opacity: 1,
+      backgroundColor: '#AA83FF',
+      opacity: 0.9,
       marginTop: 20,
-      marginRight: 100,
-      marginLeft: 100,
+      marginRight: 60,
+      marginLeft: 60,
       padding: 10,
       borderRadius: 20,
       display: 'flex',
@@ -162,29 +165,33 @@ const styles = StyleSheet.create({
   },
 
   statsHeader: {
-    fontSize: 18,
-      fontFamily: "Roboto_300Light"
+    fontSize: 30,
+    fontFamily: "Roboto_700Bold",
+    marginHorizontal: 15,
   },
 
   upvoteHeader: {
-    marginTop: 40,
+    marginTop: 50,
     fontSize: 18,
-    fontFamily: "Roboto_300Light",
+    fontFamily: "Roboto_700Bold",
     textAlign: 'center',
+    marginBottom: 10
   },
 
   stats: {
     marginTop: 10,
-    alignContent: 'flex-start',
-    flexDirection: 'column',
+    flexDirection: 'row',
     justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+    alignSelf: 'center',
+    textAlign: 'center'
   },
 
   statItem: {
     marginVertical: 2,
     fontSize: 13,
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: "Roboto_700Bold",
+    marginHorizontal: 15
   },
 
   header: {
@@ -198,10 +205,11 @@ const styles = StyleSheet.create({
     shadowColor: 'grey',
     shadowOpacity: 0.3,
     shadowOffset: {width:0, height: 4},
+    paddingBottom: 30
   },
 
   container: {
-     backgroundColor: 'white',
+     backgroundColor: '#F3F2F2',
      flex: 1
   },
   menu: {
@@ -218,6 +226,7 @@ const styles = StyleSheet.create({
   clicked: {
     color: '#AA83FF',
     fontFamily: 'Roboto_700Bold'
-  }
+  },
+  
   
 });
