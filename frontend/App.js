@@ -8,8 +8,10 @@ import {UserContextProvider} from './src/context/userContext';
 export default function App() {
   
   return (
+    
     <UserContextProvider>
-    <Navigator />
+    {/* <Navigator /> */}
+    <Profile />
     </UserContextProvider>
     
     
