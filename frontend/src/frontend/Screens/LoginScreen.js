@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getUser } from '../../../firebase';
 import {
   LogBox,
@@ -15,11 +15,15 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
+import { UserContext } from '../../context/userContext';
+
+
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  const [user, setUser] = useContext(UserContext);
 
 
   const manageLogin = async () => {
@@ -30,12 +34,11 @@ const LoginScreen = ({ navigation }) => {
 
     const response = await getUser(logInObject);
     //inside response is data for user
-    console.log(response.status); 
 
     if(response.status===true){
-      console.log('response');
+      //response.data
+      setUser(JSON.parse(JSON.stringify(response.data)));
       navigation.navigate('Feed');
-      console.log('Success');
       return;
     }
     else{
@@ -86,6 +89,7 @@ const LoginScreen = ({ navigation }) => {
           />
           <TextInput
             keyboardAppearance="dark"
+            secureTextEntry={true}
             style={text.body}
             placeholder="Password"
             value={password}
@@ -170,15 +174,15 @@ const text = StyleSheet.create({
 const page = StyleSheet.create({
   center: {
     alignItems: 'center',
-    marginBottom: 60,
+    marginBottom: 40,
   },
   center2: {
     alignItems: 'center',
   },
   imgLogoContainer: {
-    width: 60,
-    height: 60,
-    overflow: 'hidden',
+    width: 150,
+    height: 100,
+    // overflow: 'hidden',
   },
   imgTextContainer: {
     marginTop: 10,
@@ -208,7 +212,7 @@ const page = StyleSheet.create({
   inline: {
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   inlineSpaceBetween: {
     flexDirection: 'row',
@@ -249,7 +253,6 @@ const page = StyleSheet.create({
     color: 'white',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     flexDirection: 'row',
-    alignItems: 'center',
   },
   lighter: {
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
@@ -293,6 +296,7 @@ const page = StyleSheet.create({
     padding: 15,
     paddingLeft: 25,
     flexDirection: 'row',
+    
   },
   hidden: {
     display: 'none',

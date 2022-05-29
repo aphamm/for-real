@@ -19,19 +19,18 @@ export default function Post(props) {
     <View style={styles.bubble}>
       <View style={styles.container}>
       
-        
         <View style={styles.textContainer}>
         <View style={styles.userandtime}>
-            <Text style={styles.time}>{props.question}</Text>
+            <Text style={styles.question}>{props.question}</Text>
           </View>
           <Text style={styles.answer}>{props.answer}</Text>
         </View>
         
-        <View style={styles.numberContainer}>
+        {/* <View style={styles.numberContainer}>
           <Text style={styles.arrow}>∧</Text>
           <Text style={styles.number}>{props.number}</Text>
           <Text style={styles.arrow}>∨</Text>
-        </View>
+        </View> */}
 
 
       </View>
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto_700Bold",
     color: "black",
   },
-  time: {
+  question: {
     fontSize: 10,
     color: 'grey',
     fontFamily: "Roboto_300Light_Italic",

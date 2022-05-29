@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
-import { useState } from 'react';
+import { useState, useContext} from 'react';
 import { sendPost } from '../../../firebase';
+import { UserContext } from '../../context/userContext';
 
 
 
@@ -10,17 +11,11 @@ export default function Question() {
     ' Would you rather have $5 million or dinner with Jay Z and why?';
 
   const [answer, setAnswer] = useState('');
+  const [user, setUser] = useContext(UserContext);
 
   
   const getRealTime = () =>{
-    const day =
-      (new Date().getMonth() + 1).toString() +
-      '/' +
-      new Date().getDate().toString() +
-      '/' +
-      new Date().getFullYear().toString();
-
-      const hour = new Date().getHours().toString();
+      let hour = new Date().getHours().toString();
       const pm = true; 
       let ampm = 'am';
 
@@ -31,11 +26,12 @@ export default function Question() {
       const time =
         hour + ':' + String(new Date().getMinutes()).padStart(2, '0') + ampm;
 
-        return time + ' ' + day;
+        return time;
 
   };
 
   const submitPostHandler = async () =>{
+
     const post = {
       question: questionOfDay,
       answer,
@@ -49,8 +45,15 @@ export default function Question() {
         +new Date().getHours().toString() +
         ':' +
         String(new Date().getMinutes()).padStart(2, '0'),
-      username: 'testUser',
-      realtime: getRealTime()
+      //MAKE ACTUAL USERNAME
+      username: user.username.toLowerCase(),
+      realtime: getRealTime(),
+      date:
+        (new Date().getMonth() + 1).toString() +
+        '-' +
+        new Date().getDate().toString() +
+        ' ' +
+        new Date().getFullYear().toString()
     };
 
     const response = await sendPost(post);

@@ -1,18 +1,21 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
 import ProfilePost from '../components/ProfilePost';
-import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import {
+  useFonts,
+  Roboto_300Light,
+  Roboto_300Light_Italic,
+  Roboto_700Bold,
+} from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
-import { UserContext } from '../../context/userContext';
-import { useContext } from 'react';
 
-export default function Profile({ navigation }) {
-
-  const [user, setUser] = useContext(UserContext);
-
-   console.log('USER');
-   console.log(user);
-
+export default function ProfileOthers({ navigation }) {
   const userData = {
     totalPosts: 10,
     postStreak: 5,
@@ -35,12 +38,6 @@ export default function Profile({ navigation }) {
       question: 'Question #3',
       answer:
         'I would rather have dinner with Jay Z because what are you actually gonna do with 5 mil',
-      number: 3,
-    },
-    {
-      question: 'Question #4',
-      answer:
-        'answer q4',
       number: 3,
     },
   ];
@@ -77,43 +74,30 @@ export default function Profile({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.menu}>
-          <Text style={styles.menuItem} onPress={FeedHandler}>
-            Global
-          </Text>
-          <Text style={styles.menuItem} onPress={communityHandler}>
-            Your Community
-          </Text>
-          <Text style={[styles.menuItem, styles.clicked]} onPress={profileHandler}>
-            Profile
-          </Text>
-        </View>
-      </View>
+      {/* <ImageBackground 
+        source={image}
+        style={{width: '100%', height: '100%', position: 'absolute', opacity: 0.8}}>
+      </ImageBackground> */}
+      {/* <Image 
+        source={require("../../assets/tempgrad.png/")}
+        style={styles.bgimage}>
+      </Image> */}
+
 
       <Text style={styles.name}>Angelina Lue</Text>
       <Text style={styles.username}>@Angelina02184</Text>
-      
       <View style={styles.statsBox}>
+        <Text style={styles.statsHeader}>Stats</Text>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>22</Text>
-          <Text style={styles.statItem}>Posts</Text>
-        </View>
-        <View style={styles.stats}>
-          <Text style={styles.statsHeader}>15</Text>
-          <Text style={styles.statItem}>Streak</Text>
-
-        </View>
-        <View style={styles.stats}>
-          <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Upvotes</Text>
+          <Text style={styles.statItem}>Total Posts: </Text>
+          <Text style={styles.statItem}>Post Streak: </Text>
+          <Text style={styles.statItem}>Total Upvotes: </Text>
         </View>
       </View>
 
-      <Text style={styles.upvoteHeader}>Recent Posts</Text>
+      <Text style={styles.upvoteHeader}>Most Upvoted Posts</Text>
       <FlatList
         //slice the first two posts
-        // style={styles.upvotedposts}
         data={dummyData.slice(1)}
         renderItem={(item) => {
           return (
@@ -136,67 +120,59 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 35,
     paddingRight: 35,
-    fontFamily: "Roboto_700Bold"
-
+    fontFamily: 'Roboto_700Bold',
   },
 
   name: {
-      fontSize: 20,
-      marginTop: 40,
-      textAlign: 'center',
-      fontFamily: "Roboto_700Bold",
+    fontSize: 20,
+    marginTop: 20,
+    textAlign: 'center',
+    fontFamily: 'Roboto_300Light',
   },
 
   username: {
     fontSize: 15,
     marginTop: 5,
     textAlign: 'center',
-    fontFamily: "Roboto_300Light",
+    fontFamily: 'Roboto_300Light',
   },
 
   statsBox: {
-      backgroundColor: '#AA83FF',
-      opacity: 0.9,
-      marginTop: 20,
-      marginRight: 60,
-      marginLeft: 60,
-      padding: 10,
-      borderRadius: 20,
-      display: 'flex',
-      justifyContent: 'flex-start',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignSelf: 'center',
-      textAlign: 'center'
+    backgroundColor: 'lightgrey',
+    opacity: 1,
+    marginTop: 20,
+    marginRight: 100,
+    marginLeft: 100,
+    padding: 10,
+    borderRadius: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   statsHeader: {
-    fontSize: 30,
-    fontFamily: "Roboto_700Bold",
-    marginHorizontal: 15,
-    
+    fontSize: 18,
+    fontFamily: 'Roboto_300Light',
   },
 
   upvoteHeader: {
-    marginTop: 50,
+    marginTop: 40,
     fontSize: 18,
-    fontFamily: "Roboto_700Bold",
+    fontFamily: 'Roboto_300Light',
     textAlign: 'center',
-    marginBottom: 10
   },
 
   stats: {
     marginTop: 10,
+    alignContent: 'flex-start',
     flexDirection: 'column',
-    alignItems: 'center'
-    
+    justifyContent: 'flex-start',
   },
 
   statItem: {
     marginVertical: 2,
     fontSize: 13,
-    fontFamily: "Roboto_700Bold",
-    marginHorizontal: 15
+    fontFamily: 'Roboto_300Light',
   },
 
   header: {
@@ -209,13 +185,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowColor: 'grey',
     shadowOpacity: 0.3,
-    shadowOffset: {width:0, height: 4},
-    paddingBottom: 30
+    shadowOffset: { width: 0, height: 4 },
   },
 
   container: {
-     backgroundColor: '#F3F2F2',
-     flex: 1
+    backgroundColor: 'white',
+    flex: 1,
   },
   menu: {
     marginTop: 40,
@@ -225,13 +200,10 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: 'Roboto_300Light',
   },
   clicked: {
     color: '#AA83FF',
-    fontFamily: 'Roboto_700Bold'
+    fontFamily: 'Roboto_700Bold',
   },
-  
-  
 });

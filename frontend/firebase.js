@@ -79,7 +79,6 @@ const createUser = async (user) =>{
       return 1;
     })
     .catch((error) => {
-      console.log(error);
       return error;
     });
   return response;
@@ -104,7 +103,6 @@ const getUser = async (user) => {
   }
   console.log('success in firebase js');
   return { status: true, data: userInfo}; 
-
 };
 
 
@@ -137,13 +135,15 @@ const sendPost = async (post) =>{
   // });
 
   const response = await db_.ref(postID).set({ // WHAT IS THIS KEY ??
-    id: postID,
-    prompt: post.prompt,
-    response: post.response,
-    author: post.username,
-    realtime: post.realtime,
-    like: [],
-    dislike: [],
+      answer: post.answer,
+      question: post.question,
+      user: post.username,
+      realtime: post.realtime,
+      upvotes: [],
+      downvotes: [],
+      key: post.time + ' ' + post.username,
+      date: post.date,
+      id: postID,
   })
   .then(() => {
     return 1;
@@ -153,6 +153,8 @@ const sendPost = async (post) =>{
     return error;
   });
   return response;
+
+    //SEND THIS POST INTO FIRESTORE W USERNAME 
 
 };
 
@@ -203,7 +205,6 @@ const sendPost = async (post) =>{
 
 const getPosts = async (post) => {
   const response = await db_.ref().get(); 
-  console.log('START');
   const arr = [];
 
   response.forEach((element)=>{
