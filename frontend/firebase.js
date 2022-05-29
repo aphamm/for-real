@@ -123,20 +123,20 @@ const sendPost = async (post) =>{
   }
 
   // prepend post ID
-  const userPosts = userInfo.posts.unshift(postID);
+  // const userPosts = userInfo.posts.unshift(postID);
 
-  await usersRef.doc(user.username.toLowerCase()).update({
-    posts: userPosts,
-  })
-  .then(() => {
-    return 1;
-  })
-  .catch((error) => {
-    console.log(error);
-    return error;
-  });
+  // await usersRef.doc(user.username.toLowerCase()).update({
+  //   posts: userPosts,
+  // })
+  // .then(() => {
+  //   return 1;
+  // })
+  // .catch((error) => {
+  //   console.log(error);
+  //   return error;
+  // });
 
-  const response = await db_.ref(key).set({ // WHAT IS THIS KEY ??
+  const response = await db_.ref(postID).set({ // WHAT IS THIS KEY ??
     id: postID,
     prompt: post.prompt,
     response: post.response,
@@ -157,49 +157,49 @@ const sendPost = async (post) =>{
 };
 
 
-const likePost = async (post) => {
+// const likePost = async (post) => {
 
-  const post = await db_.ref(postID).get().data(); 
-  const postLikes = post.like;
+//   const post = await db_.ref(postID).get().data(); 
+//   const postLikes = post.upvotess;
 
-  // append username
-  postLikes.push(username);
+//   // append username
+//   postLikes.push(username);
 
-  const response = await db_.ref(postID).update({
-    like: postLikes,
-  })
-  .then(() => {
-    return 1;
-  })
-  .catch((error) => {
-    console.log(error);
-    return error;
-  });
-  return response;
-};
+//   const response = await db_.ref(postID).update({
+//     upvotes: postLikes,
+//   })
+//   .then(() => {
+//     return 1;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//     return error;
+//   });
+//   return response;
+// };
 
 
-const dislikePost = async (post) => {
+// const dislikePost = async (post) => {
 
-  const post = await db_.ref(postID).get().data(); 
-  const postDislikes = post.dislike;
+//   const post = await db_.ref(postID).get().data(); 
+//   const postDislikes = post.downvotes;
 
-  // append username
-  postDislikes.push(username);
+//   // append username
+//   postDislikes.push(username);
 
-  const response = await db_.ref(postID).update({
-    dislike: postDislikes,
-  })
-  .then(() => {
-    return 1;
-  })
-  .catch((error) => {
-    console.log(error);
-    return error;
-  });
-  return response;
+//   const response = await db_.ref(postID).update({
+//     downvotes: postDislikes,
+//   })
+//   .then(() => {
+//     return 1;
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//     return error;
+//   });
+//   return response;
 
-};
+// };
 
 const getPosts = async (post) => {
   const response = await db_.ref().get(); 
@@ -216,4 +216,6 @@ const getPosts = async (post) => {
 
 
 
-export {createUser, getUser, sendPost, likePost, dislikePost, getPosts} 
+export {createUser, getUser, sendPost, getPosts} 
+
+//likePost, dislikePost
