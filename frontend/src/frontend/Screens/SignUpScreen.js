@@ -106,6 +106,7 @@ const SignUpScreen = ({ navigation }) => {
           <TextInput
             keyboardAppearance="dark"
             style={text.body}
+            secureTextEntry={true}
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
@@ -123,6 +124,7 @@ const SignUpScreen = ({ navigation }) => {
           <TextInput
             keyboardAppearance="dark"
             style={text.body}
+            secureTextEntry={true}
             value={password2}
             onChangeText={setPassword2}
             placeholder="Confirm Password"
@@ -214,15 +216,15 @@ const text = StyleSheet.create({
 const page = StyleSheet.create({
   center: {
     alignItems: 'center',
-    marginBottom: 60,
+    marginBottom: 30,
   },
   center2: {
     alignItems: 'center',
   },
   imgLogoContainer: {
-    width: 60,
-    height: 60,
-    overflow: 'hidden',
+    width:150,
+    height: 100,
+    // overflow: 'hidden',
   },
   imgTextContainer: {
     marginTop: 10,

@@ -89,6 +89,7 @@ const LoginScreen = ({ navigation }) => {
           />
           <TextInput
             keyboardAppearance="dark"
+            secureTextEntry={true}
             style={text.body}
             placeholder="Password"
             value={password}
@@ -173,15 +174,15 @@ const text = StyleSheet.create({
 const page = StyleSheet.create({
   center: {
     alignItems: 'center',
-    marginBottom: 60,
+    marginBottom: 40,
   },
   center2: {
     alignItems: 'center',
   },
   imgLogoContainer: {
-    width: 60,
-    height: 60,
-    overflow: 'hidden',
+    width: 150,
+    height: 100,
+    // overflow: 'hidden',
   },
   imgTextContainer: {
     marginTop: 10,
@@ -211,7 +212,7 @@ const page = StyleSheet.create({
   inline: {
     flexDirection: 'row',
     flexWrap: 'nowrap',
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   inlineSpaceBetween: {
     flexDirection: 'row',
@@ -252,7 +253,6 @@ const page = StyleSheet.create({
     color: 'white',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     flexDirection: 'row',
-    alignItems: 'center',
   },
   lighter: {
     backgroundColor: 'rgba(255, 255, 255, 0.15)',
@@ -296,6 +296,7 @@ const page = StyleSheet.create({
     padding: 15,
     paddingLeft: 25,
     flexDirection: 'row',
+    
   },
   hidden: {
     display: 'none',
