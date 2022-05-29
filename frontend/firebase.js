@@ -71,7 +71,6 @@ const createUser = async (user) =>{
     .set({
       username: user.username,
       password: user.password,
-      name: user.name,
       friends: [],
       posts: [],
     })
@@ -111,36 +110,35 @@ const sendPost = async (post) =>{
   const postID = post.time + ' ' + post.username;
 
   // append post id to the user
-  const userRef = db.collection('users').doc(user.username.toLowerCase());
+  const userRef = db.collection('users').doc(post.username.toLowerCase());
   const doc = await userRef.get();
-  const userInfo = doc.data();
+  const userInfo = JSON.parse(JSON.stringify(doc.data()));
+  console.log('IMPORTANT')
+  console.log(userInfo);
+  console.log(userInfo.posts);
+  const userPosts = userInfo.posts;
+  userInfo.posts.unshift(postID);
+  console.log(postID);
+    console.log(userPosts);
 
-  if (!doc.exists) {
-    return {status:false, 
-      data: 'Account does not exist!'};
-  }
-
-  // prepend post ID
-  // const userPosts = userInfo.posts.unshift(postID);
-
-  // await usersRef.doc(user.username.toLowerCase()).update({
-  //   posts: userPosts,
-  // })
-  // .then(() => {
-  //   return 1;
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  //   return error;
-  // });
+  await userRef.update({
+    posts: userPosts,
+  })
+  .then(() => {
+    return 1;
+  })
+  .catch((error) => {
+    console.log(error);
+    return error;
+  });
 
   const response = await db_.ref(postID).set({ // WHAT IS THIS KEY ??
       answer: post.answer,
       question: post.question,
       user: post.username,
       realtime: post.realtime,
-      upvotes: [],
-      downvotes: [],
+      upvotes: [1],
+      downvotes: [1],
       key: post.time + ' ' + post.username,
       date: post.date,
       id: postID,
@@ -159,26 +157,42 @@ const sendPost = async (post) =>{
 };
 
 
-// const likePost = async (post) => {
+const likePost = async (postID, username) => {
+  console.log('YUH');
+  const post = await db_.ref().child(postID).get(); 
+  console.log('YUH');
+  console.log(post);
+  const post1 = JSON.parse(JSON.stringify(post));
+  const postLikes = post1.upvotes;
+  console.log(postLikes);
 
-//   const post = await db_.ref(postID).get().data(); 
-//   const postLikes = post.upvotess;
+  const array = [];
+  Object.keys(postLikes).forEach((key)=>{
+    array.push(postLikes[key]);
+  })
+  if(array.includes(username)){
+    return false;
+  }
+  // append username
 
-//   // append username
-//   postLikes.push(username);
+  array.push(username);
+  console.log(array);
 
-//   const response = await db_.ref(postID).update({
-//     upvotes: postLikes,
-//   })
-//   .then(() => {
-//     return 1;
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//     return error;
-//   });
-//   return response;
-// };
+  
+  const response = await db_.ref(postID).update({
+    upvotes: array,
+  })
+  .then(() => {
+    return 1;
+  })
+  .catch((error) => {
+    console.log(error);
+    return error;
+  });
+  console.log('SUCCESS');
+  return response;
+};
+
 
 
 // const dislikePost = async (post) => {
@@ -211,12 +225,13 @@ const getPosts = async (post) => {
     arr.push(element);
   });
 
+  console.log(arr);
   return arr;
 };
 
 
 
 
-export {createUser, getUser, sendPost, getPosts} 
+export {createUser, getUser, sendPost, getPosts, likePost} 
 
 //likePost, dislikePost
