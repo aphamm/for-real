@@ -16,8 +16,7 @@ export default function Feed({ navigation }) {
 
   const gettingData = async () =>{
   const dummyDataBaseData = await getPosts();
-  console.log(dummyDataBaseData);
-  setData(dummyDataBaseData);
+  setData(dummyDataBaseData.reverse());
 
   }
   useEffect(
@@ -60,6 +59,7 @@ export default function Feed({ navigation }) {
   };
 
 
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -96,7 +96,6 @@ export default function Feed({ navigation }) {
         data={data}
         showsVerticalScrollIndicator={false}
         renderItem={(thing) => {
-          console.log(thing);
           const goodThing = JSON.parse(JSON.stringify(thing));
           const number =
             Object.keys(goodThing.item.upvotes).length -
@@ -108,6 +107,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
             );
@@ -117,6 +117,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
             );
