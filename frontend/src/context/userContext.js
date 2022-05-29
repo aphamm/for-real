@@ -4,11 +4,11 @@ export const UserContext = React.createContext();
 
 
 export const UserContextProvider = ({ children }) => {
-    const [username, setUsername] = useState("DefaultUsr");
+    const [user, setUser] = useState();
 
 return (
-    <UserContext.Provider value = {[username, setUsername]}>
-        {children}
-    </UserContext.Provider>
-    );
+  <UserContext.Provider value={[user, setUser]}>
+    {children}
+  </UserContext.Provider>
+);
 }

@@ -100,7 +100,6 @@ export default function ProfileOthers({ navigation }) {
         //slice the first two posts
         data={dummyData.slice(1)}
         renderItem={(item) => {
-          console.log(item);
           return (
             <ProfilePost
               question={item.item.question}

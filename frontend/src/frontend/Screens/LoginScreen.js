@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getUser } from '../../../firebase';
 import {
   LogBox,
@@ -15,11 +15,15 @@ import {
 import { useNavigation } from '@react-navigation/core';
 import { Feather } from '@expo/vector-icons';
 import { Foundation, FontAwesome } from '@expo/vector-icons';
+import { UserContext } from '../../context/userContext';
+
+
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
+  const [user, setUser] = useContext(UserContext);
 
 
   const manageLogin = async () => {
@@ -30,12 +34,11 @@ const LoginScreen = ({ navigation }) => {
 
     const response = await getUser(logInObject);
     //inside response is data for user
-    console.log(response.status); 
 
     if(response.status===true){
-      console.log('response');
+      //response.data
+      setUser(JSON.parse(JSON.stringify(response.data)));
       navigation.navigate('Feed');
-      console.log('Success');
       return;
     }
     else{

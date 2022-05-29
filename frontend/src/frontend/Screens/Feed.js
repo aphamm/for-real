@@ -13,7 +13,6 @@ export default function Feed({ navigation }) {
 
   const gettingData = async () =>{
   const dummyDataBaseData = await getPosts();
-  console.log(dummyDataBaseData);
   setData(dummyDataBaseData.reverse());
 
   }
@@ -93,7 +92,6 @@ export default function Feed({ navigation }) {
       <FlatList
         data={data}
         renderItem={(thing) => {
-          console.log(thing);
           const goodThing = JSON.parse(JSON.stringify(thing));
           const number =
             Object.keys(goodThing.item.upvotes).length -

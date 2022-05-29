@@ -3,8 +3,16 @@ import ProfilePost from '../components/ProfilePost';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
+import { UserContext } from '../../context/userContext';
+import { useContext } from 'react';
 
 export default function Profile({ navigation }) {
+
+  const [user, setUser] = useContext(UserContext);
+
+   console.log('USER');
+   console.log(user);
+
   const userData = {
     totalPosts: 10,
     postStreak: 5,
@@ -102,7 +110,6 @@ export default function Profile({ navigation }) {
         //slice the first two posts
         data={dummyData.slice(1)}
         renderItem={(item) => {
-          console.log(item);
           return (
             <ProfilePost
               question={item.item.question}
