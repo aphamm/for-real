@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ImageBackground} from 'react-native';
+import React, { useContext } from "react";
 import RightPost from '../components/RightPost';
 import LeftPost from '../components/LeftPost';
 import { useNavigation } from '@react-navigation/native';
@@ -6,9 +7,11 @@ import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
 import { useState, useEffect} from 'react';
+import { UserContext } from '../../context/userContext';
+
 
 export default function Feed({ navigation }) {
-
+  const {username, setUsername} = useContext(UserContext);
   const [data, setData] = useState();
 
   const gettingData = async () =>{
@@ -91,6 +94,7 @@ export default function Feed({ navigation }) {
 
       <FlatList
         data={data}
+        showsVerticalScrollIndicator={false}
         renderItem={(thing) => {
           console.log(thing);
           const goodThing = JSON.parse(JSON.stringify(thing));

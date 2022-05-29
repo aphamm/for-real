@@ -97,6 +97,7 @@ export default function Community({ navigation }) {
       </View>
 
       <FlatList
+      showsVerticalScrollIndicator={false}
         data={data}
         renderItem={(thing) => {
           console.log(thing);
