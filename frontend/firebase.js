@@ -79,7 +79,6 @@ const createUser = async (user) =>{
       return 1;
     })
     .catch((error) => {
-      console.log(error);
       return error;
     });
 
@@ -102,7 +101,6 @@ const getUser = async (user) => {
  if(userInfo.password!=user.password){
    return { status: false, data: 'Password is wrong! Try Again!' };
  }
-console.log('success in firebase js');
  return { status: true, data: userInfo}; 
 };
 
@@ -118,13 +116,15 @@ const sendPost = async (post) =>{
       upvotes: [1, 2, 3, 4],
       downvotes: [1, 2],
       key: post.time + ' ' + post.username,
+      date: post.date
     });
+
+    //SEND THIS POST INTO FIRESTORE W USERNAME 
 
 };
 
 const getPosts = async (post) => {
   const response = await db_.ref().get(); 
-  console.log('START');
   const arr = [];
 
   response.forEach((element)=>{

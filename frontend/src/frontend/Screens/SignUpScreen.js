@@ -32,12 +32,9 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     const response = await createUser(signUpObject);
-    console.log('test');
-    console.log(response);
 
     if(response===1){
       navigation.navigate('Feed');
-      console.log('Success');
       return;
     }
     else{

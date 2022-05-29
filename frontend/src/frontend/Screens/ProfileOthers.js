@@ -1,18 +1,21 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ImageBackground,
+} from 'react-native';
 import ProfilePost from '../components/ProfilePost';
-import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import {
+  useFonts,
+  Roboto_300Light,
+  Roboto_300Light_Italic,
+  Roboto_700Bold,
+} from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
-import { UserContext } from '../../context/userContext';
-import { useContext } from 'react';
 
-export default function Profile({ navigation }) {
-
-  const [user, setUser] = useContext(UserContext);
-
-   console.log('USER');
-   console.log(user);
-
+export default function ProfileOthers({ navigation }) {
   const userData = {
     totalPosts: 10,
     postStreak: 5,
@@ -80,19 +83,6 @@ export default function Profile({ navigation }) {
         style={styles.bgimage}>
       </Image> */}
 
-      <View style={styles.header}>
-        <View style={styles.menu}>
-          <Text style={styles.menuItem} onPress={FeedHandler}>
-            Global
-          </Text>
-          <Text style={styles.menuItem} onPress={communityHandler}>
-            Your Community
-          </Text>
-          <Text style={[styles.menuItem, styles.clicked]} onPress={profileHandler}>
-            Profile
-          </Text>
-        </View>
-      </View>
 
       <Text style={styles.name}>Angelina Lue</Text>
       <Text style={styles.username}>@Angelina02184</Text>
@@ -130,46 +120,45 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 35,
     paddingRight: 35,
-    fontFamily: "Roboto_700Bold"
-
+    fontFamily: 'Roboto_700Bold',
   },
 
   name: {
-      fontSize: 20,
-      marginTop: 20,
-      textAlign: 'center',
-      fontFamily: "Roboto_300Light",
+    fontSize: 20,
+    marginTop: 20,
+    textAlign: 'center',
+    fontFamily: 'Roboto_300Light',
   },
 
   username: {
     fontSize: 15,
     marginTop: 5,
     textAlign: 'center',
-    fontFamily: "Roboto_300Light",
+    fontFamily: 'Roboto_300Light',
   },
 
   statsBox: {
-      backgroundColor: 'lightgrey',
-      opacity: 1,
-      marginTop: 20,
-      marginRight: 100,
-      marginLeft: 100,
-      padding: 10,
-      borderRadius: 20,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
+    backgroundColor: 'lightgrey',
+    opacity: 1,
+    marginTop: 20,
+    marginRight: 100,
+    marginLeft: 100,
+    padding: 10,
+    borderRadius: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   statsHeader: {
     fontSize: 18,
-      fontFamily: "Roboto_300Light"
+    fontFamily: 'Roboto_300Light',
   },
 
   upvoteHeader: {
     marginTop: 40,
     fontSize: 18,
-    fontFamily: "Roboto_300Light",
+    fontFamily: 'Roboto_300Light',
     textAlign: 'center',
   },
 
@@ -183,8 +172,7 @@ const styles = StyleSheet.create({
   statItem: {
     marginVertical: 2,
     fontSize: 13,
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: 'Roboto_300Light',
   },
 
   header: {
@@ -197,12 +185,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     shadowColor: 'grey',
     shadowOpacity: 0.3,
-    shadowOffset: {width:0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
   },
 
   container: {
-     backgroundColor: 'white',
-     flex: 1
+    backgroundColor: 'white',
+    flex: 1,
   },
   menu: {
     marginTop: 40,
@@ -212,12 +200,10 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: 'Roboto_300Light',
   },
   clicked: {
     color: '#AA83FF',
-    fontFamily: 'Roboto_700Bold'
-  }
-  
+    fontFamily: 'Roboto_700Bold',
+  },
 });
