@@ -132,14 +132,13 @@ const sendPost = async (post) =>{
     return error;
   });
 
-  const response = await db_.ref(postID).set({ // WHAT IS THIS KEY ??
+  const response = await db_.ref(postID).set({ 
       answer: post.answer,
       question: post.question,
       user: post.username,
       realtime: post.realtime,
       upvotes: [1],
       downvotes: [1],
-      key: post.time + ' ' + post.username,
       date: post.date,
       id: postID,
   })
@@ -194,7 +193,6 @@ const likePost = async (postID, username) => {
 };
 
 
-
 // const dislikePost = async (post) => {
 
 //   const post = await db_.ref(postID).get().data(); 
@@ -232,6 +230,4 @@ const getPosts = async (post) => {
 
 
 
-export {createUser, getUser, sendPost, getPosts, likePost} 
-
-//likePost, dislikePost
+export {createUser, getUser, sendPost, getPosts, likePost, } 
