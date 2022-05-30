@@ -22,9 +22,9 @@ export default function Post(props) {
   }; 
 
   const dislikeHandler = () =>{
-     console.log('dislike');
+    console.log('dislike');
     console.log(props.id);
-   console.log(user);
+    console.log(user);
   };
 
   let [fontsLoaded] = useFonts({

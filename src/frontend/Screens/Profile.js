@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext } from 'react';
@@ -10,8 +10,6 @@ export default function Profile({ navigation }) {
 
   const [user, setUser] = useContext(UserContext);
 
-   console.log('USER');
-   console.log(user);
 
   const userData = {
     totalPosts: 10,
@@ -91,17 +89,17 @@ export default function Profile({ navigation }) {
         </View>
       </View>
 
-      <Text style={styles.name}>Angelina Lue</Text>
-      <Text style={styles.username}>@Angelina02184</Text>
+      <Text style={styles.name}>{user.username}</Text>
+      <Text style={styles.username}>@{user.username}</Text>
       
       <View style={styles.statsBox}>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>22</Text>
+          <Text style={styles.statsHeader}>{user.posts.length}</Text>
           <Text style={styles.statItem}>Posts</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>15</Text>
-          <Text style={styles.statItem}>Streak</Text>
+          <Text style={styles.statsHeader}>{user.friends.length}</Text>
+          <Text style={styles.statItem}>Friends</Text>
 
         </View>
         <View style={styles.stats}>
