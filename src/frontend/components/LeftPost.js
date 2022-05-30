@@ -18,6 +18,7 @@ export default function Post(props) {
 
   const likeHandler = () =>{
     console.log('like');
+    console.log(props);
     console.log(props.id);
     console.log(user);
     likePost(props.id, user.username);

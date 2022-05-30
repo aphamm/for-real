@@ -258,6 +258,7 @@ const getUserPosts = async (username) => {
     let post = await db_.ref().child(userPosts[i]).get();
     posts.push(post);
   }
+
   return posts;
 
 };

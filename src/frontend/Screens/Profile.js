@@ -4,12 +4,28 @@ import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from
 import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect} from 'react';
+import { getUserPosts } from '../../../firebase';
 
 export default function Profile({ navigation }) {
-
   const [user, setUser] = useContext(UserContext);
+  const [userposts, setUserposts] = useState();
 
+    const gettingData = async () => {
+      const userPost = await getUserPosts(user.username);
+         console.log('POSTS');
+       console.log(userPost.reverse());
+      setUserposts(userPost.reverse());
+     
+    };
+
+  useEffect(
+    () => {
+      gettingData();
+    },
+    // optional dependency array
+    []
+  );
 
   const userData = {
     totalPosts: 10,
@@ -112,13 +128,21 @@ export default function Profile({ navigation }) {
       <FlatList
         //slice the first two posts
         // style={styles.upvotedposts}
-        data={dummyData.slice(1)}
+        data={userposts}
         renderItem={(item) => {
+          const item1 = JSON.parse(JSON.stringify(item));
+
+          console.log(item1.item);
+          console.log(item1.item.answer);
+           const number =
+             Object.keys(item1.item.upvotes).length -
+             Object.keys(item1.item.downvotes).length;
+          console.log(number);
           return (
             <ProfilePost
-              question={item.item.question}
-              answer={item.item.answer}
-              number={item.item.number}
+              question={item1.item.question}
+              answer={item1.item.answer}
+              number={number}
               keyExtractor={(item) => item.user}
             />
           );
