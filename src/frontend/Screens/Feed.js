@@ -103,6 +103,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                id={goodThing.item.id}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
@@ -113,6 +114,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                id={goodThing.item.id}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />

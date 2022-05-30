@@ -2,10 +2,11 @@ import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-na
 import { useState, useContext} from 'react';
 import { sendPost , likePost, dislikePost} from '../../../firebase';
 import { UserContext } from '../../context/userContext';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function Question() {
+export default function Question({navigation}) {
 
   const questionOfDay =
     ' Would you rather have $5 million or dinner with Jay Z and why?';
@@ -55,7 +56,10 @@ export default function Question() {
         ' ' +
         new Date().getFullYear().toString()
     };
+
     const response = await sendPost(post);
+    setAnswer("");
+    navigation.navigate("Feed");
   };
 
 
