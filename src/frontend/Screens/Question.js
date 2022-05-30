@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
 import { useState, useContext } from 'react';
-import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes } from '../../../firebase';
+import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, getPosts, getUserPosts, getFriendPosts } from '../../../firebase';
 import { UserContext } from '../../context/userContext';
 import { useNavigation } from '@react-navigation/native';
 
@@ -33,8 +33,11 @@ export default function Question({navigation}) {
 
 const submitPostHandler = async () => {
 
+  // getPosts();
+  // getFriendPosts('austin');
   // getLikes('2022-5-29 17:37 austin');
   // addFriend('austin', 'thomas');
+
   const post = {
     question: questionOfDay,
     answer,

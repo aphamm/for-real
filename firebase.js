@@ -1,19 +1,10 @@
-// Import the functions you need from the SDKs you need
-// v9 compat packages are API compatible with v8 code
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import database from 'firebase/compat/database';
 import {set, ref} from 'firebase/database';
 
-//LINK TO FIREBASE DATABASE: 
-//https://console.firebase.google.com/u/2/project/forreal-b795c/database/forreal-b795c-default-rtdb/data/~2F
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// https://console.firebase.google.com/u/2/project/forreal-b795c/database/forreal-b795c-default-rtdb/data/~2F
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB-UZ6mJwXOolXiqTm_Y7DALdX3Zi7ItXs',
@@ -247,20 +238,56 @@ const getPosts = async () => {
 
   // push each element into posts array
   const posts = [];
-  response.forEach(element => { posts.push(element); });
+  response.forEach(post => { posts.push(post); });
   return posts;
 
 };
 
 
-// const getUserPosts = async (username) => {
+const getUserPosts = async (username) => {
 
-// }
+  // get user's list of postIDs from firestore
+  const userRef = db.collection('users').doc(username.toLowerCase());
+  const doc = await userRef.get();
+  const userInfo = JSON.parse(JSON.stringify(doc.data()));
+  const userPosts = userInfo.posts
+
+  // append each database post object to array 
+  let posts = [];
+  for (let i = 0; i < userPosts.length; i++) {
+    let post = await db_.ref().child(userPosts[i]).get();
+    posts.push(post);
+  }
+  return posts;
+
+};
 
 
-// const getFriendPosts = async (username) => {
+const getFriendPosts = async (username) => {
 
-// }
+  // get all posts from database
+  const response = await db_.ref().get(); 
+
+  // push each element into posts array
+  const posts = [];
+  response.forEach( post => { posts.push(JSON.parse(JSON.stringify(post))); });
+
+  // get user's friends from firestore
+  const userRef = db.collection('users').doc(username.toLowerCase());
+  const doc = await userRef.get();
+  const userInfo = JSON.parse(JSON.stringify(doc.data()));
+  const userFriends = userInfo.friends;
+
+  // append all posts whose author is in friends list
+  const friendPosts = [];
+  for (let i = 0; i < posts.length; i++) {
+    if (userFriends.includes(posts[i].user)) {
+      friendPosts.push(posts[i]);
+    }
+  }
+  return friendPosts;
+
+};
 
 
 const addFriend = async (username, friend) => {
@@ -288,7 +315,7 @@ const addFriend = async (username, friend) => {
   });
   return response;
 
-}
+};
 
 
 const removeFriend = async (username, friend) => {
@@ -316,7 +343,7 @@ const removeFriend = async (username, friend) => {
   });
   return response;
 
-}
+};
 
 
 const getLikes = async (postID) => {
@@ -333,7 +360,7 @@ const getLikes = async (postID) => {
   })
   return likes;
 
-}
+};
 
 
 const getDislikes = async (postID) => {
@@ -350,11 +377,11 @@ const getDislikes = async (postID) => {
   })
   return dislikes;
 
-}
+};
 
-export {createUser, getUser, 
+export { createUser, getUser, 
   sendPost, likePost, dislikePost, 
-  getPosts,
+  getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
-}
+};
