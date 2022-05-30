@@ -74,28 +74,33 @@ export default function ProfileOthers({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <ImageBackground 
-        source={image}
-        style={{width: '100%', height: '100%', position: 'absolute', opacity: 0.8}}>
-      </ImageBackground> */}
-      {/* <Image 
-        source={require("../../assets/tempgrad.png/")}
-        style={styles.bgimage}>
-      </Image> */}
 
 
       <Text style={styles.name}>Angelina Lue</Text>
       <Text style={styles.username}>@Angelina02184</Text>
+
+      <View style={styles.button}>
+        <Text style={styles.buttonText}>+ Follow</Text>
+      </View>
+
       <View style={styles.statsBox}>
-        <Text style={styles.statsHeader}>Stats</Text>
         <View style={styles.stats}>
-          <Text style={styles.statItem}>Total Posts: </Text>
-          <Text style={styles.statItem}>Post Streak: </Text>
-          <Text style={styles.statItem}>Total Upvotes: </Text>
+          <Text style={styles.statsHeader}>2</Text>
+          <Text style={styles.statItem}>Posts</Text>
+        </View>
+        <View style={styles.stats}>
+          <Text style={styles.statsHeader}>3</Text>
+          <Text style={styles.statItem}>Friends</Text>
+
+        </View>
+        <View style={styles.stats}>
+          <Text style={styles.statsHeader}>87</Text>
+          <Text style={styles.statItem}>Upvotes</Text>
         </View>
       </View>
 
-      <Text style={styles.upvoteHeader}>Most Upvoted Posts</Text>
+
+      <Text style={styles.upvoteHeader}>Recent Posts</Text>
       <FlatList
         //slice the first two posts
         data={dummyData.slice(1)}
@@ -114,65 +119,65 @@ export default function ProfileOthers({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  question: {
-    marginTop: 30,
-    fontSize: 18,
-    textAlign: 'center',
-    paddingLeft: 35,
-    paddingRight: 35,
-    fontFamily: 'Roboto_700Bold',
-  },
+  
 
   name: {
     fontSize: 20,
-    marginTop: 20,
+    marginTop: 80,
     textAlign: 'center',
-    fontFamily: 'Roboto_300Light',
+    fontFamily: "Roboto_700Bold",
   },
 
   username: {
     fontSize: 15,
     marginTop: 5,
     textAlign: 'center',
-    fontFamily: 'Roboto_300Light',
+    fontFamily: "Roboto_300Light",
   },
 
   statsBox: {
-    backgroundColor: 'lightgrey',
-    opacity: 1,
-    marginTop: 20,
-    marginRight: 100,
-    marginLeft: 100,
-    padding: 10,
-    borderRadius: 20,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#AA83FF',
+      opacity: 0.9,
+      marginTop: 20,
+      marginRight: 60,
+      marginLeft: 60,
+      padding: 10,
+      borderRadius: 20,
+      display: 'flex',
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignSelf: 'center',
+      textAlign: 'center'
   },
 
   statsHeader: {
-    fontSize: 18,
-    fontFamily: 'Roboto_300Light',
+    fontSize: 30,
+    fontFamily: "Roboto_700Bold",
+    marginHorizontal: 15,
+    
   },
 
   upvoteHeader: {
-    marginTop: 40,
+    marginTop: 50,
     fontSize: 18,
-    fontFamily: 'Roboto_300Light',
+    fontFamily: "Roboto_700Bold",
     textAlign: 'center',
+    marginBottom: 10
   },
 
   stats: {
     marginTop: 10,
-    alignContent: 'flex-start',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    alignItems: 'center'
+    
   },
 
   statItem: {
     marginVertical: 2,
     fontSize: 13,
-    fontFamily: 'Roboto_300Light',
+    fontFamily: "Roboto_700Bold",
+    marginHorizontal: 15
   },
 
   header: {
@@ -206,4 +211,25 @@ const styles = StyleSheet.create({
     color: '#AA83FF',
     fontFamily: 'Roboto_700Bold',
   },
+
+  button: {
+    marginTop: 15,
+    marginBottom: 10,
+    width: 100,
+    backgroundColor: '#A4DBED',
+    borderRadius: 30,
+    padding: 10,
+    shadowColor: 'grey',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    alignSelf: 'center'
+  },
+
+  buttonText: {
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 15,
+  },
+
 });
