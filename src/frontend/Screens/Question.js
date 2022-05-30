@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
-import { useState, useContext} from 'react';
-import { sendPost , likePost, dislikePost} from '../../../firebase';
+import { useState, useContext } from 'react';
+import { sendPost , likePost, dislikePost, addFriend, removeFriend } from '../../../firebase';
 import { UserContext } from '../../context/userContext';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function Question({navigation}) {
 
   const questionOfDay =
-    ' Would you rather have $5 million or dinner with Jay Z and why?';
+    'Would you rather have $5 million or dinner with Jay Z and why?';
 
   const [answer, setAnswer] = useState('');
   const [user, setUser] = useContext(UserContext);
@@ -33,6 +33,7 @@ export default function Question({navigation}) {
 
   const submitPostHandler = async () => {
 
+    // addFriend('austin', 'thomas');
     // dislikePost('2022-5-29 17:37 austin', 'austin');
     const post = {
       question: questionOfDay,
