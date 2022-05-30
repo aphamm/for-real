@@ -2,11 +2,29 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../../context/userContext';
+import {useContext} from 'react';
+
+
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
+  const [user, setUser] = useContext(UserContext);
+
   const profileOthersHandler = () => {
     navigation.navigate('ProfileOthers');
+  };
+
+  const likeHandler = () =>{
+    console.log('like');
+    console.log(props.id);
+    console.log(user);
+  }; 
+
+  const dislikeHandler = () =>{
+     console.log('dislike');
+    console.log(props.id);
+   console.log(user);
   };
 
   let [fontsLoaded] = useFonts({
@@ -32,9 +50,9 @@ export default function Post(props) {
         </View>
 
         <View style={styles.numberContainer}>
-          <Text style={styles.arrow}>∧</Text>
+          <Text style={styles.arrow} onPress={likeHandler}>∧</Text>
           <Text style={styles.number}>{props.number}</Text>
-          <Text style={styles.arrow}>∨</Text>
+          <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text>
         </View>
       </View>
 
