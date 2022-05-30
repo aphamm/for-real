@@ -252,6 +252,17 @@ const getPosts = async () => {
 
 };
 
+
+// const getUserPosts = async (username) => {
+
+// }
+
+
+// const getFriendPosts = async (username) => {
+
+// }
+
+
 const addFriend = async (username, friend) => {
 
   // get list of user's friends
@@ -307,9 +318,43 @@ const removeFriend = async (username, friend) => {
 
 }
 
-// TODO: create function to see if user liked specific post
 
-export {createUser, getUser, sendPost, 
-  likePost, dislikePost, getPosts,
+const getLikes = async (postID) => {
+
+  // get list of post's likes
+  const post = await db_.ref().child(postID).get();
+  const postInfo = JSON.parse(JSON.stringify(post));
+  const postLikes = postInfo.upvotes;
+
+  // convert postLikes object to array
+  const likes = [];
+  Object.keys(postLikes).forEach((key)=>{
+    likes.push(postLikes[key]);
+  })
+  return likes;
+
+}
+
+
+const getDislikes = async (postID) => {
+
+  // get list of post's dislikes
+  const post = await db_.ref().child(postID).get();
+  const postInfo = JSON.parse(JSON.stringify(post));
+  const postDislikes = postInfo.downvotes;
+
+  // convert postDislikes object to array
+  const dislikes = [];
+  Object.keys(postDislikes).forEach((key)=>{
+    dislikes.push(postDislikes[key]);
+  })
+  return dislikes;
+
+}
+
+export {createUser, getUser, 
+  sendPost, likePost, dislikePost, 
+  getPosts,
   addFriend, removeFriend,
+  getLikes, getDislikes,
 }

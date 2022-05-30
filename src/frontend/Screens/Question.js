@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
 import { useState, useContext } from 'react';
-import { sendPost , likePost, dislikePost, addFriend, removeFriend } from '../../../firebase';
+import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes } from '../../../firebase';
 import { UserContext } from '../../context/userContext';
 import { useNavigation } from '@react-navigation/native';
 
@@ -31,37 +31,37 @@ export default function Question({navigation}) {
 
   };
 
-  const submitPostHandler = async () => {
+const submitPostHandler = async () => {
 
-    // addFriend('austin', 'thomas');
-    // dislikePost('2022-5-29 17:37 austin', 'austin');
-    const post = {
-      question: questionOfDay,
-      answer,
-      time:
-        new Date().getFullYear().toString() +
-        '-' +
-        (new Date().getMonth() + 1).toString() +
-        '-' +
-        new Date().getDate().toString() +
-        ' ' +
-        +new Date().getHours().toString() +
-        ':' +
-        String(new Date().getMinutes()).padStart(2, '0'),
-      username: user.username.toLowerCase(),
-      realtime: getRealTime(),
-      date:
-        (new Date().getMonth() + 1).toString() +
-        '-' +
-        new Date().getDate().toString() +
-        ' ' +
-        new Date().getFullYear().toString()
-    };
-
-    const response = await sendPost(post);
-    setAnswer("");
-    navigation.navigate("Feed");
+  // getLikes('2022-5-29 17:37 austin');
+  // addFriend('austin', 'thomas');
+  const post = {
+    question: questionOfDay,
+    answer,
+    time:
+      new Date().getFullYear().toString() +
+      '-' +
+      (new Date().getMonth() + 1).toString() +
+      '-' +
+      new Date().getDate().toString() +
+      ' ' +
+      +new Date().getHours().toString() +
+      ':' +
+      String(new Date().getMinutes()).padStart(2, '0'),
+    username: user.username.toLowerCase(),
+    realtime: getRealTime(),
+    date:
+      (new Date().getMonth() + 1).toString() +
+      '-' +
+      new Date().getDate().toString() +
+      ' ' +
+      new Date().getFullYear().toString()
   };
+
+  const response = await sendPost(post);
+  setAnswer("");
+  navigation.navigate("Feed");
+};
 
 
   return (
