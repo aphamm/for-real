@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
 import { useState, useContext} from 'react';
-import { sendPost , likePost} from '../../../firebase';
+import { sendPost , likePost, dislikePost} from '../../../firebase';
 import { UserContext } from '../../context/userContext';
 
 
@@ -30,34 +30,32 @@ export default function Question() {
 
   };
 
-  const submitPostHandler = async () =>{
+  const submitPostHandler = async () => {
 
-    likePost('2022-5-29 13:57 AustinPham', 'AustinPham');
-    // const post = {
-    //   question: questionOfDay,
-    //   answer,
-    //   time:
-    //     new Date().getFullYear().toString() +
-    //     '-' +
-    //     (new Date().getMonth() + 1).toString() +
-    //     '-' +
-    //     new Date().getDate().toString() +
-    //     ' ' +
-    //     +new Date().getHours().toString() +
-    //     ':' +
-    //     String(new Date().getMinutes()).padStart(2, '0'),
-    //   //MAKE ACTUAL USERNAME
-    //   username: user.username.toLowerCase(),
-    //   realtime: getRealTime(),
-    //   date:
-    //     (new Date().getMonth() + 1).toString() +
-    //     '-' +
-    //     new Date().getDate().toString() +
-    //     ' ' +
-    //     new Date().getFullYear().toString()
-    // };
-
-    // const response = await sendPost(post);
+    // dislikePost('2022-5-29 17:37 austin', 'austin');
+    const post = {
+      question: questionOfDay,
+      answer,
+      time:
+        new Date().getFullYear().toString() +
+        '-' +
+        (new Date().getMonth() + 1).toString() +
+        '-' +
+        new Date().getDate().toString() +
+        ' ' +
+        +new Date().getHours().toString() +
+        ':' +
+        String(new Date().getMinutes()).padStart(2, '0'),
+      username: user.username.toLowerCase(),
+      realtime: getRealTime(),
+      date:
+        (new Date().getMonth() + 1).toString() +
+        '-' +
+        new Date().getDate().toString() +
+        ' ' +
+        new Date().getFullYear().toString()
+    };
+    const response = await sendPost(post);
   };
 
 

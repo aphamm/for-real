@@ -37,7 +37,7 @@ const db = firebase.firestore(app);
 const db_ = firebase.database(app);
 
 
-const createUser = async (user) =>{
+const createUser = async (user) => {
 
   const userRef = db.collection('users').doc(user.username.toLowerCase());
   const doc = await userRef.get();
@@ -45,8 +45,6 @@ const createUser = async (user) =>{
   if (doc.exists) {
     return 'Username already exists!';
   } 
-
-  //checks and error handling
 
   if (user.username === '' || user.password === '') {
     return 'Please fill in all inputs!';
@@ -60,10 +58,6 @@ const createUser = async (user) =>{
     return 'Passwords do not match!'
   }
 
-  if (user.password.length < 8) {
-    return 'Password must be 8+ characters';
-  }
-
   const usersRef = db.collection('users');
 
   const response = await usersRef
@@ -71,6 +65,7 @@ const createUser = async (user) =>{
     .set({
       username: user.username,
       password: user.password,
+      email: user.email,
       friends: [],
       posts: [],
     })
@@ -93,19 +88,18 @@ const getUser = async (user) => {
 
   //checks and error handling
   if (!doc.exists) {
-    return {status:false, 
-      data: 'Account does not exist!'};
+    return { status:false, data: 'Account does not exist!'};
   }
 
-  if(userInfo.password != user.password){
+  if(userInfo.password != user.password) {
     return { status: false, data: 'Password is wrong! Try Again!' };
   }
-  console.log('success in firebase js');
+
   return { status: true, data: userInfo}; 
 };
 
 
-const sendPost = async (post) =>{
+const sendPost = async (post) => {
 
   const postID = post.time + ' ' + post.username;
 
@@ -113,13 +107,18 @@ const sendPost = async (post) =>{
   const userRef = db.collection('users').doc(post.username.toLowerCase());
   const doc = await userRef.get();
   const userInfo = JSON.parse(JSON.stringify(doc.data()));
-  console.log('IMPORTANT')
-  console.log(userInfo);
-  console.log(userInfo.posts);
+
+  const dates = userInfo.posts.map(time => time.trim().split(/\s+/)[0]);
+  const date = post.time.trim().split(/\s+/)[0];
+
+  // ensure user can only post once per day
+  if (dates.includes(date)) {
+    console.log("You already posted today!");
+    return { status: false, data: "You already posted today!"};
+  }
+
   const userPosts = userInfo.posts;
-  userInfo.posts.unshift(postID);
-  console.log(postID);
-    console.log(userPosts);
+  userPosts.unshift(postID);
 
   await userRef.update({
     posts: userPosts,
@@ -132,16 +131,15 @@ const sendPost = async (post) =>{
     return error;
   });
 
-  const response = await db_.ref(postID).set({ // WHAT IS THIS KEY ??
-      answer: post.answer,
+  // send post to database
+  const response = await db_.ref(postID).set({
+      postID: postID,
       question: post.question,
+      answer: post.answer,
       user: post.username,
       realtime: post.realtime,
-      upvotes: [1],
-      downvotes: [1],
-      key: post.time + ' ' + post.username,
-      date: post.date,
-      id: postID,
+      upvotes: ["init_val"],
+      downvotes: ["init_val"],
   })
   .then(() => {
     return 1;
@@ -151,36 +149,43 @@ const sendPost = async (post) =>{
     return error;
   });
   return response;
-
-    //SEND THIS POST INTO FIRESTORE W USERNAME 
-
 };
 
 
 const likePost = async (postID, username) => {
-  console.log('YUH');
-  const post = await db_.ref().child(postID).get(); 
-  console.log('YUH');
-  console.log(post);
-  const post1 = JSON.parse(JSON.stringify(post));
-  const postLikes = post1.upvotes;
-  console.log(postLikes);
 
-  const array = [];
+  const post = await db_.ref().child(postID).get();
+  const postInfo = JSON.parse(JSON.stringify(post));
+  const postLikes = postInfo.upvotes;
+  const postDislikes = postInfo.downvotes;
+
+  let likes = [];
+  let dislikes = [];
+
   Object.keys(postLikes).forEach((key)=>{
-    array.push(postLikes[key]);
+    likes.push(postLikes[key]);
   })
-  if(array.includes(username)){
-    return false;
+  
+  Object.keys(postDislikes).forEach((key)=>{
+    dislikes.push(postDislikes[key]);
+  })
+
+  if (likes.includes(username)) {
+    console.log("You already liked this post!");
+    return { status: false, data: "You already liked this post!"};
   }
+
+  if (dislikes.includes(username)) {
+    console.log("We need to remove this dislike!");
+    dislikes = dislikes.filter(item => item !== username)
+  }
+
   // append username
-
-  array.push(username);
-  console.log(array);
-
+  likes.push(username);
   
   const response = await db_.ref(postID).update({
-    upvotes: array,
+    upvotes: likes,
+    downvotes: dislikes,
   })
   .then(() => {
     return 1;
@@ -189,49 +194,72 @@ const likePost = async (postID, username) => {
     console.log(error);
     return error;
   });
-  console.log('SUCCESS');
   return response;
 };
 
 
+const dislikePost = async (postID, username) => {
 
-// const dislikePost = async (post) => {
+  const post = await db_.ref().child(postID).get();
+  const postInfo = JSON.parse(JSON.stringify(post));
+  const postLikes = postInfo.upvotes;
+  const postDislikes = postInfo.downvotes;
 
-//   const post = await db_.ref(postID).get().data(); 
-//   const postDislikes = post.downvotes;
+  let likes = [];
+  let dislikes = [];
 
-//   // append username
-//   postDislikes.push(username);
+  Object.keys(postLikes).forEach((key)=>{
+    likes.push(postLikes[key]);
+  })
+  
+  Object.keys(postDislikes).forEach((key)=>{
+    dislikes.push(postDislikes[key]);
+  })
 
-//   const response = await db_.ref(postID).update({
-//     downvotes: postDislikes,
-//   })
-//   .then(() => {
-//     return 1;
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//     return error;
-//   });
-//   return response;
+  if (dislikes.includes(username)) {
+    console.log("You already disliked this post!");
+    return { status: false, data: "You already disliked this post!"};
+  }
 
-// };
+  if (likes.includes(username)) {
+    console.log("We need to remove this like!");
+    likes = likes.filter(item => item !== username)
+  }
 
-const getPosts = async (post) => {
-  const response = await db_.ref().get(); 
-  const arr = [];
-
-  response.forEach((element)=>{
-    arr.push(element);
+  // append username
+  dislikes.push(username);
+  
+  const response = await db_.ref(postID).update({
+    upvotes: likes,
+    downvotes: dislikes,
+  })
+  .then(() => {
+    return 1;
+  })
+  .catch((error) => {
+    console.log(error);
+    return error;
   });
-
-  console.log(arr);
-  return arr;
+  return response;
 };
 
 
+const getPosts = async () => {
+
+  const response = await db_.ref().get(); 
+  const posts = [];
+
+  response.forEach(element => {
+    posts.push(element);
+  });
+
+  return posts;
+};
 
 
-export {createUser, getUser, sendPost, getPosts, likePost} 
+// TODO: create function to see if user liked specific post
+// TODO: create function to add a friend
+// TODO: create function to remove a friend
 
-//likePost, dislikePost
+
+export {createUser, getUser, sendPost, likePost, dislikePost, getPosts}
