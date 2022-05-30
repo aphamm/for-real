@@ -17,13 +17,28 @@ import {
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
 import { useState, useEffect } from 'react';
+import { UserContext } from '../../context/userContext';
+import { useContext } from 'react';
 
 export default function Community({ navigation }) {
   const [data, setData] = useState();
+  const [user, setUser] = useContext(UserContext);
 
   const gettingData = async () => {
     const dummyDataBaseData = await getPosts();
-    setData(dummyDataBaseData.reverse());
+    //filter 
+    const filteredData = dummyDataBaseData.filter((item)=>{
+      const username = item.user;
+      console.log(user.friends);
+      if(user.friends.includes(username)){
+        return true;
+      }
+      else{
+        return false;
+      }
+    })
+    console.log(filteredData);
+    setData(filteredData.reverse());
   };
   useEffect(
     () => {
