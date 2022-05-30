@@ -14,8 +14,8 @@ export default function Feed({ navigation }) {
   const gettingData = async () =>{
   const dummyDataBaseData = await getPosts();
   setData(dummyDataBaseData.reverse());
-    console.log('HIT');
   }
+
   useEffect(
     () => {
        gettingData(); 
@@ -103,7 +103,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
-                id={goodThing.item.id}
+                id={goodThing.item.postID}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
@@ -114,7 +114,7 @@ export default function Feed({ navigation }) {
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
-                id={goodThing.item.id}
+                id={goodThing.item.postID}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
