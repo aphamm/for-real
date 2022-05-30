@@ -220,7 +220,7 @@ const getPosts = async (post) => {
   const arr = [];
 
   response.forEach((element)=>{
-    arr.push(element);
+    arr.push(JSON.parse(JSON.stringify(element)));
   });
 
   console.log(arr);
