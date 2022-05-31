@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
-import { useState, useContext} from 'react';
-import { sendPost } from '../../../firebase';
+import { useState, useContext } from 'react';
+import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, getPosts, getUserPosts, getFriendPosts } from '../../../firebase';
 import { UserContext } from '../../context/userContext';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-export default function Question() {
+export default function Question({navigation}) {
 
   const questionOfDay =
-    ' Would you rather have $5 million or dinner with Jay Z and why?';
+    'Would you rather have $5 million or dinner with Jay Z and why?';
 
   const [answer, setAnswer] = useState('');
   const [user, setUser] = useContext(UserContext);
@@ -30,34 +31,40 @@ export default function Question() {
 
   };
 
-  const submitPostHandler = async () =>{
+const submitPostHandler = async () => {
 
-    const post = {
-      question: questionOfDay,
-      answer,
-      time:
-        new Date().getFullYear().toString() +
-        '-' +
-        (new Date().getMonth() + 1).toString() +
-        '-' +
-        new Date().getDate().toString() +
-        ' ' +
-        +new Date().getHours().toString() +
-        ':' +
-        String(new Date().getMinutes()).padStart(2, '0'),
-      //MAKE ACTUAL USERNAME
-      username: user.username.toLowerCase(),
-      realtime: getRealTime(),
-      date:
-        (new Date().getMonth() + 1).toString() +
-        '-' +
-        new Date().getDate().toString() +
-        ' ' +
-        new Date().getFullYear().toString()
-    };
+  // getPosts();
+  // getFriendPosts('austin');
+  // getLikes('2022-5-29 17:37 austin');
+  // addFriend('austin', 'thomas');
 
-    const response = await sendPost(post);
+  const post = {
+    question: questionOfDay,
+    answer,
+    time:
+      new Date().getFullYear().toString() +
+      '-' +
+      (new Date().getMonth() + 1).toString() +
+      '-' +
+      new Date().getDate().toString() +
+      ' ' +
+      +new Date().getHours().toString() +
+      ':' +
+      String(new Date().getMinutes()).padStart(2, '0'),
+    username: user.username.toLowerCase(),
+    realtime: getRealTime(),
+    date:
+      (new Date().getMonth() + 1).toString() +
+      '-' +
+      new Date().getDate().toString() +
+      ' ' +
+      new Date().getFullYear().toString()
   };
+
+  const response = await sendPost(post);
+  setAnswer("");
+  navigation.navigate("Feed");
+};
 
 
   return (

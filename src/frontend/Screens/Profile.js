@@ -1,17 +1,31 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect} from 'react';
+import { getUserPosts } from '../../../firebase';
 
 export default function Profile({ navigation }) {
-
   const [user, setUser] = useContext(UserContext);
+  const [userposts, setUserposts] = useState();
 
-   console.log('USER');
-   console.log(user);
+    const gettingData = async () => {
+      const userPost = await getUserPosts(user.username);
+         console.log('POSTS');
+       console.log(userPost.reverse());
+      setUserposts(userPost.reverse());
+     
+    };
+
+  useEffect(
+    () => {
+      gettingData();
+    },
+    // optional dependency array
+    []
+  );
 
   const userData = {
     totalPosts: 10,
@@ -91,17 +105,17 @@ export default function Profile({ navigation }) {
         </View>
       </View>
 
-      <Text style={styles.name}>Angelina Lue</Text>
-      <Text style={styles.username}>@Angelina02184</Text>
+      <Text style={styles.name}>{user.username}</Text>
+      <Text style={styles.username}>@{user.username}</Text>
       
       <View style={styles.statsBox}>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>22</Text>
+          <Text style={styles.statsHeader}>{user.posts.length}</Text>
           <Text style={styles.statItem}>Posts</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>15</Text>
-          <Text style={styles.statItem}>Streak</Text>
+          <Text style={styles.statsHeader}>{user.friends.length}</Text>
+          <Text style={styles.statItem}>Friends</Text>
 
         </View>
         <View style={styles.stats}>
@@ -114,13 +128,21 @@ export default function Profile({ navigation }) {
       <FlatList
         //slice the first two posts
         // style={styles.upvotedposts}
-        data={dummyData.slice(1)}
+        data={userposts}
         renderItem={(item) => {
+          const item1 = JSON.parse(JSON.stringify(item));
+
+          console.log(item1.item);
+          console.log(item1.item.answer);
+           const number =
+             Object.keys(item1.item.upvotes).length -
+             Object.keys(item1.item.downvotes).length;
+          console.log(number);
           return (
             <ProfilePost
-              question={item.item.question}
-              answer={item.item.answer}
-              number={item.item.number}
+              question={item1.item.question}
+              answer={item1.item.answer}
+              number={number}
               keyExtractor={(item) => item.user}
             />
           );
