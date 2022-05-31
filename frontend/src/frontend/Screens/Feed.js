@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, FlatList, ImageBackground, Touchable} from 'react-native';
 import React, { useContext } from "react";
 import RightPost from '../components/RightPost';
 import LeftPost from '../components/LeftPost';
@@ -8,6 +8,7 @@ import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
 import { useState, useEffect} from 'react';
 import { UserContext } from '../../context/userContext';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export default function Feed({ navigation }) {
@@ -103,6 +104,9 @@ export default function Feed({ navigation }) {
 
           if (thing.index % 2 == 0) {
             return (
+              <TouchableOpacity
+              onPress = {()=>navigation.navigate('ProfileOthers',{name:goodThing.item.user})}
+              >
               <RightPost
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
@@ -110,16 +114,23 @@ export default function Feed({ navigation }) {
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
+              </TouchableOpacity>
+              
             );
           } else {
             return (
+              <TouchableOpacity  
+              onPress = {()=>navigation.navigate('ProfileOthers',{name:goodThing.item.user})}
+              >
               <LeftPost
-                user={goodThing.item.user}
-                answer={goodThing.item.answer}
-                number={number}
-                realtime={goodThing.item.realtime}
-                keyExtractor={(thing) => thing.index}
-              />
+              user={goodThing.item.user}
+              answer={goodThing.item.answer}
+              number={number}
+              realtime={goodThing.item.realtime}
+              keyExtractor={(thing) => thing.index}
+            />
+              </TouchableOpacity>
+
             );
           }
         }}

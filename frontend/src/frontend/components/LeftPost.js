@@ -19,7 +19,8 @@ export default function Post(props) {
     return <AppLoading />;
   }
   return (
-    <View style={styles.bubble}>
+    <View 
+    style={styles.bubble}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.answer}>{props.answer}</Text>
