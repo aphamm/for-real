@@ -104,26 +104,30 @@ export default function Feed({ navigation }) {
         data={data}
         showsVerticalScrollIndicator={false}
         renderItem={(thing) => {
+
           const goodThing = JSON.parse(JSON.stringify(thing));
+          const liked = Object.values(goodThing.item.upvotes).includes(user.username);
+          const disliked = Object.values(goodThing.item.downvotes).includes(
+             user.username
+           );
           const number =
             Object.keys(goodThing.item.upvotes).length -
             Object.keys(goodThing.item.downvotes).length;
 
           if (thing.index % 2 == 0) {
             return (
-  
               <RightPost
-                gettingPosts = {gettingData}
-                navigation = {navigation}
+                gettingPosts={gettingData}
+                navigation={navigation}
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
                 id={goodThing.item.postID}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
+                liked={liked}
+                disliked={disliked}
               />
-
-
             );
           } else {
             return (
@@ -135,6 +139,8 @@ export default function Feed({ navigation }) {
                 id={goodThing.item.postID}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
+                liked={liked}
+                disliked={disliked}
               />
             );
           }
