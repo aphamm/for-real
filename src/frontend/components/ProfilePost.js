@@ -26,11 +26,9 @@ export default function Post(props) {
           <Text style={styles.answer}>{props.answer}</Text>
         </View>
         
-        {/* <View style={styles.numberContainer}>
-          <Text style={styles.arrow}>∧</Text>
+        <View style={styles.numberContainer}>
           <Text style={styles.number}>{props.number}</Text>
-          <Text style={styles.arrow}>∨</Text>
-        </View> */}
+        </View>
 
 
       </View>
@@ -113,26 +111,5 @@ const styles = StyleSheet.create({
     shadowOffset: {width:0, height: 4},
 
   },
-  // rightArrow: {
-  //   position: "absolute",
-  //   backgroundColor: "white",
-  //   //backgroundColor:"red",
-  //   width: 20,
-  //   height: 25,
-  //   bottom: 0,
-  //   borderBottomLeftRadius: 25,
-  //   right: -10
-  // },
-  
-  // rightArrowOverlap: {
-  //   position: "absolute",
-  //   backgroundColor: "#eeeeee",
-  //   //backgroundColor:"green",
-  //   width: 20,
-  //   height: 35,
-  //   bottom: -6,
-  //   borderBottomLeftRadius: 18,
-  //   right: -20
-  
-  // },
+ 
 });

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import { UserContext } from '../../context/userContext';
 import { likePost, dislikePost } from '../../../firebase';
+import { AntDesign } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 //needs to be given {navigation} somehow
@@ -47,9 +48,12 @@ export default function Post(props) {
         <View style={styles.TriangleShapeCSS} />
 
         <View style={styles.numberContainer}>
-          <Text style={styles.arrow} onPress={likeHandler}>∧</Text>
+          {/* <Text style={styles.arrow} onPress={likeHandler}>∧</Text> */}
+          <AntDesign name="up" style={styles.arrow} onPress={likeHandler} />
           <Text style={styles.number}>{props.number}</Text>
-          <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text>
+          <AntDesign name="down" style={styles.arrow} onPress={dislikeHandler}/>
+
+          {/* <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text> */}
         </View>
 
         <View style={styles.textContainer}>
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   arrow: {
-    fontSize: 30,
+    fontSize: 24,
     color: 'grey'
   },
   bubble: {
@@ -142,26 +146,5 @@ const styles = StyleSheet.create({
     shadowOffset: {width:0, height: 4},
   },
 
-  // rightArrow: {
-  //   position: "absolute",
-  //   backgroundColor: "white",
-  //   //backgroundColor:"red",
-  //   width: 20,
-  //   height: 25,
-  //   bottom: 0,
-  //   borderBottomLeftRadius: 25,
-  //   right: -10
-  // },
   
-  // rightArrowOverlap: {
-  //   position: "absolute",
-  //   backgroundColor: "#eeeeee",
-  //   //backgroundColor:"green",
-  //   width: 20,
-  //   height: 35,
-  //   bottom: -6,
-  //   borderBottomLeftRadius: 18,
-  //   right: -20
-  
-  // },
 });
