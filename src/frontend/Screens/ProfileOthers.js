@@ -103,7 +103,7 @@ export default function ProfileOthers({ navigation }) {
         </View>
         <View style={styles.stats}>
           <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Upvotes</Text>
+          <Text style={styles.statItem}>Likes</Text>
         </View>
       </View>
 

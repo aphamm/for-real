@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
-
+import {
+  Karla_500Medium
+} from '@expo-google-fonts/karla';
 
 export default function Post(props) {
   
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
     Roboto_300Light,
-    Roboto_700Bold
+    Roboto_700Bold,
+    Karla_500Medium
   });
 
   if (!fontsLoaded) {
@@ -71,7 +74,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 20,
-    fontFamily: "Roboto_700Bold"
+    fontFamily: "Karla_500Medium"
   },
   answer: {
     fontSize: 14,

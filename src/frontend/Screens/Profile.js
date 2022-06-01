@@ -6,6 +6,10 @@ import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
 import { getUserPosts } from '../../../firebase';
+import {
+  Karla_500Medium,
+  Karla_700Bold
+} from '@expo-google-fonts/karla';
 
 export default function Profile({ navigation }) {
   const [user, setUser] = useContext(UserContext);
@@ -27,46 +31,13 @@ export default function Profile({ navigation }) {
     []
   );
 
-  const userData = {
-    totalPosts: 10,
-    postStreak: 5,
-    totalUpvotes: 100,
-  };
-
-  const dummyData = [
-    {
-      question: 'Question #1',
-      answer:
-        'Def 5 milli who cares bout Jay Z get a bag and run wit it am i rite',
-      number: 15,
-    },
-    {
-      question: 'Question #2',
-      answer: 'neither, both are overrated',
-      number: 4,
-    },
-    {
-      question: 'Question #3',
-      answer:
-        'I would rather have dinner with Jay Z because what are you actually gonna do with 5 mil',
-      number: 3,
-    },
-    {
-      question: 'Question #4',
-      answer:
-        'answer q4',
-      number: 3,
-    },
-  ];
-
-  const image = {
-    uri: 'https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg',
-  };
-
+  
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
     Roboto_300Light,
     Roboto_700Bold,
+    Karla_500Medium,
+    Karla_700Bold
   });
 
   if (!fontsLoaded) {
@@ -239,12 +210,12 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    fontFamily: "Roboto_300Light",
-
+    fontFamily: "Karla_500Medium",
+    color: 'grey'
   },
   clicked: {
     color: '#AA83FF',
-    fontFamily: 'Roboto_700Bold'
+    fontFamily: 'Karla_700Bold'
   },
   
   
