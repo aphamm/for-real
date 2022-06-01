@@ -448,5 +448,5 @@ export { createUser, getUser,
   getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
-  postedToday, getOtherUser, totalLikes,
+  postedToday, getOtherUser, totalLikes
 };

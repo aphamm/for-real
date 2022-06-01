@@ -18,8 +18,12 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
+<<<<<<< HEAD
 import { addFriend, getOtherUser, getUserPosts} from '../../../firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+=======
+import { getOtherUser, getUserPosts, totalLikes} from '../../../firebase';
+>>>>>>> 3de7e29a146c289dfa6a8cb134eaac88972eb68c
 
 export default function ProfileOthers({ navigation }) {
   ///
@@ -36,6 +40,7 @@ export default function ProfileOthers({ navigation }) {
     friends: [], 
     upvotes: 0
   });
+  const [score,setScore] = useState(0);
 
 
   const gettingData = async () => {
@@ -47,7 +52,13 @@ export default function ProfileOthers({ navigation }) {
     console.log('USER');
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
+<<<<<<< HEAD
     setOtherUser(userData1.data);
+=======
+    setUser(userData1.data);
+    const num = await totalLikes(name);
+    setScore(num);
+>>>>>>> 3de7e29a146c289dfa6a8cb134eaac88972eb68c
   };
 
   useEffect(
@@ -120,8 +131,8 @@ export default function ProfileOthers({ navigation }) {
           <Text style={styles.statItem}>Friends</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Likes</Text>
+          <Text style={styles.statsHeader}>{score}</Text>
+          <Text style={styles.statItem}>Net Likes</Text>
         </View>
       </View>
 
