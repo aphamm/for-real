@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { getUser } from '../../../firebase';
+import { getUser, postedToday} from '../../../firebase';
 import {
   LogBox,
   StatusBar,
@@ -39,7 +39,15 @@ const LoginScreen = ({ navigation }) => {
       //response.data
       setUser(JSON.parse(JSON.stringify(response.data)));
       console.log('setUser in context');
-      navigation.navigate('Feed');
+      const response1 = await postedToday(username);
+      //IF HAVE NOT ANSWERED
+      console.log("IMPORTANT IF POSTED");
+      console.log(response1.status);
+      if(!response1.status){
+      navigation.navigate('Question');}
+      //IF HAVE ANSWERED
+      else{
+        navigation.navigate('Feed');}
       return;
     }
     else{

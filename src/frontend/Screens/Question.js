@@ -12,6 +12,7 @@ export default function Question({navigation}) {
     'Would you rather have $5 million or dinner with Jay Z and why?';
 
   const [answer, setAnswer] = useState('');
+  const [error, setError] = useState(null);
   const [user, setUser] = useContext(UserContext);
 
   
@@ -32,6 +33,13 @@ export default function Question({navigation}) {
   };
 
 const submitPostHandler = async () => {
+  if(answer===''){
+    setError('Please answer the prompt!');
+    setTimeout(() => {
+      setError(null);
+    }, '2500');
+    return false;
+  }
 
   // getPosts();
   // getFriendPosts('austin');
@@ -71,17 +79,13 @@ const submitPostHandler = async () => {
   return (
     <View style={styles.container}>
       <View style={styles.questionofday}>
-        <Text style={styles.question}>
-
-        {questionOfDay}
-
-        </Text>
+        <Text style={styles.question}>{questionOfDay}</Text>
       </View>
       <TextInput
         placeholder="Your thoughts here..."
         placeholderTextColor="white"
-        multiline = {true}
-        marginTop = '10'
+        multiline={true}
+        marginTop="10"
         maxLength={250}
         numberOfLines={8}
         style={styles.textInput}
@@ -89,9 +93,19 @@ const submitPostHandler = async () => {
         onChangeText={setAnswer}
       />
 
-      <Text style={styles.characters}>{250-answer.length}/250 characters left</Text>
+      <Text style={styles.characters}>
+        {250 - answer.length}/250 characters left
+      </Text>
+      {error ? (
+        <View style={styles.center2}>
+          <Text style={styles.button2}>{error}</Text>
+        </View>
+      ) : null}
+
       <View style={styles.button}>
-        <Text style={styles.buttonText} onPress={submitPostHandler}>Publish</Text>
+        <Text style={styles.buttonText} onPress={submitPostHandler}>
+          Publish
+        </Text>
       </View>
     </View>
   );
@@ -126,7 +140,7 @@ const styles = StyleSheet.create({
     color: 'black',
     opacity: 0.8,
     textAlignVertical: 'top',
-    textAlign : 'left',
+    textAlign: 'left',
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
@@ -159,11 +173,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#AA83FF'
+    backgroundColor: '#AA83FF',
   },
   characters: {
     marginTop: 8,
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
+  center2: {
+    alignItems: 'center',
+    marginTop:10
+  },
+  button2: {
+    color: 'white',
+    fontSize: 15,
+  },
 });
 
