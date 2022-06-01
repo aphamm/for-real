@@ -169,8 +169,24 @@ const likePost = async (postID, username) => {
 
   // if already liked, remove from likes list
   if (likes.includes(username)) {
-    console.log("You already liked this post!");
-    likes = likes.filter(item => item !== username);
+    console.log('You already liked this post!');
+    likes = likes.filter((item) => item != username);
+    console.log(likes);
+    // update upvotes & downvotes in database
+    const response = await db_
+      .ref(postID)
+      .update({
+        upvotes: likes,
+        downvotes: dislikes,
+      })
+      .then(() => {
+        return 1;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+    return response;
   }
 
   // if already disliked, remove from dislikes list
@@ -225,6 +241,20 @@ const dislikePost = async (postID, username) => {
   if (dislikes.includes(username)) {
     console.log("We need to remove this dislike!");
     dislikes = dislikes.filter(item => item !== username)
+    const response = await db_
+      .ref(postID)
+      .update({
+        upvotes: likes,
+        downvotes: dislikes,
+      })
+      .then(() => {
+        return 1;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error;
+      });
+    return response;
   }
 
   // remove username from likes list

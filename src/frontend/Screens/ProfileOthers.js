@@ -18,7 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-import { addFriend, getOtherUser, getUserPosts,totalLikes, removeFriend} from '../../../firebase';
+import { addFriend, getOtherUser, getUserPosts,totalLikes, removeFriend, netScore} from '../../../firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ProfileOthers({ navigation }) {
@@ -30,6 +30,9 @@ export default function ProfileOthers({ navigation }) {
   const [user, setUser] = useContext(UserContext);
 
   const name = navigation.getParam('name');
+
+  
+
   const [userposts, setUserposts] = useState([]);
   
   const [otherUser, setOtherUser] = useState({
@@ -50,13 +53,16 @@ export default function ProfileOthers({ navigation }) {
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
     setOtherUser(userData1.data);
-    const num = await totalLikes(name);
+    const num = await netScore(name);
     setScore(num);
   };
 
   useEffect(
     () => {
       gettingData();
+      if (user.friends.includes(name.toLowerCase())) {
+        setFollowButton('Following');
+      }
     },
     // optional dependency array
     []

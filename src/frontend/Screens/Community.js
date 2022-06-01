@@ -146,7 +146,6 @@ export default function Community({ navigation }) {
 
           if (thing.index % 2 == 0) {
             return (
-              
               <RightPost
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
@@ -156,13 +155,14 @@ export default function Community({ navigation }) {
                 keyExtractor={(thing) => thing.index}
                 liked={liked}
                 disliked={disliked}
+                navigation={navigation}
               />
-             
             );
           } else {
             return (
               <LeftPost
                 user={goodThing.item.user}
+                navigation={navigation}
                 answer={goodThing.item.answer}
                 number={number}
                 realtime={goodThing.item.realtime}
