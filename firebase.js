@@ -238,7 +238,14 @@ const getPosts = async () => {
 
   // push each element into posts array
   const posts = [];
-  response.forEach(post => { posts.push(post); });
+  response.forEach(post => { 
+    const post1 = JSON.parse(JSON.stringify(post));
+    const todayDate = new Date().getFullYear().toString() + '-' +
+      (new Date().getMonth() + 1).toString() + '-' +
+      new Date().getDate().toString(); 
+      if (todayDate === post1.postID.split(' ')[0]) {
+        posts.push(post); }
+    });
   return posts;
 
 };
@@ -380,9 +387,32 @@ const getDislikes = async (postID) => {
 
 };
 
+const postedToday = async (username) => {
+
+  // get user info from firestore
+  const userRef = db.collection('users').doc(username.toLowerCase());
+  const doc = await userRef.get();
+  const userInfo = JSON.parse(JSON.stringify(doc.data()));
+
+  // get all dates a user posted on
+  const dates = userInfo.posts.map(time => time.trim().split(/\s+/)[0]);
+  const date = new Date().getFullYear().toString() + '-' +
+  (new Date().getMonth() + 1).toString() + '-' +
+  new Date().getDate().toString();
+
+  // ensure user can only post once per day
+  if (dates.includes(date)) {
+    console.log("You already posted today!");
+    return { status: true, data: "You already posted today!" };
+  }
+  return { status: false, data: "You still need to post!"};
+
+}
+
 export { createUser, getUser, 
   sendPost, likePost, dislikePost, 
   getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
+  postedToday,
 };

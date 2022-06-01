@@ -8,6 +8,7 @@ import Question from "../Screens/Question";
 import Profile from "../Screens/Profile";
 import Community from "../Screens/Community";
 import ProfileOthers from "../Screens/ProfileOthers";
+import Post from "../components/RightPost";
 
 const screens = {
   Signup: {
@@ -48,24 +49,7 @@ const screens = {
   Question: {
     screen: Question,
     navigationOptions: ({ navigation }) => ({
-      title: '',
-      headerBackTitleVisible: false,
-      headerShown: true,
-      headerTransparent: true,
-      headerTintColor: 'white',
-      headerLeft: (
-        <Feather
-          style={{
-            marginLeft: 9,
-          }}
-          name="chevron-left"
-          size={34}
-          color="black"
-          onPress={() => {
-            navigation.goBack();
-          }}
-        />
-      ),
+      headerShown: false,
     }),
   },
 
