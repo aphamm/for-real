@@ -82,15 +82,7 @@ export default function ProfileOthers({ navigation }) {
   return (
 
     <SafeAreaView style={styles.container}>
-      {/* <ImageBackground 
-        source={image}
-        style={{width: '100%', height: '100%', position: 'absolute', opacity: 0.8}}>
-      </ImageBackground> */}
-      {/* <Image 
-        source={require("../../assets/tempgrad.png/")}
-        style={styles.bgimage}>
-      </Image> */}
-
+     
 
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.username}>@Angelina02184</Text>

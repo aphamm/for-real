@@ -10,11 +10,10 @@ export default function App() {
   
   return (
     
-    // <UserContextProvider>
-    // <Navigator />
-    // </UserContextProvider>
+    <UserContextProvider>
+    <Navigator />
+    </UserContextProvider>
     
-    <ProfileOthers/>
     );
 }
 
