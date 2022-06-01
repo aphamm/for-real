@@ -9,16 +9,13 @@ import { getPosts } from '../../../firebase';
 import { useState, useEffect} from 'react';
 import { UserContext } from '../../context/userContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 
 export default function Feed({ navigation }) {
-  const {username, setUsername} = useContext(UserContext);
-  const [data, setData] = useState();
+  const [user, setUser, data, ,gettingData] = useContext(UserContext);
 
-  const gettingData = async () =>{
-  const dummyDataBaseData = await getPosts();
-  setData(dummyDataBaseData.reverse());
-  }
+
 
   useEffect(
     () => {
@@ -104,8 +101,9 @@ export default function Feed({ navigation }) {
 
           if (thing.index % 2 == 0) {
             return (
-
+  
               <RightPost
+                gettingPosts = {gettingData}
                 navigation = {navigation}
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
@@ -114,7 +112,8 @@ export default function Feed({ navigation }) {
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
-              
+
+
             );
           } else {
             return (

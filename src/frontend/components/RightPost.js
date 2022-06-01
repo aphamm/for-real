@@ -15,7 +15,7 @@ export default function Post(props) {
     Roboto_700Bold,
   });
 
-  const [user, setUser] = useContext(UserContext);
+  const [user, setUser, data, ,gettingData] = useContext(UserContext);
 
 
   const likeHandler = () => {
@@ -23,6 +23,7 @@ export default function Post(props) {
     console.log(props);
     console.log(props.id);
     console.log(user);
+    props.gettingData;
     likePost(props.id, user.username);
   };
 
