@@ -15,7 +15,7 @@ import {
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
-  const [user, setUser, data, ,gettingData] = useContext(UserContext);
+  const [user, setUser, data,setData,gettingData] = useContext(UserContext);
 
   const profileOthersHandler = () => {
     navigation.navigate('ProfileOthers');

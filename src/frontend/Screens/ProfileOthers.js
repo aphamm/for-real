@@ -4,7 +4,8 @@ import {
   View,
   FlatList,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
+  Touchable
 } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
 import {
@@ -17,21 +18,25 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-import { getOtherUser, getUserPosts} from '../../../firebase';
+import { addFriend, getOtherUser, getUserPosts,totalLikes} from '../../../firebase';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ProfileOthers({ navigation }) {
   ///
-  /// user variable
+  /// otherUser variable
   /// 
 
+  const [user, setUser] = useContext(UserContext);
 
   const name = navigation.getParam('name');
   const [userposts, setUserposts] = useState([]);
-  const [user, setUser] = useState({
+  
+  const [otherUser, setOtherUser] = useState({
     posts: [], 
     friends: [], 
     upvotes: 0
   });
+  const [score,setScore] = useState(0);
 
 
   const gettingData = async () => {
@@ -43,7 +48,10 @@ export default function ProfileOthers({ navigation }) {
     console.log('USER');
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
+    setOtherUser(userData1.data);
     setUser(userData1.data);
+    const num = await totalLikes(name);
+    setScore(num);
   };
 
   useEffect(
@@ -90,27 +98,34 @@ export default function ProfileOthers({ navigation }) {
     navigation.navigate('Community');
   };
 
+  const followHandler = () =>{
+    console.log(user);
+    addFriend(user,name);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.username}>@{name}</Text>
 
-      <View style={styles.button}>
+      <TouchableOpacity style={styles.button}
+      onPress = {()=> followHandler()}
+      >
         <Text style={styles.buttonText}>+ Follow</Text>
-      </View>
+      </TouchableOpacity>
 
       <View style={styles.statsBox}>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>{user.posts.length}</Text>
+          <Text style={styles.statsHeader}>{otherUser.posts.length}</Text>
           <Text style={styles.statItem}>Posts</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>{user.friends.length}</Text>
+          <Text style={styles.statsHeader}>{otherUser.friends.length}</Text>
           <Text style={styles.statItem}>Friends</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Likes</Text>
+          <Text style={styles.statsHeader}>{score}</Text>
+          <Text style={styles.statItem}>Net Likes</Text>
         </View>
       </View>
 
@@ -127,7 +142,7 @@ export default function ProfileOthers({ navigation }) {
               question={item.item.question}
               answer={item.item.answer}
               number={number}
-              keyExtractor={(item) => item.user}
+              keyExtractor={(item) => item.otherUser}
             />
           );
         }}
