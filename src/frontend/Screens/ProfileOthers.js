@@ -80,6 +80,7 @@ export default function ProfileOthers({ navigation }) {
   };
 
   return (
+
     <SafeAreaView style={styles.container}>
       {/* <ImageBackground 
         source={image}
