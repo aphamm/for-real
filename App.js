@@ -7,7 +7,7 @@ import {UserContextProvider} from './src/context/userContext';
 import ProfileOthers from './src/frontend/Screens/ProfileOthers';
 
 export default function App() {
-  
+  console.disableYellowBox = true;
   return (
     
     <UserContextProvider>
