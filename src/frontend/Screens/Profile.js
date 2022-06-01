@@ -5,7 +5,7 @@ import { useNavigation, useScrollToTop } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-import { getUserPosts } from '../../../firebase';
+import { getUserPosts, netScore} from '../../../firebase';
 import {
   Karla_500Medium,
   Karla_700Bold
@@ -14,6 +14,10 @@ import {
 export default function Profile({ navigation }) {
   const [user, setUser] = useContext(UserContext);
   const [userposts, setUserposts] = useState();
+  const [score, setScore] = useState(0);
+
+
+
 
     const gettingData = async () => {
       const userPost = await getUserPosts(user.username);
@@ -21,6 +25,9 @@ export default function Profile({ navigation }) {
        console.log(userPost.reverse());
       setUserposts(userPost.reverse());
      
+       const num = await netScore(user.username); 
+       setScore(num);
+
     };
 
   useEffect(
@@ -90,8 +97,8 @@ export default function Profile({ navigation }) {
 
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Likes</Text>
+          <Text style={styles.statsHeader}>{score}</Text>
+          <Text style={styles.statItem}>Net Likes</Text>
         </View>
       </View>
 

@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-import { getOtherUser, getUserPosts} from '../../../firebase';
+import { getOtherUser, getUserPosts, netScore} from '../../../firebase';
 
 export default function ProfileOthers({ navigation }) {
   ///
@@ -32,6 +32,7 @@ export default function ProfileOthers({ navigation }) {
     friends: [], 
     upvotes: 0
   });
+  const [score,setScore] = useState(0);
 
 
   const gettingData = async () => {
@@ -44,6 +45,8 @@ export default function ProfileOthers({ navigation }) {
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
     setUser(userData1.data);
+    const num = await netScore(name);
+    setScore(num);
   };
 
   useEffect(
@@ -109,8 +112,8 @@ export default function ProfileOthers({ navigation }) {
           <Text style={styles.statItem}>Friends</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Likes</Text>
+          <Text style={styles.statsHeader}>{score}</Text>
+          <Text style={styles.statItem}>Net Likes</Text>
         </View>
       </View>
 
