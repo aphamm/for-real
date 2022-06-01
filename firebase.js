@@ -423,7 +423,7 @@ const postedToday = async (username) => {
 
 }
 
-const netScore = async (username) => {
+const totalLikes = async (username) => {
 
   // get user info from firestore
   const userRef = db.collection('users').doc(username.toLowerCase());
@@ -431,17 +431,15 @@ const netScore = async (username) => {
   const userInfo = JSON.parse(JSON.stringify(doc.data()));
   const userPosts = userInfo.posts;
 
-  let net = 0;
+  let totalLikes = -1;
   for (let i = 0; i < userPosts.length; i++) {
-    // get list of post's likes & dislikes
+    // get list of post's likes & increment counter
     const post = await db_.ref().child(userPosts[i]).get();
     const postInfo = JSON.parse(JSON.stringify(post));
     const postLikes = postInfo.upvotes;
-    const postDislikes = postInfo.downvotes;
-    Object.keys(postLikes).forEach(key => net++ );
-    Object.keys(postDislikes).forEach(key => net--);
+    Object.keys(postLikes).forEach(key => totalLikes++);
   }
-  return net;
+  return totalLikes;
 
 }
 
@@ -450,5 +448,5 @@ export { createUser, getUser,
   getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
-  postedToday, getOtherUser, netScore,
+  postedToday, getOtherUser, totalLikes,
 };

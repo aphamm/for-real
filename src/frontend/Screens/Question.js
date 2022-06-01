@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
 import { useState, useContext } from 'react';
-import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, getPosts, getUserPosts, getFriendPosts , postedToday, netScore } from '../../../firebase';
+import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, getPosts, getUserPosts, getFriendPosts , postedToday } from '../../../firebase';
 import { UserContext } from '../../context/userContext';
 import { useNavigation } from '@react-navigation/native';
 
