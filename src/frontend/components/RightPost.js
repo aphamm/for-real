@@ -26,6 +26,14 @@ export default function Post(props) {
   const [user, setUser, data, , gettingData, gettingFilteredData] =
     useContext(UserContext);
 
+    const giveColor = (liked) => {
+      if (liked) {
+        return styles.liked;
+      } else {
+        return null;
+      }
+    }; 
+
 
   const likeHandler = async () => {
     console.log('like');
@@ -59,10 +67,18 @@ export default function Post(props) {
 
         <View style={styles.numberContainer}>
           {/* <Text style={styles.arrow} onPress={likeHandler}>∧</Text> */}
-          
-          <AntDesign name="up" style={styles.arrow} onPress={likeHandler} />
+
+          <AntDesign
+            name="up"
+            style={[styles.arrow, giveColor(props.liked)]}
+            onPress={likeHandler}
+          />
           <Text style={styles.number}>{props.number}</Text>
-          <AntDesign  name="down" style={styles.arrow} onPress={dislikeHandler}/>
+          <AntDesign
+            name="down"
+            style={[styles.arrow, giveColor(props.disliked)]}
+            onPress={dislikeHandler}
+          />
 
           {/* <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text> */}
         </View>
@@ -70,13 +86,15 @@ export default function Post(props) {
         <View style={styles.textContainer}>
           <Text style={styles.answer}>{props.answer}</Text>
           <View style={styles.userandtime}>
-          <TouchableOpacity
-              onPress = {()=> props.navigation.navigate('ProfileOthers',{name:props.user})}
-              >
-            <Text style={styles.username} onPress={profileOthersHandler}>
-              {props.user} -{' '}
-            </Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate('ProfileOthers', { name: props.user })
+              }
+            >
+              <Text style={styles.username} onPress={profileOthersHandler}>
+                {props.user} -{' '}
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.time}>{props.realtime}</Text>
           </View>
         </View>
@@ -103,12 +121,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    marginLeft: 10
+    marginLeft: 10,
   },
   numberContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10
+    marginRight: 10,
   },
   userandtime: {
     display: 'flex',
@@ -118,44 +136,45 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 20,
-    fontFamily: "Karla_500Medium"
+    fontFamily: 'Karla_500Medium',
   },
   answer: {
     fontSize: 14,
     marginBottom: 15,
-    fontFamily: "Roboto_300Light",
-    color: "black",
-    lineHeight: 18
+    fontFamily: 'Roboto_300Light',
+    color: 'black',
+    lineHeight: 18,
   },
   username: {
     fontWeight: 'bold',
     fontSize: 12,
-    fontFamily: "Karla_700Bold",
-    color: "black",
+    fontFamily: 'Karla_700Bold',
+    color: 'black',
   },
   time: {
     fontSize: 10,
     color: 'grey',
-    fontFamily: "Roboto_300Light_Italic",
-    color: "black",
+    fontFamily: 'Roboto_300Light_Italic',
+    color: 'black',
   },
   arrow: {
     fontSize: 24,
-    color: 'grey'
+    color: 'grey',
   },
   bubble: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 5,
     marginTop: 15,
-    marginRight: "5%",
+    marginRight: '5%',
     width: '70%',
     alignSelf: 'flex-end',
     borderRadius: 20,
     shadowRadius: 4,
     shadowColor: 'grey',
     shadowOpacity: 0.3,
-    shadowOffset: {width:0, height: 4},
+    shadowOffset: { width: 0, height: 4 },
   },
-
-  
+  liked: {
+    color: '#AA83FF',
+  },
 });

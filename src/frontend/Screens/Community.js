@@ -137,6 +137,12 @@ export default function Community({ navigation }) {
             Object.keys(goodThing.item.upvotes).length -
             Object.keys(goodThing.item.downvotes).length;
             console.log(number);
+             const liked = Object.values(goodThing.item.upvotes).includes(
+               user.username
+             );
+             const disliked = Object.values(goodThing.item.downvotes).includes(
+               user.username
+             );
 
           if (thing.index % 2 == 0) {
             return (
@@ -148,18 +154,22 @@ export default function Community({ navigation }) {
                 id={goodThing.item.postID}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
+                liked={liked}
+                disliked={disliked}
               />
              
             );
           } else {
             return (
               <LeftPost
-              user={goodThing.item.user}
-              answer={goodThing.item.answer}
-              number={number}
-              realtime={goodThing.item.realtime}
-              keyExtractor={(thing) => thing.index}
-            />
+                user={goodThing.item.user}
+                answer={goodThing.item.answer}
+                number={number}
+                realtime={goodThing.item.realtime}
+                keyExtractor={(thing) => thing.index}
+                liked={liked}
+                disliked={disliked}
+              />
             );
           }
         }}
