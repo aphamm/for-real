@@ -238,7 +238,16 @@ const getPosts = async () => {
 
   // push each element into posts array
   const posts = [];
-  response.forEach(post => { posts.push(post); });
+  response.forEach(post => { 
+    const post1 = JSON.parse(JSON.stringify(post));
+
+    const todayDate = new Date().getFullYear().toString() +
+      '-' +
+      (new Date().getMonth() + 1).toString() +
+      '-' +
+      new Date().getDate().toString(); 
+
+      if (todayDate === post1.postID.split(' ')[0]) {posts.push(post); }});
   return posts;
 
 };
