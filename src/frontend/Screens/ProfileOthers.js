@@ -119,11 +119,14 @@ export default function ProfileOthers({ navigation }) {
         //slice the first two posts
         data={userposts}
         renderItem={(item) => {
+          const number = Object.keys(item.item.upvotes).length -
+            Object.keys(item.item.downvotes).length;
+
           return (
             <ProfilePost
               question={item.item.question}
               answer={item.item.answer}
-              number={item.item.number}
+              number={number}
               keyExtractor={(item) => item.user}
             />
           );
