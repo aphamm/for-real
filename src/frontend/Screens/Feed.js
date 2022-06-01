@@ -104,10 +104,9 @@ export default function Feed({ navigation }) {
 
           if (thing.index % 2 == 0) {
             return (
-              <TouchableOpacity
-              onPress = {()=>navigation.navigate('ProfileOthers',{name:goodThing.item.user})}
-              >
+
               <RightPost
+                navigation = {navigation}
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
@@ -115,22 +114,18 @@ export default function Feed({ navigation }) {
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
-              </TouchableOpacity>
               
             );
           } else {
             return (
-              <TouchableOpacity  
-              onPress = {()=>navigation.navigate('ProfileOthers',{name:goodThing.item.user})}
-              >
               <LeftPost
+              navigation = {navigation}
               user={goodThing.item.user}
               answer={goodThing.item.answer}
               number={number}
               realtime={goodThing.item.realtime}
               keyExtractor={(thing) => thing.index}
             />
-              </TouchableOpacity>
 
             );
           }
