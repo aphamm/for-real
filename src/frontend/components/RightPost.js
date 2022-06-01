@@ -23,7 +23,8 @@ export default function Post(props) {
     Karla_700Bold
   });
 
-  const [user, setUser, data, ,gettingData] = useContext(UserContext);
+  const [user, setUser, data, , gettingData, gettingFilteredData] =
+    useContext(UserContext);
 
 
   const likeHandler = async () => {
@@ -32,6 +33,7 @@ export default function Post(props) {
     console.log(props.id);
     console.log(user);
     await likePost(props.id, user.username);
+    gettingFilteredData();
     gettingData();
   };
 
