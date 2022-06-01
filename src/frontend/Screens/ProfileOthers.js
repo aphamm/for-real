@@ -15,39 +15,50 @@ import {
 } from '@expo-google-fonts/roboto';
 import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
+import { UserContext } from '../../context/userContext';
+import { useContext, useState, useEffect} from 'react';
+import { getOtherUser, getUserPosts} from '../../../firebase';
 
 export default function ProfileOthers({ navigation }) {
   ///
   /// user variable
   /// 
+
+
   const name = navigation.getParam('name');
+  const [userposts, setUserposts] = useState([]);
+  const [user, setUser] = useState({
+    posts: [], 
+    friends: [], 
+    upvotes: 0
+  });
 
 
+  const gettingData = async () => {
+    const userPost = await getUserPosts(name);
+    console.log('POSTS');
+    console.log(userPost.reverse());
+    setUserposts(JSON.parse(JSON.stringify(userPost.reverse())));
+    const userData = await getOtherUser(name); 
+    console.log('USER');
+    const userData1 = JSON.parse(JSON.stringify(userData)); 
+    console.log(userData1.data.friends);
+    setUser(userData1.data);
+  };
+
+  useEffect(
+    () => {
+      gettingData();
+    },
+    // optional dependency array
+    []
+  );
   const userData = {
-    totalPosts: 10,
+    totalPosts: 0,
     postStreak: 5,
     totalUpvotes: 100,
   };
 
-  const dummyData = [
-    {
-      question: 'Question #1',
-      answer:
-        'Def 5 milli who cares bout Jay Z get a bag and run wit it am i rite',
-      number: 15,
-    },
-    {
-      question: 'Question #2',
-      answer: 'neither, both are overrated',
-      number: 4,
-    },
-    {
-      question: 'Question #3',
-      answer:
-        'I would rather have dinner with Jay Z because what are you actually gonna do with 5 mil',
-      number: 3,
-    },
-  ];
 
   const image = {
     uri: 'https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg',
@@ -80,12 +91,9 @@ export default function ProfileOthers({ navigation }) {
   };
 
   return (
-
     <SafeAreaView style={styles.container}>
-     
-
       <Text style={styles.name}>{name}</Text>
-      <Text style={styles.username}>@Angelina02184</Text>
+      <Text style={styles.username}>@{name}</Text>
 
       <View style={styles.button}>
         <Text style={styles.buttonText}>+ Follow</Text>
@@ -93,13 +101,12 @@ export default function ProfileOthers({ navigation }) {
 
       <View style={styles.statsBox}>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>2</Text>
+          <Text style={styles.statsHeader}>{user.posts.length}</Text>
           <Text style={styles.statItem}>Posts</Text>
         </View>
         <View style={styles.stats}>
-          <Text style={styles.statsHeader}>3</Text>
+          <Text style={styles.statsHeader}>{user.friends.length}</Text>
           <Text style={styles.statItem}>Friends</Text>
-
         </View>
         <View style={styles.stats}>
           <Text style={styles.statsHeader}>87</Text>
@@ -107,11 +114,10 @@ export default function ProfileOthers({ navigation }) {
         </View>
       </View>
 
-
       <Text style={styles.upvoteHeader}>Recent Posts</Text>
       <FlatList
         //slice the first two posts
-        data={dummyData.slice(1)}
+        data={userposts}
         renderItem={(item) => {
           return (
             <ProfilePost
