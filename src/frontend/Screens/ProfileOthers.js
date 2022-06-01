@@ -18,12 +18,8 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-<<<<<<< HEAD
-import { addFriend, getOtherUser, getUserPosts} from '../../../firebase';
+import { addFriend, getOtherUser, getUserPosts,totalLikes} from '../../../firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-=======
-import { getOtherUser, getUserPosts, totalLikes} from '../../../firebase';
->>>>>>> 3de7e29a146c289dfa6a8cb134eaac88972eb68c
 
 export default function ProfileOthers({ navigation }) {
   ///
@@ -52,13 +48,10 @@ export default function ProfileOthers({ navigation }) {
     console.log('USER');
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
-<<<<<<< HEAD
     setOtherUser(userData1.data);
-=======
     setUser(userData1.data);
     const num = await totalLikes(name);
     setScore(num);
->>>>>>> 3de7e29a146c289dfa6a8cb134eaac88972eb68c
   };
 
   useEffect(
