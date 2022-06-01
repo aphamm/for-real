@@ -486,12 +486,13 @@ const getQuestion = async () => {
   // get question from firebase
   const date = new Date().getFullYear().toString() + '-' +
   (new Date().getMonth() + 1).toString() + '-' +
-  new Date().getDate().toString();
+  (new Date().getDate()).toString();
   const questionRef = db.collection('question').doc(date);
   const doc = await questionRef.get();
   const questionInfo = JSON.parse(JSON.stringify(doc.data()));
   const question = questionInfo.question;
   return question;
+
 }
 
 export { createUser, getUser, 
@@ -501,4 +502,5 @@ export { createUser, getUser,
   getLikes, getDislikes,
   postedToday, getOtherUser, netScore,
   getQuestion,
+
 };

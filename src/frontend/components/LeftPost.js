@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
   liked: {
-    color: '#AA83FF',
+    color: '#ff46da',
   },
   bubble: {
     backgroundColor: 'white',

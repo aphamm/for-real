@@ -185,6 +185,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
   },
   liked: {
-    color: '#AA83FF',
+    color: '#ff46da',
   },
 });
