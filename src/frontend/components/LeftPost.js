@@ -15,7 +15,7 @@ import {
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
-  const [user, setUser, data,setData,gettingData] = useContext(UserContext);
+  const [user, setUser, data,setData,gettingData,gettingFilteredData] = useContext(UserContext);
 
   const profileOthersHandler = () => {
     navigation.navigate('ProfileOthers');
@@ -27,6 +27,7 @@ export default function Post(props) {
     console.log(props.id);
     console.log(user);
     await likePost(props.id, user.username);
+    gettingFilteredData();
     gettingData();
   };
 

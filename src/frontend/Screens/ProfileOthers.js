@@ -18,13 +18,14 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-import { addFriend, getOtherUser, getUserPosts,totalLikes} from '../../../firebase';
+import { addFriend, getOtherUser, getUserPosts,totalLikes, removeFriend} from '../../../firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function ProfileOthers({ navigation }) {
   ///
   /// otherUser variable
   /// 
+  const [followButton, setFollowButton] = useState('+ Follow ');
 
   const [user, setUser] = useContext(UserContext);
 
@@ -49,7 +50,6 @@ export default function ProfileOthers({ navigation }) {
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
     setOtherUser(userData1.data);
-    setUser(userData1.data);
     const num = await totalLikes(name);
     setScore(num);
   };
@@ -98,9 +98,28 @@ export default function ProfileOthers({ navigation }) {
     navigation.navigate('Community');
   };
 
-  const followHandler = () =>{
-    console.log(user);
-    addFriend(user,name);
+  const followHandler = async () =>{
+    console.log(user.username);
+    console.log(name);
+    //if is following 
+    if(user.friends.includes(name)){
+      await removeFriend(user.username, name);
+      setFollowButton('+ Follow');
+    }
+    else{
+      //if is not following
+      //name is friend's name
+      await addFriend(user.username, name);
+      setFollowButton("Following");
+    }
+    const userData = await getOtherUser(user.username); 
+    setUser(userData.data);
+
+    const userData1 = await getOtherUser(name);
+    setOtherUser(userData1.data);
+
+
+    // addFriend(user.username,name);
   };
 
   return (
@@ -111,7 +130,7 @@ export default function ProfileOthers({ navigation }) {
       <TouchableOpacity style={styles.button}
       onPress = {()=> followHandler()}
       >
-        <Text style={styles.buttonText}>+ Follow</Text>
+        <Text style={styles.buttonText}>{followButton}</Text>
       </TouchableOpacity>
 
       <View style={styles.statsBox}>

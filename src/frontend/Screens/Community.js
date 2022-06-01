@@ -31,10 +31,10 @@ export default function Community({ navigation }) {
 
   const gettingData = async () => {
     const dummyDataBaseData = await getPosts();
+    const dummyDataBaseData1 = JSON.parse(JSON.stringify(dummyDataBaseData));
     //filter 
-    const filteredData = dummyDataBaseData.filter((item)=>{
+    const filteredData = dummyDataBaseData1.filter((item)=>{
       const username = item.user;
-      console.log(user.friends);
       if(user.friends.includes(username)){
         return true;
       }
@@ -122,17 +122,15 @@ export default function Community({ navigation }) {
         data={data}
         renderItem={(thing) => {
           const goodThing = JSON.parse(JSON.stringify(thing));
+          
           const number =
             Object.keys(goodThing.item.upvotes).length -
             Object.keys(goodThing.item.downvotes).length;
+            console.log(number);
 
           if (thing.index % 2 == 0) {
             return (
-              <TouchableOpacity
-              onPress = {()=>
-                navigation.navigate('ProfileOthers',{name:goodThing.item.user})
-              }
-              >
+              
               <RightPost
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
@@ -141,13 +139,10 @@ export default function Community({ navigation }) {
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
-              </TouchableOpacity>
+             
             );
           } else {
             return (
-              <TouchableOpacity  
-              onPress = {()=>navigation.navigate('ProfileOthers',{name:goodThing.item.user})}
-              >
               <LeftPost
               user={goodThing.item.user}
               answer={goodThing.item.answer}
@@ -155,7 +150,6 @@ export default function Community({ navigation }) {
               realtime={goodThing.item.realtime}
               keyExtractor={(thing) => thing.index}
             />
-              </TouchableOpacity>
             );
           }
         }}
