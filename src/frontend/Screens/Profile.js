@@ -152,15 +152,7 @@ export default function Profile({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
-  question: {
-    marginTop: 30,
-    fontSize: 18,
-    textAlign: 'center',
-    paddingLeft: 35,
-    paddingRight: 35,
-    fontFamily: "Roboto_700Bold"
-
-  },
+  
 
   name: {
       fontSize: 20,
