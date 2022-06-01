@@ -12,25 +12,28 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
-  const [user, setUser] = useContext(UserContext);
+  const [user, setUser, data, ,gettingData] = useContext(UserContext);
 
   const profileOthersHandler = () => {
     navigation.navigate('ProfileOthers');
   };
 
-  const likeHandler = () =>{
+  const likeHandler = async () => {
     console.log('like');
     console.log(props);
     console.log(props.id);
     console.log(user);
-    likePost(props.id, user.username);
-  }; 
+    await likePost(props.id, user.username);
+    gettingData();
+  };
 
-  const dislikeHandler = () =>{
+
+  const dislikeHandler = async () => {
     console.log('dislike');
     console.log(props.id);
     console.log(user);
-    dislikePost(props.id, user.username);
+    await dislikePost(props.id, user.username);
+    gettingData();
   };
 
   let [fontsLoaded] = useFonts({
