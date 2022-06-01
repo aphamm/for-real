@@ -60,6 +60,17 @@ export default function Post(props) {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  const move = () => {
+    console.log(user.username);
+    console.log(props.user);
+    if (user.username.toLowerCase() == props.user.toLowerCase()) {
+      props.navigation.navigate('Profile');
+    } else {
+      props.navigation.navigate('ProfileOthers', { name: props.user });
+    }
+  };
+
   return (
     <View style={styles.bubble}>
       <View style={styles.container}>
@@ -87,8 +98,7 @@ export default function Post(props) {
           <Text style={styles.answer}>{props.answer}</Text>
           <View style={styles.userandtime}>
             <TouchableOpacity
-              onPress={() =>
-                props.navigation.navigate('ProfileOthers', { name: props.user })
+              onPress={move
               }
             >
               <Text style={styles.username} onPress={profileOthersHandler}>
