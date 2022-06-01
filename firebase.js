@@ -79,9 +79,23 @@ const getUser = async (user) => {
 
   // return status and data
   return { status: true, data: userInfo}; 
-
 };
 
+
+const getOtherUser = async (username) => {
+  // get user info from firestore
+  const userRef = db.collection('users').doc(username.toLowerCase());
+  const doc = await userRef.get();
+  const userInfo = doc.data();
+
+  // checks and error handling
+  if (!doc.exists) {
+    return { status: false, data: 'Account does not exist!' };
+  }
+
+  // return status and data
+  return { status: true, data: userInfo };
+};
 
 const sendPost = async (post) => {
 
@@ -436,5 +450,5 @@ export { createUser, getUser,
   getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
-  postedToday, netScore,
+  postedToday, getOtherUser, netScore,
 };

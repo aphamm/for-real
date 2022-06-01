@@ -58,7 +58,7 @@ const SignUpScreen = ({ navigation }) => {
     const response = await createUser(signUpObject);
 
     if(response===1){
-      navigation.navigate('Feed');
+      navigation.navigate('Login');
       return;
     }
     else{
