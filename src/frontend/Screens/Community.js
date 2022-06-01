@@ -26,14 +26,14 @@ import { UserContext } from '../../context/userContext';
 import { useContext } from 'react';
 
 export default function Community({ navigation }) {
-  const [data, setData] = useState();
-  const [user, setUser] = useContext(UserContext);
+  const [filteredData, setFilteredData] = useState();
+  const [user, setUser, data, setData] = useContext(UserContext);
 
   const gettingData = async () => {
-    const dummyDataBaseData = await getPosts();
+    const dummyDataBaseData = data;
     const dummyDataBaseData1 = JSON.parse(JSON.stringify(dummyDataBaseData));
     //filter 
-    const filteredData = dummyDataBaseData1.filter((item)=>{
+    const fData = dummyDataBaseData1.filter((item)=>{
       const username = item.user;
       if(user.friends.includes(username)){
         return true;
@@ -43,14 +43,14 @@ export default function Community({ navigation }) {
       }
     })
     console.log(filteredData);
-    setData(filteredData.reverse());
+    setFilteredData(fData.reverse());
   };
   useEffect(
     () => {
       gettingData();
     },
     // optional dependency array
-    []
+    [data]
   );
 
   const image = {
@@ -119,7 +119,7 @@ export default function Community({ navigation }) {
 
       <FlatList
       showsVerticalScrollIndicator={false}
-        data={data}
+        data={filteredData}
         renderItem={(thing) => {
           const goodThing = JSON.parse(JSON.stringify(thing));
           
