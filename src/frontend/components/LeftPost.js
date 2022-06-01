@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../context/userContext';
 import {useContext} from 'react';
 import { likePost, dislikePost } from '../../../firebase';
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 
@@ -55,9 +56,11 @@ export default function Post(props) {
         </View>
 
         <View style={styles.numberContainer}>
-          <Text style={styles.arrow} onPress={likeHandler}>∧</Text>
+          {/* <Text style={styles.arrow} onPress={likeHandler}>∧</Text> */}
+          <AntDesign name="up" style={styles.arrow} onPress={likeHandler} />
           <Text style={styles.number}>{props.number}</Text>
-          <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text>
+          <AntDesign name="down" style={styles.arrow} onPress={dislikeHandler}/>
+          {/* <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text> */}
         </View>
       </View>
 
@@ -120,7 +123,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   arrow: {
-    fontSize: 30,
+    fontSize: 24,
     color: 'grey'
   },
   bubble: {
