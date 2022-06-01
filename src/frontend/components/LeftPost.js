@@ -4,6 +4,7 @@ import AppLoading from 'expo-app-loading';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../context/userContext';
 import {useContext} from 'react';
+import { likePost, dislikePost } from '../../../firebase';
 
 
 
@@ -17,14 +18,17 @@ export default function Post(props) {
 
   const likeHandler = () =>{
     console.log('like');
+    console.log(props);
     console.log(props.id);
     console.log(user);
+    likePost(props.id, user.username);
   }; 
 
   const dislikeHandler = () =>{
     console.log('dislike');
     console.log(props.id);
     console.log(user);
+    dislikePost(props.id, user.username);
   };
 
   let [fontsLoaded] = useFonts({
@@ -37,7 +41,8 @@ export default function Post(props) {
     return <AppLoading />;
   }
   return (
-    <View style={styles.bubble}>
+    <View 
+    style={styles.bubble}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.answer}>{props.answer}</Text>
