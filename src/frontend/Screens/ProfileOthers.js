@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import { UserContext } from '../../context/userContext';
 import { useContext, useState, useEffect} from 'react';
-import { getOtherUser, getUserPosts, netScore} from '../../../firebase';
+import { getOtherUser, getUserPosts, totalLikes} from '../../../firebase';
 
 export default function ProfileOthers({ navigation }) {
   ///
@@ -45,7 +45,7 @@ export default function ProfileOthers({ navigation }) {
     const userData1 = JSON.parse(JSON.stringify(userData)); 
     console.log(userData1.data.friends);
     setUser(userData1.data);
-    const num = await netScore(name);
+    const num = await totalLikes(name);
     setScore(num);
   };
 
