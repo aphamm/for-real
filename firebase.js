@@ -453,8 +453,7 @@ const getQuestion = async () => {
   const doc = await questionRef.get();
   const questionInfo = JSON.parse(JSON.stringify(doc.data()));
   const question = questionInfo.question;
-  console.log(question);
-  return { status: true, data: question};
+  return question;
 }
 
 export { createUser, getUser, 

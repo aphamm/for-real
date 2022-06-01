@@ -4,11 +4,16 @@ import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, ge
 import { UserContext } from '../../context/userContext';
 import { useNavigation } from '@react-navigation/native';
 
-
-
 export default function Question({navigation}) {
 
-  const questionOfDay = 'question of the day';
+  const [questionOfDay, setQuestionOfDay] = useState();
+
+  const gettingQuestion = async () => {
+    const question = await getQuestion();
+    setQuestionOfDay(question);
+  };
+
+  gettingQuestion();
 
   const [answer, setAnswer] = useState('');
   const [error, setError] = useState(null);

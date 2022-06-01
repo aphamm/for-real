@@ -14,12 +14,20 @@ import { useState, useEffect} from 'react';
 import { UserContext } from '../../context/userContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+import { getQuestion } from '../../../firebase';
 
 
 export default function Feed({ navigation }) {
   const [user, setUser, data, ,gettingData] = useContext(UserContext);
 
+  const [questionOfDay, setQuestionOfDay] = useState();
 
+  const gettingQuestion = async () => {
+    const question = await getQuestion();
+    setQuestionOfDay(question);
+  };
+
+  gettingQuestion();
 
   useEffect(
     () => {
@@ -88,7 +96,7 @@ export default function Feed({ navigation }) {
           </Text>
         </View>
         <Text style={styles.question} onPress={questionHandler}>
-          Would you rather have $5 million or dinner with Jay Z and why?
+          {questionOfDay}
         </Text>
       </View>
 

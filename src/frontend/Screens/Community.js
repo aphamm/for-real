@@ -24,10 +24,20 @@ import { getPosts } from '../../../firebase';
 import { useState, useEffect } from 'react';
 import { UserContext } from '../../context/userContext';
 import { useContext } from 'react';
+import { getQuestion } from '../../../firebase';
 
 export default function Community({ navigation }) {
   const [filteredData, setFilteredData] = useState();
   const [user, setUser, data, setData] = useContext(UserContext);
+
+  const [questionOfDay, setQuestionOfDay] = useState();
+
+  const gettingQuestion = async () => {
+    const question = await getQuestion();
+    setQuestionOfDay(question);
+  };
+
+  gettingQuestion();
 
   const gettingData = async () => {
     const dummyDataBaseData = data;
@@ -113,7 +123,7 @@ export default function Community({ navigation }) {
           </Text>
         </View>
         <Text style={styles.question} onPress={questionHandler}>
-          Would you rather have $5 million or dinner with Jay Z and why?
+          {questionOfDay}
         </Text>
       </View>
 
