@@ -119,14 +119,14 @@ export default function Feed({ navigation }) {
           } else {
             return (
               <LeftPost
-              navigation = {navigation}
-              user={goodThing.item.user}
-              answer={goodThing.item.answer}
-              number={number}
-              realtime={goodThing.item.realtime}
-              keyExtractor={(thing) => thing.index}
-            />
-
+                navigation={navigation}
+                user={goodThing.item.user}
+                answer={goodThing.item.answer}
+                number={number}
+                id={goodThing.item.postID}
+                realtime={goodThing.item.realtime}
+                keyExtractor={(thing) => thing.index}
+              />
             );
           }
         }}
