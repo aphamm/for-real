@@ -81,7 +81,7 @@ export default function Feed({ navigation }) {
             Global
           </Text>
           <Text style={styles.menuItem} onPress={communityHandler}>
-            Your Community
+            Friends
           </Text>
           <Text style={styles.menuItem} onPress={profileHandler}>
             Profile

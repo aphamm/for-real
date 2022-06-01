@@ -106,7 +106,7 @@ export default function Community({ navigation }) {
             Global
           </Text>
           <Text style={[styles.menuItem, styles.clicked]} onPress={communityHandler}>
-            Your Community
+            Friends
           </Text>
           <Text style={styles.menuItem} onPress={profileHandler}>
             Profile

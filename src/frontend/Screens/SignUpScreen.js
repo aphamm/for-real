@@ -10,11 +10,34 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Pressable,
   AsyncStorage,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { Feather } from '@expo/vector-icons';
-import { Foundation, FontAwesome } from '@expo/vector-icons';
+import { Foundation, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
+
+
+export const useTogglePasswordVisibility = () => {
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
+  const [rightIcon, setRightIcon] = useState('eye');
+
+  const handlePasswordVisibility = () => {
+    if (rightIcon === 'eye') {
+      setRightIcon('eye-off');
+      setPasswordVisibility(!passwordVisibility);
+    } else if (rightIcon === 'eye-off') {
+      setRightIcon('eye');
+      setPasswordVisibility(!passwordVisibility);
+    }
+  };
+
+  return {
+    passwordVisibility,
+    rightIcon,
+    handlePasswordVisibility
+  };
+};
 
 const SignUpScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -22,6 +45,7 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState();
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
 
   const manageSignUp = async () => {
     const signUpObject = {
@@ -44,8 +68,6 @@ const SignUpScreen = ({ navigation }) => {
       }, '2500');
       return false;
     }
-    
-    
   };
   return (
     <View style={page.container}>
@@ -112,6 +134,9 @@ const SignUpScreen = ({ navigation }) => {
             onChangeText={setPassword}
             placeholderTextColor="rgba(30, 30, 30, 0.8)"
           />
+          {/* <Pressable onPress={handlePasswordVisibility} style={page.eye}>
+            <MaterialCommunityIcons name={rightIcon} size={22} color="#232323" />
+          </Pressable> */}
         </View>
 
         <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>
@@ -350,6 +375,9 @@ const page = StyleSheet.create({
     top: -5,
     right: -5,
   },
+  eye: {
+    marginRight: 10
+  }
 });
 
 const body = StyleSheet.create({

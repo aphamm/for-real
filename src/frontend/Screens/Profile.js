@@ -68,7 +68,7 @@ export default function Profile({ navigation }) {
             Global
           </Text>
           <Text style={styles.menuItem} onPress={communityHandler}>
-            Your Community
+            Friends
           </Text>
           <Text style={[styles.menuItem, styles.clicked]} onPress={profileHandler}>
             Profile
@@ -91,7 +91,7 @@ export default function Profile({ navigation }) {
         </View>
         <View style={styles.stats}>
           <Text style={styles.statsHeader}>87</Text>
-          <Text style={styles.statItem}>Upvotes</Text>
+          <Text style={styles.statItem}>Likes</Text>
         </View>
       </View>
 
