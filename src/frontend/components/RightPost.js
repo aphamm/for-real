@@ -7,6 +7,10 @@ import { UserContext } from '../../context/userContext';
 import { likePost, dislikePost } from '../../../firebase';
 import { AntDesign } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  Karla_500Medium,
+  Karla_700Bold
+} from '@expo-google-fonts/karla';
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
@@ -14,6 +18,8 @@ export default function Post(props) {
     Roboto_300Light_Italic,
     Roboto_300Light,
     Roboto_700Bold,
+    Karla_500Medium,
+    Karla_700Bold
   });
 
   const [user, setUser] = useContext(UserContext);
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 20,
-    fontFamily: "Roboto_700Bold"
+    fontFamily: "Karla_500Medium"
   },
   answer: {
     fontSize: 14,
@@ -118,7 +124,7 @@ const styles = StyleSheet.create({
   username: {
     fontWeight: 'bold',
     fontSize: 12,
-    fontFamily: "Roboto_700Bold",
+    fontFamily: "Karla_700Bold",
     color: "black",
   },
   time: {
