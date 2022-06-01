@@ -167,13 +167,13 @@ const likePost = async (postID, username) => {
     dislikes.push(postDislikes[key]);
   })
 
-  // check if likes list includes username
+  // if already liked, remove from likes list
   if (likes.includes(username)) {
     console.log("You already liked this post!");
-    return { status: false, data: "You already liked this post!"};
+    likes = likes.filter(item => item !== username);
   }
 
-  // remove username from dislikes list
+  // if already disliked, remove from dislikes list
   if (dislikes.includes(username)) {
     console.log("We need to remove this dislike!");
     dislikes = dislikes.filter(item => item !== username)
@@ -215,10 +215,16 @@ const dislikePost = async (postID, username) => {
     dislikes.push(postDislikes[key]);
   })
 
-  // check if dislikes list includes username
+  // if already liked, remove from likes list
+  if (likes.includes(username)) {
+    console.log("You already liked this post!");
+    likes = likes.filter(item => item !== username);
+  }
+
+  // if already disliked, remove from dislikes list
   if (dislikes.includes(username)) {
-    console.log("You already disliked this post!");
-    return { status: false, data: "You already disliked this post!"};
+    console.log("We need to remove this dislike!");
+    dislikes = dislikes.filter(item => item !== username)
   }
 
   // remove username from likes list
@@ -423,7 +429,7 @@ const postedToday = async (username) => {
 
 }
 
-const totalLikes = async (username) => {
+const netScore = async (username) => {
 
   // get user info from firestore
   const userRef = db.collection('users').doc(username.toLowerCase());
@@ -431,15 +437,17 @@ const totalLikes = async (username) => {
   const userInfo = JSON.parse(JSON.stringify(doc.data()));
   const userPosts = userInfo.posts;
 
-  let totalLikes = -1;
+  let netScore = 0;
   for (let i = 0; i < userPosts.length; i++) {
     // get list of post's likes & increment counter
     const post = await db_.ref().child(userPosts[i]).get();
     const postInfo = JSON.parse(JSON.stringify(post));
     const postLikes = postInfo.upvotes;
-    Object.keys(postLikes).forEach(key => totalLikes++);
+    const postDislikes = postInfo.downvotes;
+    Object.keys(postLikes).forEach(key => netScore++);
+    Object.keys(postDislikes).forEach(key => netScore--);
   }
-  return totalLikes;
+  return netScore;
 
 }
 
@@ -461,6 +469,6 @@ export { createUser, getUser,
   getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
-  postedToday, getOtherUser, totalLikes,
+  postedToday, getOtherUser, netScore,
   getQuestion,
 };
