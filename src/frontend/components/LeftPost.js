@@ -7,7 +7,10 @@ import {useContext} from 'react';
 import { likePost, dislikePost } from '../../../firebase';
 import { AntDesign } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import {
+  Karla_500Medium,
+  Karla_700Bold
+} from '@expo-google-fonts/karla';
 
 
 //needs to be given {navigation} somehow
@@ -40,6 +43,8 @@ export default function Post(props) {
     Roboto_300Light_Italic,
     Roboto_300Light,
     Roboto_700Bold,
+    Karla_500Medium,
+    Karla_700Bold
   });
 
   if (!fontsLoaded) {
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 20,
-    fontFamily: "Roboto_700Bold"
+    fontFamily: "Karla_500Medium"
   },
   answer: {
     fontSize: 14,
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
   username: {
     fontWeight: 'bold',
     fontSize: 12,
-    fontFamily: "Roboto_700Bold",
+    fontFamily: "Karla_700Bold",
     color: "black",
   },
   time: {
@@ -148,26 +153,4 @@ const styles = StyleSheet.create({
     shadowOffset: {width:0, height: 4},
 
   },
-  // rightArrow: {
-  //   position: "absolute",
-  //   backgroundColor: "white",
-  //   //backgroundColor:"red",
-  //   width: 20,
-  //   height: 25,
-  //   bottom: 0,
-  //   borderBottomLeftRadius: 25,
-  //   right: -10
-  // },
-  
-  // rightArrowOverlap: {
-  //   position: "absolute",
-  //   backgroundColor: "#eeeeee",
-  //   //backgroundColor:"green",
-  //   width: 20,
-  //   height: 35,
-  //   bottom: -6,
-  //   borderBottomLeftRadius: 18,
-  //   right: -20
-  
-  // },
 });
