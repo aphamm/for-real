@@ -15,6 +15,10 @@ import {
   Roboto_300Light_Italic,
   Roboto_700Bold,
 } from '@expo-google-fonts/roboto';
+import {
+  Karla_500Medium,
+  Karla_700Bold
+} from '@expo-google-fonts/karla';
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
 import { useState, useEffect } from 'react';
@@ -57,6 +61,8 @@ export default function Community({ navigation }) {
     Roboto_300Light_Italic,
     Roboto_300Light,
     Roboto_700Bold,
+    Karla_500Medium,
+    Karla_700Bold
   });
 
   if (!fontsLoaded) {
@@ -100,7 +106,7 @@ export default function Community({ navigation }) {
             Global
           </Text>
           <Text style={[styles.menuItem, styles.clicked]} onPress={communityHandler}>
-            Your Community
+            Friends
           </Text>
           <Text style={styles.menuItem} onPress={profileHandler}>
             Profile
@@ -190,10 +196,11 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    fontFamily: 'Roboto_300Light',
+    fontFamily: 'Karla_500Medium',
+    color: 'grey'
   },
   clicked: {
     color: '#AA83FF',
-    fontFamily: 'Roboto_700Bold',
+    fontFamily: 'Karla_700Bold',
   },
 });

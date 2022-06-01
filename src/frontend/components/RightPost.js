@@ -7,6 +7,11 @@ import { UserContext } from '../../context/userContext';
 import { likePost, dislikePost } from '../../../firebase';
 import { AntDesign } from '@expo/vector-icons'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+import {
+  Karla_500Medium,
+  Karla_700Bold
+} from '@expo-google-fonts/karla';
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
@@ -14,24 +19,28 @@ export default function Post(props) {
     Roboto_300Light_Italic,
     Roboto_300Light,
     Roboto_700Bold,
+    Karla_500Medium,
+    Karla_700Bold
   });
 
-  const [user, setUser] = useContext(UserContext);
+  const [user, setUser, data, ,gettingData] = useContext(UserContext);
 
 
-  const likeHandler = () => {
+  const likeHandler = async () => {
     console.log('like');
     console.log(props);
     console.log(props.id);
     console.log(user);
-    likePost(props.id, user.username);
+    await likePost(props.id, user.username);
+    gettingData();
   };
 
-  const dislikeHandler = () => {
+  const dislikeHandler = async () => {
     console.log('dislike');
     console.log(props.id);
     console.log(user);
-    dislikePost(props.id, user.username);
+    await dislikePost(props.id, user.username);
+    gettingData();
   };
 
   const profileOthersHandler = () => {
@@ -48,9 +57,10 @@ export default function Post(props) {
 
         <View style={styles.numberContainer}>
           {/* <Text style={styles.arrow} onPress={likeHandler}>∧</Text> */}
+          
           <AntDesign name="up" style={styles.arrow} onPress={likeHandler} />
           <Text style={styles.number}>{props.number}</Text>
-          <AntDesign name="down" style={styles.arrow} onPress={dislikeHandler}/>
+          <AntDesign  name="down" style={styles.arrow} onPress={dislikeHandler}/>
 
           {/* <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text> */}
         </View>
@@ -106,7 +116,7 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 20,
-    fontFamily: "Roboto_700Bold"
+    fontFamily: "Karla_500Medium"
   },
   answer: {
     fontSize: 14,
@@ -118,7 +128,7 @@ const styles = StyleSheet.create({
   username: {
     fontWeight: 'bold',
     fontSize: 12,
-    fontFamily: "Roboto_700Bold",
+    fontFamily: "Karla_700Bold",
     color: "black",
   },
   time: {

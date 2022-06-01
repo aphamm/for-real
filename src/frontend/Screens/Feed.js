@@ -4,21 +4,22 @@ import RightPost from '../components/RightPost';
 import LeftPost from '../components/LeftPost';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
+import {
+  Karla_500Medium,
+  Karla_700Bold
+} from '@expo-google-fonts/karla';
 import AppLoading from 'expo-app-loading';
 import { getPosts } from '../../../firebase';
 import { useState, useEffect} from 'react';
 import { UserContext } from '../../context/userContext';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 
 
 export default function Feed({ navigation }) {
-  const {username, setUsername} = useContext(UserContext);
-  const [data, setData] = useState();
+  const [user, setUser, data, ,gettingData] = useContext(UserContext);
 
-  const gettingData = async () =>{
-  const dummyDataBaseData = await getPosts();
-  setData(dummyDataBaseData.reverse());
-  }
+
 
   useEffect(
     () => {
@@ -29,7 +30,6 @@ export default function Feed({ navigation }) {
   );
 
   const image = {
-    // uri: 'https://i.pinimg.com/736x/41/33/f9/4133f987e7712ec45394bb2bf9204002.jpg',
     uri: 'https://i.imgur.com/WgIfoZ4.jpg'
   };
 
@@ -37,6 +37,8 @@ export default function Feed({ navigation }) {
     Roboto_300Light_Italic,
     Roboto_300Light,
     Roboto_700Bold,
+    Karla_500Medium,
+    Karla_700Bold
   });
 
   if (!fontsLoaded) {
@@ -72,17 +74,14 @@ export default function Feed({ navigation }) {
           opacity: 0.8,
         }}
       ></ImageBackground>
-      {/* <Image 
-        source={require("../../assets/tempgrad.png/")}
-        style={styles.bgimage}>
-      </Image> */}
+      
       <View style={styles.header}>
         <View style={styles.menu}>
           <Text style={[styles.menuItem, styles.clicked]} onPress={feedHandler}>
             Global
           </Text>
           <Text style={styles.menuItem} onPress={communityHandler}>
-            Your Community
+            Friends
           </Text>
           <Text style={styles.menuItem} onPress={profileHandler}>
             Profile
@@ -104,8 +103,9 @@ export default function Feed({ navigation }) {
 
           if (thing.index % 2 == 0) {
             return (
-
+  
               <RightPost
+                gettingPosts = {gettingData}
                 navigation = {navigation}
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
@@ -114,7 +114,8 @@ export default function Feed({ navigation }) {
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
-              
+
+
             );
           } else {
             return (
@@ -167,10 +168,11 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginHorizontal: 15,
-    fontFamily: 'Roboto_300Light',
+    fontFamily: 'Karla_500Medium',
+    color: 'grey'
   },
   clicked: {
     color: '#AA83FF',
-    fontFamily: 'Roboto_700Bold',
+    fontFamily: 'Karla_700Bold',
   },
 });
