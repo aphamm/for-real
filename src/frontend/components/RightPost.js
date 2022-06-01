@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 import { UserContext } from '../../context/userContext';
 import { likePost, dislikePost } from '../../../firebase';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
@@ -53,9 +54,13 @@ export default function Post(props) {
         <View style={styles.textContainer}>
           <Text style={styles.answer}>{props.answer}</Text>
           <View style={styles.userandtime}>
+          <TouchableOpacity
+              onPress = {()=> props.navigation.navigate('ProfileOthers',{name:props.user})}
+              >
             <Text style={styles.username} onPress={profileOthersHandler}>
               {props.user} -{' '}
             </Text>
+          </TouchableOpacity>
             <Text style={styles.time}>{props.realtime}</Text>
           </View>
         </View>

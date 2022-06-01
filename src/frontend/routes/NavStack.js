@@ -8,6 +8,7 @@ import Question from "../Screens/Question";
 import Profile from "../Screens/Profile";
 import Community from "../Screens/Community";
 import ProfileOthers from "../Screens/ProfileOthers";
+import Post from "../components/RightPost";
 
 const screens = {
   Signup: {
