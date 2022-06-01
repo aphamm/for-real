@@ -2,6 +2,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useFonts, Roboto_300Light, Roboto_300Light_Italic, Roboto_700Bold} from '@expo-google-fonts/roboto';
 import AppLoading from 'expo-app-loading';
 import { useNavigation } from '@react-navigation/native';
+import { useContext } from 'react';
+import { UserContext } from '../../context/userContext';
+import { likePost, dislikePost } from '../../../firebase';
 
 //needs to be given {navigation} somehow
 export default function Post(props) {
@@ -10,6 +13,24 @@ export default function Post(props) {
     Roboto_300Light,
     Roboto_700Bold,
   });
+
+  const [user, setUser] = useContext(UserContext);
+
+
+  const likeHandler = () => {
+    console.log('like');
+    console.log(props);
+    console.log(props.id);
+    console.log(user);
+    likePost(props.id, user.username);
+  };
+
+  const dislikeHandler = () => {
+    console.log('dislike');
+    console.log(props.id);
+    console.log(user);
+    dislikePost(props.id, user.username);
+  };
 
   const profileOthersHandler = () => {
     navigation.navigate('ProfileOthers');
@@ -24,9 +45,9 @@ export default function Post(props) {
         <View style={styles.TriangleShapeCSS} />
 
         <View style={styles.numberContainer}>
-          <Text style={styles.arrow}>∧</Text>
+          <Text style={styles.arrow} onPress={likeHandler}>∧</Text>
           <Text style={styles.number}>{props.number}</Text>
-          <Text style={styles.arrow}>∨</Text>
+          <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text>
         </View>
 
         <View style={styles.textContainer}>

@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   ImageBackground,
+  SafeAreaView
 } from 'react-native';
 import ProfilePost from '../components/ProfilePost';
 import {
@@ -16,6 +17,12 @@ import { useNavigation } from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 
 export default function ProfileOthers({ navigation }) {
+  ///
+  /// user variable
+  /// 
+  const name = navigation.getParam('name');
+
+
   const userData = {
     totalPosts: 10,
     postStreak: 5,
@@ -73,10 +80,22 @@ export default function ProfileOthers({ navigation }) {
   };
 
   return (
+<<<<<<< HEAD
     <View style={styles.container}>
+=======
+    <SafeAreaView style={styles.container}>
+      {/* <ImageBackground 
+        source={image}
+        style={{width: '100%', height: '100%', position: 'absolute', opacity: 0.8}}>
+      </ImageBackground> */}
+      {/* <Image 
+        source={require("../../assets/tempgrad.png/")}
+        style={styles.bgimage}>
+      </Image> */}
+>>>>>>> origin
 
 
-      <Text style={styles.name}>Angelina Lue</Text>
+      <Text style={styles.name}>{name}</Text>
       <Text style={styles.username}>@Angelina02184</Text>
 
       <View style={styles.button}>
@@ -115,7 +134,7 @@ export default function ProfileOthers({ navigation }) {
           );
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 const styles = StyleSheet.create({

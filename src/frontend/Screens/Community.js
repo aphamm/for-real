@@ -8,6 +8,7 @@ import {
 import RightPost from '../components/RightPost';
 import LeftPost from '../components/LeftPost';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {
   useFonts,
   Roboto_300Light,
@@ -111,6 +112,7 @@ export default function Community({ navigation }) {
       </View>
 
       <FlatList
+      showsVerticalScrollIndicator={false}
         data={data}
         renderItem={(thing) => {
           const goodThing = JSON.parse(JSON.stringify(thing));
@@ -120,23 +122,34 @@ export default function Community({ navigation }) {
 
           if (thing.index % 2 == 0) {
             return (
+              <TouchableOpacity
+              onPress = {()=>
+                navigation.navigate('ProfileOthers',{name:goodThing.item.user})
+              }
+              >
               <RightPost
                 user={goodThing.item.user}
                 answer={goodThing.item.answer}
                 number={number}
+                id={goodThing.item.postID}
                 realtime={goodThing.item.realtime}
                 keyExtractor={(thing) => thing.index}
               />
+              </TouchableOpacity>
             );
           } else {
             return (
+              <TouchableOpacity  
+              onPress = {()=>navigation.navigate('ProfileOthers',{name:goodThing.item.user})}
+              >
               <LeftPost
-                user={goodThing.item.user}
-                answer={goodThing.item.answer}
-                number={number}
-                realtime={goodThing.item.realtime}
-                keyExtractor={(thing) => thing.index}
-              />
+              user={goodThing.item.user}
+              answer={goodThing.item.answer}
+              number={number}
+              realtime={goodThing.item.realtime}
+              keyExtractor={(thing) => thing.index}
+            />
+              </TouchableOpacity>
             );
           }
         }}
