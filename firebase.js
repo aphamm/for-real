@@ -443,10 +443,25 @@ const totalLikes = async (username) => {
 
 }
 
+const getQuestion = async () => {
+
+  // get question from firebase
+  const date = new Date().getFullYear().toString() + '-' +
+  (new Date().getMonth() + 1).toString() + '-' +
+  new Date().getDate().toString();
+  const questionRef = db.collection('question').doc(date);
+  const doc = await questionRef.get();
+  const questionInfo = JSON.parse(JSON.stringify(doc.data()));
+  const question = questionInfo.question;
+  console.log(question);
+  return { status: true, data: question};
+}
+
 export { createUser, getUser, 
   sendPost, likePost, dislikePost, 
   getPosts, getUserPosts, getFriendPosts,
   addFriend, removeFriend,
   getLikes, getDislikes,
   postedToday, getOtherUser, totalLikes,
+  getQuestion,
 };

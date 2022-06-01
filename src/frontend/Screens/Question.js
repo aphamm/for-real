@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput, MaskedViewComponent } from 'react-native';
 import { useState, useContext } from 'react';
-import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, getPosts, getUserPosts, getFriendPosts , postedToday } from '../../../firebase';
+import { sendPost , likePost, dislikePost, addFriend, removeFriend, getLikes, getPosts, getUserPosts, getFriendPosts , postedToday, getQuestion } from '../../../firebase';
 import { UserContext } from '../../context/userContext';
 import { useNavigation } from '@react-navigation/native';
 
@@ -8,14 +8,12 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Question({navigation}) {
 
-  const questionOfDay =
-    'Would you rather have $5 million or dinner with Jay Z and why?';
+  const questionOfDay = 'question of the day';
 
   const [answer, setAnswer] = useState('');
   const [error, setError] = useState(null);
   const [user, setUser] = useContext(UserContext);
 
-  
   const getRealTime = () =>{
       let hour = new Date().getHours().toString();
       const pm = true; 
@@ -30,16 +28,17 @@ export default function Question({navigation}) {
 
         return time;
 
-  };
+};
 
 const submitPostHandler = async () => {
-  // if(answer===''){
-  //   setError('Please answer the prompt!');
-  //   setTimeout(() => {
-  //     setError(null);
-  //   }, '2500');
-  //   return false;
-  // }
+
+  if(answer===''){
+    setError('Please answer the prompt!');
+    setTimeout(() => {
+      setError(null);
+    }, '2500');
+    return false;
+  }
 
   // getPosts();
   // getFriendPosts('austin');
@@ -74,6 +73,7 @@ const submitPostHandler = async () => {
   const response = await sendPost(post);
   setAnswer("");
   navigation.navigate("Feed");
+
 };
 
 
