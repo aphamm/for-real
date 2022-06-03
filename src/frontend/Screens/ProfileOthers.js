@@ -205,7 +205,11 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       flexWrap: 'wrap',
       alignSelf: 'center',
-      textAlign: 'center'
+      textAlign: 'center',
+      shadowRadius: 4,
+      shadowColor: 'grey',
+      shadowOpacity: 0.3,
+      shadowOffset: {width:0, height: 4},
   },
 
   statsHeader: {
