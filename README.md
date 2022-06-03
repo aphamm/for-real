@@ -6,7 +6,7 @@ Current social media has been criticized for the emergence of echo chambers and 
 
 
 <p align="center">
-  <img src=./demo/demo.gif height="400">
+  <img src=./demo/demo.gif height="600">
 </p>
 
 
