@@ -13,7 +13,7 @@ import {
 } from '@expo-google-fonts/karla';
 
 
-//needs to be given {navigation} somehow
+
 export default function Post(props) {
   const [user, setUser, data,setData,gettingData,gettingFilteredData] = useContext(UserContext);
 

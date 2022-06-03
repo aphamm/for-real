@@ -124,8 +124,6 @@ export default function ProfileOthers({ navigation }) {
     const userData1 = await getOtherUser(name);
     setOtherUser(userData1.data);
 
-
-    // addFriend(user.username,name);
   };
 
   return (

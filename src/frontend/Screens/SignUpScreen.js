@@ -134,9 +134,7 @@ const SignUpScreen = ({ navigation }) => {
             onChangeText={setPassword}
             placeholderTextColor="rgba(30, 30, 30, 0.8)"
           />
-          {/* <Pressable onPress={handlePasswordVisibility} style={page.eye}>
-            <MaterialCommunityIcons name={rightIcon} size={22} color="#232323" />
-          </Pressable> */}
+
         </View>
 
         <View style={[page.input, page.inline, page.bottomMargin, page.dropShadow]}>

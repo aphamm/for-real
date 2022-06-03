@@ -45,13 +45,6 @@ const submitPostHandler = async () => {
     return false;
   }
 
-  // getPosts();
-  // getFriendPosts('austin');
-  // getLikes('2022-5-29 17:37 austin');
-  // addFriend('austin', 'thomas');
-  // postedToday('austin', '2022-5-30');
-  // netScore("austin");
-
   const post = {
     question: questionOfDay,
     answer,
