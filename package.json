@@ -10,6 +10,7 @@
     "@expo-google-fonts/karla": "^0.2.2",
     "@expo-google-fonts/poppins": "^0.2.2",
     "@expo-google-fonts/roboto": "^0.2.2",
+    "@expo/ngrok": "^2.4.3",
     "@react-navigation/native": "^6.0.10",
     "expo": "~44.0.0",
     "expo-app-loading": "~1.3.0",
