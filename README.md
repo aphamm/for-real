@@ -4,7 +4,9 @@ ForReal is a mobile application that allows users to share their thoughts on a d
 
 Current social media has been criticized for the emergence of echo chambers and filtered realities. We hope our application can help push users to develop their own original opinions before interacting with other posts.
 
-<img src=./demo/demo.gif height="400">
+<p align="center">
+  <img src=./demo/demo.gif height="400">
+</p>
 
 ## Install
 
