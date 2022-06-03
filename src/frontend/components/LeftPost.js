@@ -65,7 +65,7 @@ export default function Post(props) {
     console.log(props.user);
 
     if(user.username.toLowerCase()==props.user.toLowerCase()){
-      navigation.navigate('Profile');
+      props.navigation.navigate('Profile');
     }
     else{
    props.navigation.navigate('ProfileOthers',{name:props.user})}
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
   liked: {
-    color: '#ff46da',
+    color: '#AA83FF',
   },
   bubble: {
     backgroundColor: 'white',
