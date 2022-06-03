@@ -53,9 +53,6 @@ export default function Feed({ navigation }) {
     return <AppLoading />;
   }
 
-  const questionHandler = () => {
-    navigation.navigate('Question');
-  };
 
   const profileHandler = () => {
     navigation.navigate('Profile');
@@ -95,7 +92,7 @@ export default function Feed({ navigation }) {
             Profile
           </Text>
         </View>
-        <Text style={styles.question} onPress={questionHandler}>
+        <Text style={styles.question}>
           {questionOfDay}
         </Text>
       </View>
