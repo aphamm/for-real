@@ -45,6 +45,7 @@ const screens = {
     navigationOptions: ({ navigation }) => ({
       headerShown: false,
     }),
+    
   },
   Question: {
     screen: Question,
