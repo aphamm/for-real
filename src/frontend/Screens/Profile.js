@@ -103,7 +103,6 @@ export default function Profile({ navigation }) {
       <Text style={styles.upvoteHeader}>Recent Posts</Text>
       <FlatList
         //slice the first two posts
-        // style={styles.upvotedposts}
         data={userposts}
         renderItem={(item) => {
           const item1 = JSON.parse(JSON.stringify(item));
@@ -132,7 +131,7 @@ const styles = StyleSheet.create({
 
   name: {
       fontSize: 20,
-      marginTop: 40,
+      marginTop: 38,
       textAlign: 'center',
       fontFamily: "Roboto_700Bold",
   },
