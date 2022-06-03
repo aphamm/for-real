@@ -292,7 +292,7 @@ const getPosts = async () => {
     const post1 = JSON.parse(JSON.stringify(post));
     const todayDate = new Date().getFullYear().toString() + '-' +
       (new Date().getMonth() + 1).toString() + '-' +
-      new Date().getDate().toString(); 
+      (new Date().getDate()).toString(); 
       if (todayDate === post1.postID.split(' ')[0]) {
         posts.push(post); }
     });
@@ -487,6 +487,7 @@ const getQuestion = async () => {
   const date = new Date().getFullYear().toString() + '-' +
   (new Date().getMonth() + 1).toString() + '-' +
   (new Date().getDate()).toString();
+  // CHANGE DATE HERE
   const questionRef = db.collection('question').doc(date);
   const doc = await questionRef.get();
   const questionInfo = JSON.parse(JSON.stringify(doc.data()));

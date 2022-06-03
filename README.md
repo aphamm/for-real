@@ -4,6 +4,8 @@ ForReal is a mobile application that allows users to share their thoughts on a d
 
 Current social media has been criticized for the emergence of echo chambers and filtered realities. We hope our application can help push users to develop their own original opinions before interacting with other posts.
 
+![](./demo/demo.gif)
+
 ## Install
 
 This project uses [node](http://nodejs.org) and [npm](https://npmjs.com). Check to see if you already have them installed by running the following command otherwise you can install them [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
@@ -25,7 +27,7 @@ $ npm install -g expo-cli # manually install
 Our full-stack application is using React Native & Firebase.
 
 1. [React Native](https://reactnative.dev/docs/getting-started) - a client-side JavaScript framework
-2. [Firebase](https://nodejs.org/en/docs/) - serverless backend functionality
+2. [Firebase](https://firebase.google.com/docs) - serverless backend functionality
 
 React Native allows us to deploy a dynamic client-side application for both Android and iOS. Firebase is a cloud-hosted NoSQL database that lets you store and sync data between your users in realtime. Firebase provides cross-platform SDKs to help you build and ship apps on Android, iOS and the web.
 
@@ -39,7 +41,7 @@ $ cd for-real
 $ npm install # locally install dependencies
 ```
 
-Start your project via the `npm run client` command. Download the [Expo Go](https://expo.dev/client) app on iOS to run natively on your own personal device by scanning the QR code.
+Start your project via the `npm run client` command. Use app simulator by pressing `i` or download the [Expo Go](https://expo.dev/client) app on iOS to run natively on your own personal device by scanning the QR code.
 
 ## Contributors
 
