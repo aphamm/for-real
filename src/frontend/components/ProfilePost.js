@@ -7,6 +7,10 @@ import {
 
 export default function Post(props) {
   
+  //TESTING 
+  const test = 1;
+  
+
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
     Roboto_300Light,
