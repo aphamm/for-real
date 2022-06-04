@@ -7,8 +7,6 @@ import {
 
 export default function Post(props) {
   
-  //TESTING 
-  const test = 1;
   
 
   let [fontsLoaded] = useFonts({
