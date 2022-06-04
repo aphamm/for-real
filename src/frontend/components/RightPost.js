@@ -13,7 +13,6 @@ import {
   Karla_700Bold
 } from '@expo-google-fonts/karla';
 
-//needs to be given {navigation} somehow
 export default function Post(props) {
   let [fontsLoaded] = useFonts({
     Roboto_300Light_Italic,
@@ -77,7 +76,6 @@ export default function Post(props) {
         <View style={styles.TriangleShapeCSS} />
 
         <View style={styles.numberContainer}>
-          {/* <Text style={styles.arrow} onPress={likeHandler}>∧</Text> */}
 
           <AntDesign
             name="up"
@@ -91,7 +89,6 @@ export default function Post(props) {
             onPress={dislikeHandler}
           />
 
-          {/* <Text style={styles.arrow} onPress={dislikeHandler}>∨</Text> */}
         </View>
 
         <View style={styles.textContainer}>
